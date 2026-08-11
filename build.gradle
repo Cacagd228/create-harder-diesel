@@ -1,0 +1,72 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '1.0.24'
+}
+
+version = '1.0.0'
+group = 'com.harderdiesel'
+
+base {
+    archivesName = 'harderdiesel'
+}
+
+// В имени папки проекта есть двоеточие («create: harder disel»), а для Java оно
+// является разделителем записей classpath. Из-за этого gradlew и javac не находят
+// свои jar-файлы. Переносим каталог сборки в соседнюю папку без двоеточия.
+buildDir = file('../harderdiesel-build')
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'BlameJared' // официальный maven JEI (mezz.jei)
+        url = 'https://maven.blamejared.com'
+    }
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content {
+            includeGroup 'maven.modrinth'
+        }
+    }
+}
+
+dependencies {
+    // Моды для dev-окружения (runClient) и runtime.
+    // NEI для 1.21.1 не существует — его преемник это JEI, поэтому ставим JEI.
+    // JEI берём с официального maven (maven.blamejared.com): на Modrinth Maven
+    // у JEI один номер версии на все загрузчики, и maven отдаёт fabric-версию.
+    implementation "mezz.jei:jei-1.21.1-neoforge:19.27.0.340"
+    implementation "maven.modrinth:create:6.0.10+mc1.21.1"
+    implementation "maven.modrinth:create-diesel-generators:1.21.1-1.3.15"
+}
+
+neoForge {
+    version = '21.1.248'
+
+    mods {
+        harderdiesel {
+            sourceSet sourceSets.main
+        }
+    }
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+        }
+        data {
+            data()
+        }
+    }
+}
+
+// Модели, языки и текстуры хранятся отдельно от кода — в textures/neoforge
+sourceSets.main.resources.srcDir 'textures/neoforge'
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

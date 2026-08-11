@@ -1,0 +1,26 @@
+{
+  "type": "createdieselgenerators:distillation",
+  "ingredients": [
+    {
+      "type": "fluid_tag",
+      "fluid_tag": "c:crude_oil",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "superheated",
+  "processing_time": 40,
+  "results": [
+    {
+      "id": "harderdiesel:naphtha",
+      "amount": 60
+    },
+    {
+      "id": "harderdiesel:kerosene",
+      "amount": 50
+    },
+    {
+      "id": "harderdiesel:heavy_oil",
+      "amount": 40
+    }
+  ]
+}

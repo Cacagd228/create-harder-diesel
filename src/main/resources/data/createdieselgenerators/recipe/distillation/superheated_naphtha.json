@@ -1,0 +1,22 @@
+{
+  "type": "createdieselgenerators:distillation",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:naphtha",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "superheated",
+  "processing_time": 40,
+  "results": [
+    {
+      "id": "createdieselgenerators:gasoline",
+      "amount": 70
+    },
+    {
+      "id": "createdieselgenerators:diesel",
+      "amount": 40
+    }
+  ]
+}

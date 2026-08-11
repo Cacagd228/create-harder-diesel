@@ -1,0 +1,11 @@
+{
+  "block.harderdiesel.naphtha": "Naphtha",
+  "block.harderdiesel.kerosene": "Kerosene",
+  "block.harderdiesel.heavy_oil": "Heavy Oil",
+  "block.harderdiesel.tar": "Tar",
+  "item.harderdiesel.naphtha_bucket": "Naphtha Bucket",
+  "item.harderdiesel.kerosene_bucket": "Kerosene Bucket",
+  "item.harderdiesel.heavy_oil_bucket": "Heavy Oil Bucket",
+  "item.harderdiesel.tar_bucket": "Tar Bucket",
+  "itemGroup.harderdiesel": "Create: Harder Diesel"
+}

@@ -1,0 +1,11 @@
+{
+  "block.harderdiesel.naphtha": "Нафта",
+  "block.harderdiesel.kerosene": "Керосин",
+  "block.harderdiesel.heavy_oil": "Тяжёлая нефть",
+  "block.harderdiesel.tar": "Гудрон",
+  "item.harderdiesel.naphtha_bucket": "Ведро нафты",
+  "item.harderdiesel.kerosene_bucket": "Ведро керосина",
+  "item.harderdiesel.heavy_oil_bucket": "Ведро тяжёлой нефти",
+  "item.harderdiesel.tar_bucket": "Ведро гудрона",
+  "itemGroup.harderdiesel": "Create: Harder Diesel"
+}
