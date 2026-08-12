@@ -4,9 +4,9 @@ license = "All Rights Reserved"
 
 [[mods]]
 modId = "harderdiesel"
-version = "1.0.0"
+version = "1.2.0"
 displayName = "Create: Harder Diesel"
-description = '''Adds naphtha, kerosene and heavy oil fluids.'''
+description = '''Adds a realistic oil refining chain: naphtha, kerosene, gasoline and diesel grades, nitro fuels, mazut and tar.'''
 authors = "Aero utils"
 
 [[dependencies.harderdiesel]]

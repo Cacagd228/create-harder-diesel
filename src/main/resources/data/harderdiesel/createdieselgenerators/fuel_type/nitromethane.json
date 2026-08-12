@@ -1,0 +1,20 @@
+{
+  "fluid": "#c:nitromethane",
+  "sound_pitch": 1.2,
+  "normal": {
+    "speed": 96.0,
+    "strength": 12288.0,
+    "burn_rate": 0.05
+  },
+  "modular": {
+    "speed": 96.0,
+    "strength": 18432.0,
+    "burn_rate": 0.05
+  },
+  "huge": {
+    "speed": 224.0,
+    "strength": 36864.0,
+    "burn_rate": 0.05
+  },
+  "burner_multiplier": 1.5
+}

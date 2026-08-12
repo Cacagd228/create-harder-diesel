@@ -21,6 +21,18 @@ public class ModCreativeTabs {
                         output.accept(ModItems.KEROSENE_BUCKET);
                         output.accept(ModItems.HEAVY_OIL_BUCKET);
                         output.accept(ModItems.TAR_BUCKET);
+                        output.accept(ModItems.LOW_OCTANE_GASOLINE_BUCKET);
+                        output.accept(ModItems.HIGH_OCTANE_GASOLINE_BUCKET);
+                        output.accept(ModItems.ARTISAN_HIGH_OCTANE_GASOLINE_BUCKET);
+                        output.accept(ModItems.NITROMETHANE_BUCKET);
+                        output.accept(ModItems.PROPANE_BUCKET);
+                        output.accept(ModItems.MIXED_NITROALKANES_BUCKET);
+                        output.accept(ModItems.NITROETHANE_BUCKET);
+                        output.accept(ModItems.NITROPROPANE_BUCKET);
+                        output.accept(ModItems.LOW_CETANE_DIESEL_BUCKET);
+                        output.accept(ModItems.MEDIUM_CETANE_DIESEL_BUCKET);
+                        output.accept(ModItems.HIGH_CETANE_DIESEL_BUCKET);
+                        output.accept(ModItems.MAZUT_BUCKET);
                     })
                     .build());
 

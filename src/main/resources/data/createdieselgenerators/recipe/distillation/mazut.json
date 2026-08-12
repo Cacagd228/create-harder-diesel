@@ -1,0 +1,22 @@
+{
+  "type": "createdieselgenerators:distillation",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:mazut",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "heated",
+  "processing_time": 120,
+  "results": [
+    {
+      "id": "harderdiesel:tar",
+      "amount": 70
+    },
+    {
+      "id": "harderdiesel:naphtha",
+      "amount": 5
+    }
+  ]
+}

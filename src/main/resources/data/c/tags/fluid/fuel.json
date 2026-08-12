@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "harderdiesel:kerosene",
+    "harderdiesel:flowing_kerosene",
+    "harderdiesel:tar",
+    "harderdiesel:flowing_tar",
+    "harderdiesel:low_octane_gasoline",
+    "harderdiesel:flowing_low_octane_gasoline",
+    "harderdiesel:low_cetane_diesel",
+    "harderdiesel:flowing_low_cetane_diesel",
+    "harderdiesel:medium_cetane_diesel",
+    "harderdiesel:flowing_medium_cetane_diesel",
+    "harderdiesel:high_octane_gasoline",
+    "harderdiesel:flowing_high_octane_gasoline",
+    "harderdiesel:high_cetane_diesel",
+    "harderdiesel:flowing_high_cetane_diesel",
+    "harderdiesel:artisan_high_octane_gasoline",
+    "harderdiesel:flowing_artisan_high_octane_gasoline",
+    "harderdiesel:nitromethane",
+    "harderdiesel:flowing_nitromethane"
+  ]
+}

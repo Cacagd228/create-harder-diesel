@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:medium_cetane_diesel",
+      "amount": 100
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:nitroethane",
+      "amount": 20
+    }
+  ],
+  "heatRequirement": "heated",
+  "results": [
+    {
+      "id": "harderdiesel:high_cetane_diesel",
+      "amount": 100
+    }
+  ]
+}

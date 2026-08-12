@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:low_octane_gasoline",
+      "amount": 100
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "createdieselgenerators:ethanol",
+      "amount": 50
+    }
+  ],
+  "results": [
+    {
+      "id": "harderdiesel:high_octane_gasoline",
+      "amount": 100
+    }
+  ]
+}

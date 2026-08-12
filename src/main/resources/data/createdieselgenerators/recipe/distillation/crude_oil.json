@@ -21,6 +21,10 @@
     {
       "id": "harderdiesel:heavy_oil",
       "amount": 25
+    },
+    {
+      "id": "harderdiesel:propane",
+      "amount": 10
     }
   ]
 }

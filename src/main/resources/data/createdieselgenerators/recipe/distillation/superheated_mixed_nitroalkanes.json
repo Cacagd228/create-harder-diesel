@@ -1,0 +1,26 @@
+{
+  "type": "createdieselgenerators:distillation",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:mixed_nitroalkanes",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "superheated",
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "harderdiesel:nitromethane",
+      "amount": 50
+    },
+    {
+      "id": "harderdiesel:nitroethane",
+      "amount": 30
+    },
+    {
+      "id": "harderdiesel:nitropropane",
+      "amount": 20
+    }
+  ]
+}
