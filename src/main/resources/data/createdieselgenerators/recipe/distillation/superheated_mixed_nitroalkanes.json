@@ -12,15 +12,15 @@
   "results": [
     {
       "id": "harderdiesel:nitromethane",
-      "amount": 50
-    },
-    {
-      "id": "harderdiesel:nitroethane",
       "amount": 30
     },
     {
+      "id": "harderdiesel:nitroethane",
+      "amount": 40
+    },
+    {
       "id": "harderdiesel:nitropropane",
-      "amount": 20
+      "amount": 30
     }
   ]
 }
