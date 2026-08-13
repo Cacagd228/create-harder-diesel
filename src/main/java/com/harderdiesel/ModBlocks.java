@@ -387,6 +387,83 @@ public class ModBlocks {
                     .sound(SoundType.EMPTY)
                     .pushReaction(PushReaction.DESTROY)));
 
+    public static final DeferredBlock<LiquidBlock> LIGHT_SWEET_CRUDE = BLOCKS.register("light_sweet_crude",
+            () -> new LiquidBlock(ModFluids.LIGHT_SWEET_CRUDE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_YELLOW)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> LIGHT_SOUR_CRUDE = BLOCKS.register("light_sour_crude",
+            () -> new LiquidBlock(ModFluids.LIGHT_SOUR_CRUDE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> MEDIUM_SWEET_CRUDE = BLOCKS.register("medium_sweet_crude",
+            () -> new LiquidBlock(ModFluids.MEDIUM_SWEET_CRUDE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> MEDIUM_SOUR_CRUDE = BLOCKS.register("medium_sour_crude",
+            () -> new LiquidBlock(ModFluids.MEDIUM_SOUR_CRUDE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> HEAVY_SWEET_CRUDE = BLOCKS.register("heavy_sweet_crude",
+            () -> new LiquidBlock(ModFluids.HEAVY_SWEET_CRUDE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> HEAVY_SOUR_CRUDE = BLOCKS.register("heavy_sour_crude",
+            () -> new LiquidBlock(ModFluids.HEAVY_SOUR_CRUDE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> MOLTEN_SULFUR = BLOCKS.register("molten_sulfur",
+            () -> new LiquidBlock(ModFluids.MOLTEN_SULFUR.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_YELLOW)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
     public static final DeferredBlock<CrackingReactorBlock> CRACKING_REACTOR = BLOCKS.register("cracking_reactor",
             () -> new CrackingReactorBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_ORANGE)

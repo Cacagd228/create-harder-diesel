@@ -284,6 +284,62 @@ public class ModFluidTypes {
                     .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                     .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
 
+    public static final DeferredHolder<FluidType, FluidType> LIGHT_SWEET_CRUDE =
+            FLUID_TYPES.register("light_sweet_crude", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.light_sweet_crude")
+                    .density(700)
+                    .viscosity(800)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> LIGHT_SOUR_CRUDE =
+            FLUID_TYPES.register("light_sour_crude", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.light_sour_crude")
+                    .density(710)
+                    .viscosity(850)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> MEDIUM_SWEET_CRUDE =
+            FLUID_TYPES.register("medium_sweet_crude", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.medium_sweet_crude")
+                    .density(830)
+                    .viscosity(1500)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> MEDIUM_SOUR_CRUDE =
+            FLUID_TYPES.register("medium_sour_crude", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.medium_sour_crude")
+                    .density(840)
+                    .viscosity(1600)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> HEAVY_SWEET_CRUDE =
+            FLUID_TYPES.register("heavy_sweet_crude", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.heavy_sweet_crude")
+                    .density(950)
+                    .viscosity(4000)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> HEAVY_SOUR_CRUDE =
+            FLUID_TYPES.register("heavy_sour_crude", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.heavy_sour_crude")
+                    .density(960)
+                    .viscosity(4200)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> MOLTEN_SULFUR =
+            FLUID_TYPES.register("molten_sulfur", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.molten_sulfur")
+                    .density(1800)
+                    .viscosity(6000)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
     public static void register(IEventBus modEventBus) {
         FLUID_TYPES.register(modEventBus);
     }
