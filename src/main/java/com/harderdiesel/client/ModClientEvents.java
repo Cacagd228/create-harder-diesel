@@ -32,6 +32,24 @@ public class ModClientEvents {
         event.registerFluidType(fluidTextures("medium_cetane_diesel"), ModFluidTypes.MEDIUM_CETANE_DIESEL.get());
         event.registerFluidType(fluidTextures("high_cetane_diesel"), ModFluidTypes.HIGH_CETANE_DIESEL.get());
         event.registerFluidType(fluidTextures("mazut"), ModFluidTypes.MAZUT.get());
+        event.registerFluidType(fluidTextures("butane_gas"), ModFluidTypes.BUTANE_GAS.get());
+        event.registerFluidType(fluidTextures("butane_liquid"), ModFluidTypes.BUTANE_LIQUID.get());
+        event.registerFluidType(fluidTextures("lpg_gas"), ModFluidTypes.LPG_GAS.get());
+        event.registerFluidType(fluidTextures("lpg_liquid"), ModFluidTypes.LPG_LIQUID.get());
+        event.registerFluidType(fluidTextures("wet_gas"), ModFluidTypes.WET_GAS.get());
+        event.registerFluidType(fluidTextures("propane_liquid"), ModFluidTypes.PROPANE_LIQUID.get());
+        event.registerFluidType(fluidTextures("vacuum_gas_oil"), ModFluidTypes.VACUUM_GAS_OIL.get());
+        event.registerFluidType(fluidTextures("vacuum_residue"), ModFluidTypes.VACUUM_RESIDUE.get());
+        event.registerFluidType(fluidTextures("cracked_naphtha"), ModFluidTypes.CRACKED_NAPHTHA.get());
+        event.registerFluidType(fluidTextures("light_cycle_oil"), ModFluidTypes.LIGHT_CYCLE_OIL.get());
+        event.registerFluidType(fluidTextures("fcc_gas"), ModFluidTypes.FCC_GAS.get());
+        event.registerFluidType(fluidTextures("alkylate"), ModFluidTypes.ALKYLATE.get());
+        event.registerFluidType(fluidTextures("glycerol"), ModFluidTypes.GLYCEROL.get());
+        event.registerFluidType(fluidTextures("nitroglycerin"), ModFluidTypes.NITROGLYCERIN.get());
+        event.registerFluidType(fluidTextures("reformate"), ModFluidTypes.REFORMATE.get());
+        event.registerFluidType(fluidTextures("benzene"), ModFluidTypes.BENZENE.get());
+        event.registerFluidType(fluidTextures("toluene"), ModFluidTypes.TOLUENE.get());
+        event.registerFluidType(fluidTextures("xylene"), ModFluidTypes.XYLENE.get());
     }
 
     private static IClientFluidTypeExtensions fluidTextures(String name) {
@@ -66,5 +84,23 @@ public class ModClientEvents {
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.MEDIUM_CETANE_DIESEL_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.HIGH_CETANE_DIESEL_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.MAZUT_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.BUTANE_GAS_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.BUTANE_LIQUID_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.LPG_GAS_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.LPG_LIQUID_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.WET_GAS_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.PROPANE_LIQUID_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.VACUUM_GAS_OIL_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.VACUUM_RESIDUE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.CRACKED_NAPHTHA_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.LIGHT_CYCLE_OIL_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.FCC_GAS_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.ALKYLATE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.GLYCEROL_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.NITROGLYCERIN_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.REFORMATE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.BENZENE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.TOLUENE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.XYLENE_BUCKET.get());
     }
 }

@@ -17,6 +17,7 @@ public class ModCreativeTabs {
                     .title(Component.translatable("itemGroup.harderdiesel"))
                     .icon(() -> new ItemStack(ModItems.NAPHTHA_BUCKET.get()))
                     .displayItems((params, output) -> {
+                        output.accept(ModItems.COKE_COAL);
                         output.accept(ModItems.NAPHTHA_BUCKET);
                         output.accept(ModItems.KEROSENE_BUCKET);
                         output.accept(ModItems.HEAVY_OIL_BUCKET);
@@ -33,6 +34,24 @@ public class ModCreativeTabs {
                         output.accept(ModItems.MEDIUM_CETANE_DIESEL_BUCKET);
                         output.accept(ModItems.HIGH_CETANE_DIESEL_BUCKET);
                         output.accept(ModItems.MAZUT_BUCKET);
+                        output.accept(ModItems.BUTANE_GAS_BUCKET);
+                        output.accept(ModItems.BUTANE_LIQUID_BUCKET);
+                        output.accept(ModItems.LPG_GAS_BUCKET);
+                        output.accept(ModItems.LPG_LIQUID_BUCKET);
+                        output.accept(ModItems.WET_GAS_BUCKET);
+                        output.accept(ModItems.PROPANE_LIQUID_BUCKET);
+                        output.accept(ModItems.VACUUM_GAS_OIL_BUCKET);
+                        output.accept(ModItems.VACUUM_RESIDUE_BUCKET);
+                        output.accept(ModItems.CRACKED_NAPHTHA_BUCKET);
+                        output.accept(ModItems.LIGHT_CYCLE_OIL_BUCKET);
+                        output.accept(ModItems.FCC_GAS_BUCKET);
+                        output.accept(ModItems.ALKYLATE_BUCKET);
+                        output.accept(ModItems.GLYCEROL_BUCKET);
+                        output.accept(ModItems.NITROGLYCERIN_BUCKET);
+                        output.accept(ModItems.REFORMATE_BUCKET);
+                        output.accept(ModItems.BENZENE_BUCKET);
+                        output.accept(ModItems.TOLUENE_BUCKET);
+                        output.accept(ModItems.XYLENE_BUCKET);
                     })
                     .build());
 

@@ -1,0 +1,8 @@
+{
+  "loader": "neoforge:fluid_container",
+  "parent": "neoforge:item/bucket",
+  "fluid": "harderdiesel:cracked_naphtha",
+  "flip_gas": false,
+  "cover_is_mask": true,
+  "apply_fluid_luminosity": false
+}

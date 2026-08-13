@@ -140,6 +140,150 @@ public class ModFluidTypes {
                     .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                     .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
 
+    public static final DeferredHolder<FluidType, FluidType> BUTANE_GAS =
+            FLUID_TYPES.register("butane_gas", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.butane_gas")
+                    .density(560)
+                    .viscosity(250)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> BUTANE_LIQUID =
+            FLUID_TYPES.register("butane_liquid", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.butane_liquid")
+                    .density(600)
+                    .viscosity(300)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> LPG_GAS =
+            FLUID_TYPES.register("lpg_gas", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.lpg_gas")
+                    .density(550)
+                    .viscosity(240)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> LPG_LIQUID =
+            FLUID_TYPES.register("lpg_liquid", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.lpg_liquid")
+                    .density(620)
+                    .viscosity(320)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> WET_GAS =
+            FLUID_TYPES.register("wet_gas", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.wet_gas")
+                    .density(580)
+                    .viscosity(280)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> PROPANE_LIQUID =
+            FLUID_TYPES.register("propane_liquid", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.propane_liquid")
+                    .density(510)
+                    .viscosity(400)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> VACUUM_GAS_OIL =
+            FLUID_TYPES.register("vacuum_gas_oil", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.vacuum_gas_oil")
+                    .density(960)
+                    .viscosity(3500)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> VACUUM_RESIDUE =
+            FLUID_TYPES.register("vacuum_residue", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.vacuum_residue")
+                    .density(1020)
+                    .viscosity(9000)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> CRACKED_NAPHTHA =
+            FLUID_TYPES.register("cracked_naphtha", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.cracked_naphtha")
+                    .density(730)
+                    .viscosity(700)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> LIGHT_CYCLE_OIL =
+            FLUID_TYPES.register("light_cycle_oil", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.light_cycle_oil")
+                    .density(880)
+                    .viscosity(2000)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> FCC_GAS =
+            FLUID_TYPES.register("fcc_gas", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.fcc_gas")
+                    .density(550)
+                    .viscosity(260)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> ALKYLATE =
+            FLUID_TYPES.register("alkylate", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.alkylate")
+                    .density(700)
+                    .viscosity(600)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> GLYCEROL =
+            FLUID_TYPES.register("glycerol", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.glycerol")
+                    .density(1260)
+                    .viscosity(9000)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> NITROGLYCERIN =
+            FLUID_TYPES.register("nitroglycerin", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.nitroglycerin")
+                    .density(1590)
+                    .viscosity(1300)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> REFORMATE =
+            FLUID_TYPES.register("reformate", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.reformate")
+                    .density(770)
+                    .viscosity(700)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> BENZENE =
+            FLUID_TYPES.register("benzene", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.benzene")
+                    .density(880)
+                    .viscosity(650)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> TOLUENE =
+            FLUID_TYPES.register("toluene", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.toluene")
+                    .density(870)
+                    .viscosity(590)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> XYLENE =
+            FLUID_TYPES.register("xylene", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.xylene")
+                    .density(860)
+                    .viscosity(650)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
     public static void register(IEventBus modEventBus) {
         FLUID_TYPES.register(modEventBus);
     }
