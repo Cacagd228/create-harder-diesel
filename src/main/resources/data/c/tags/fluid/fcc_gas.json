@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "harderdiesel:fcc_gas",
+    "harderdiesel:flowing_fcc_gas"
+  ]
+}

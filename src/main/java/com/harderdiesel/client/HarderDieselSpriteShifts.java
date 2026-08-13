@@ -1,6 +1,7 @@
 package com.harderdiesel.client;
 
 import com.harderdiesel.HarderDiesel;
+import com.harderdiesel.content.generators.FuelCategory;
 import com.simibubi.create.foundation.block.connected.AllCTTypes;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
@@ -22,6 +23,13 @@ public class HarderDieselSpriteShifts {
             WEAR_RESISTANT_TANK_TOP = rectangle("wear_resistant_tank/fluid_tank_top");
 
     public static void init() {
+    }
+
+    /** Соединяемая текстура модульного генератора конкретного семейства топлива. */
+    public static CTSpriteShiftEntry modularDieselEngine(FuelCategory category) {
+        return CTSpriteShifter.getCT(AllCTTypes.CROSS,
+                ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "block/" + category.id + "/diesel_engine_big"),
+                ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "block/" + category.id + "/diesel_engine_big_connected"));
     }
 
     private static CTSpriteShiftEntry rectangle(String name) {

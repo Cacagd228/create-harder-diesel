@@ -1,0 +1,20 @@
+{
+  "fluid": "#c:nitropropane",
+  "sound_pitch": 1.15,
+  "normal": {
+    "speed": 96.0,
+    "strength": 10240.0,
+    "burn_rate": 0.05
+  },
+  "modular": {
+    "speed": 96.0,
+    "strength": 15360.0,
+    "burn_rate": 0.05
+  },
+  "huge": {
+    "speed": 224.0,
+    "strength": 30720.0,
+    "burn_rate": 0.05
+  },
+  "burner_multiplier": 1.0
+}

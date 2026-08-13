@@ -17,6 +17,11 @@ public class ModCreativeTabs {
                     .title(Component.translatable("itemGroup.harderdiesel"))
                     .icon(() -> new ItemStack(ModItems.NAPHTHA_BUCKET.get()))
                     .displayItems((params, output) -> {
+                        for (ModGenerators.Family family : ModGenerators.FAMILIES.values()) {
+                            output.accept(family.normalItem.get());
+                            output.accept(family.modularItem.get());
+                            output.accept(family.hugeItem.get());
+                        }
                         output.accept(ModItems.COKE_COAL);
                         output.accept(ModItems.GALVANIZED_TANK);
                         output.accept(ModItems.WEAR_RESISTANT_TANK);

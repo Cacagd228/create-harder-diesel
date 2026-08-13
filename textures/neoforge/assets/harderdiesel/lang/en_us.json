@@ -90,5 +90,17 @@
   "harderdiesel.actionbar.separator_controller.not_enough": "Not enough controllers",
   "harderdiesel.hint.separator_full.title": "Separator is full",
   "harderdiesel.hint.separator_full": "Clear the output tanks to continue processing",
-  "harderdiesel.hint.separator_empty": "Empty"
+  "harderdiesel.hint.separator_empty": "Empty",
+  "block.harderdiesel.gasoline_generator": "Gasoline Generator",
+  "block.harderdiesel.diesel_generator": "Diesel Generator",
+  "block.harderdiesel.gas_generator": "Gas Generator",
+  "block.harderdiesel.nitro_generator": "Nitro Generator",
+  "block.harderdiesel.large_gasoline_generator": "Large Gasoline Generator",
+  "block.harderdiesel.large_diesel_generator": "Large Diesel Generator",
+  "block.harderdiesel.large_gas_generator": "Large Gas Generator",
+  "block.harderdiesel.large_nitro_generator": "Large Nitro Generator",
+  "block.harderdiesel.huge_gasoline_generator": "Huge Gasoline Generator",
+  "block.harderdiesel.huge_diesel_generator": "Huge Diesel Generator",
+  "block.harderdiesel.huge_gas_generator": "Huge Gas Generator",
+  "block.harderdiesel.huge_nitro_generator": "Huge Nitro Generator"
 }

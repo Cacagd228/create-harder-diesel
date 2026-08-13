@@ -1,0 +1,68 @@
+{
+  "variants": {
+    "facing=east,pipe=false,powered=false": {
+      "model": "harderdiesel:block/large_nitro_generator/block",
+      "y": 90
+    },
+    "facing=east,pipe=false,powered=true": {
+      "model": "harderdiesel:block/large_nitro_generator/block",
+      "y": 90
+    },
+    "facing=east,pipe=true,powered=false": {
+      "model": "harderdiesel:block/large_nitro_generator/block_pipe",
+      "y": 90
+    },
+    "facing=east,pipe=true,powered=true": {
+      "model": "harderdiesel:block/large_nitro_generator/block_pipe",
+      "y": 90
+    },
+    "facing=north,pipe=false,powered=false": {
+      "model": "harderdiesel:block/large_nitro_generator/block",
+      "y": 180
+    },
+    "facing=north,pipe=false,powered=true": {
+      "model": "harderdiesel:block/large_nitro_generator/block",
+      "y": 180
+    },
+    "facing=north,pipe=true,powered=false": {
+      "model": "harderdiesel:block/large_nitro_generator/block_pipe",
+      "y": 180
+    },
+    "facing=north,pipe=true,powered=true": {
+      "model": "harderdiesel:block/large_nitro_generator/block_pipe",
+      "y": 180
+    },
+    "facing=south,pipe=false,powered=false": {
+      "model": "harderdiesel:block/large_nitro_generator/block",
+      "y": 180
+    },
+    "facing=south,pipe=false,powered=true": {
+      "model": "harderdiesel:block/large_nitro_generator/block",
+      "y": 180
+    },
+    "facing=south,pipe=true,powered=false": {
+      "model": "harderdiesel:block/large_nitro_generator/block_pipe",
+      "y": 180
+    },
+    "facing=south,pipe=true,powered=true": {
+      "model": "harderdiesel:block/large_nitro_generator/block_pipe",
+      "y": 180
+    },
+    "facing=west,pipe=false,powered=false": {
+      "model": "harderdiesel:block/large_nitro_generator/block",
+      "y": 90
+    },
+    "facing=west,pipe=false,powered=true": {
+      "model": "harderdiesel:block/large_nitro_generator/block",
+      "y": 90
+    },
+    "facing=west,pipe=true,powered=false": {
+      "model": "harderdiesel:block/large_nitro_generator/block_pipe",
+      "y": 90
+    },
+    "facing=west,pipe=true,powered=true": {
+      "model": "harderdiesel:block/large_nitro_generator/block_pipe",
+      "y": 90
+    }
+  }
+}

@@ -21,6 +21,7 @@ public class HarderDiesel {
         ModCreativeTabs.register(modEventBus);
         ModRecipeTypes.register(modEventBus);
         ModBlockEntityTypes.register(modEventBus);
+        ModGenerators.register(modEventBus);
         ModConfig.register(container);
 
         modEventBus.addListener((RegisterCapabilitiesEvent event) ->
@@ -31,5 +32,7 @@ public class HarderDiesel {
                 GalvanizedTankBlockEntity.registerCapabilities(event));
         modEventBus.addListener((RegisterCapabilitiesEvent event) ->
                 WearResistantTankBlockEntity.registerCapabilities(event));
+        modEventBus.addListener((RegisterCapabilitiesEvent event) ->
+                ModGenerators.registerCapabilities(event));
     }
 }

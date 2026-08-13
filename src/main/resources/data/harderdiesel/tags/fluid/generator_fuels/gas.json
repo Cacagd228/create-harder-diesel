@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#c:propane",
+    "#c:butane_gas",
+    "#c:butane_liquid",
+    "#c:lpg_gas",
+    "#c:lpg_liquid",
+    "#c:wet_gas",
+    "#c:fcc_gas"
+  ]
+}

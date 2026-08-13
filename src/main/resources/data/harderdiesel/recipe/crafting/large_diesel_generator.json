@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BEB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "harderdiesel:low_cetane_diesel_bucket"
+    },
+    "E": {
+      "item": "createdieselgenerators:large_diesel_engine"
+    }
+  },
+  "result": {
+    "id": "harderdiesel:large_diesel_generator"
+  }
+}
