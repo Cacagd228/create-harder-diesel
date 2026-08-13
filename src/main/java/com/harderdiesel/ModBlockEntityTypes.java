@@ -1,6 +1,7 @@
 package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingReactorBlockEntity;
+import com.harderdiesel.content.galvanized.GalvanizedTankBlockEntity;
 import com.harderdiesel.content.separator.SeparatorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,6 +20,9 @@ public class ModBlockEntityTypes {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SeparatorBlockEntity>> SEPARATOR =
             BLOCK_ENTITY_TYPES.register("separator", () -> createSeparatorType());
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GalvanizedTankBlockEntity>> GALVANIZED_TANK =
+            BLOCK_ENTITY_TYPES.register("galvanized_reactor_tank", () -> createTankType());
 
     private static BlockEntityType<CrackingReactorBlockEntity> createReactorType() {
         BlockEntityType<CrackingReactorBlockEntity> type =
@@ -40,6 +44,17 @@ public class ModBlockEntityTypes {
 
     private static SeparatorBlockEntity createSeparator(BlockPos pos, BlockState state) {
         return new SeparatorBlockEntity(SEPARATOR.get(), pos, state);
+    }
+
+    private static BlockEntityType<GalvanizedTankBlockEntity> createTankType() {
+        BlockEntityType<GalvanizedTankBlockEntity> type =
+                BlockEntityType.Builder.of(ModBlockEntityTypes::createTank, ModBlocks.GALVANIZED_TANK.get())
+                        .build(null);
+        return type;
+    }
+
+    private static GalvanizedTankBlockEntity createTank(BlockPos pos, BlockState state) {
+        return new GalvanizedTankBlockEntity(GALVANIZED_TANK.get(), pos, state);
     }
 
     public static void register(IEventBus modEventBus) {

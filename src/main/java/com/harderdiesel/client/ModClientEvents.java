@@ -119,6 +119,9 @@ public class ModClientEvents {
         CreateClient.MODEL_SWAPPER.getCustomBlockModels()
                 .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "separator"),
                         model -> new SeparatorModel(model));
+        CreateClient.MODEL_SWAPPER.getCustomBlockModels()
+                .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "galvanized_reactor_tank"),
+                        model -> new GalvanizedTankModel(model));
     }
 
     @SubscribeEvent

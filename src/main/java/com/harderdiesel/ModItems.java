@@ -2,6 +2,7 @@ package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingControllerItem;
 import com.harderdiesel.content.separator.SeparatorControllerItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -156,6 +157,9 @@ public class ModItems {
 
     public static final DeferredItem<SeparatorControllerItem> SEPARATOR_CONTROLLER = ITEMS.register("separator_controller",
             () -> new SeparatorControllerItem(new Item.Properties().stacksTo(64)));
+
+    public static final DeferredItem<BlockItem> GALVANIZED_TANK = ITEMS.register("galvanized_reactor_tank",
+            () -> new BlockItem(ModBlocks.GALVANIZED_TANK.get(), new Item.Properties()));
 
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);

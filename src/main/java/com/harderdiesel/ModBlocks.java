@@ -1,6 +1,7 @@
 package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingReactorBlock;
+import com.harderdiesel.content.galvanized.GalvanizedTankBlock;
 import com.harderdiesel.content.separator.SeparatorBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -400,6 +401,14 @@ public class ModBlocks {
                     .mapColor(MapColor.COLOR_LIGHT_BLUE)
                     .strength(3.0F)
                     .noOcclusion()
+                    .isRedstoneConductor((p1, p2, p3) -> true)));
+
+    public static final DeferredBlock<GalvanizedTankBlock> GALVANIZED_TANK = BLOCKS.register("galvanized_reactor_tank",
+            () -> new GalvanizedTankBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                    .strength(3.0F)
+                    .noOcclusion()
+                    .sound(SoundType.METAL)
                     .isRedstoneConductor((p1, p2, p3) -> true)));
 
     public static void register(IEventBus modEventBus) {

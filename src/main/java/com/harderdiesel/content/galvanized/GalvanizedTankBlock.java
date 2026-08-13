@@ -1,21 +1,15 @@
-package com.harderdiesel.content.cracking;
+package com.harderdiesel.content.galvanized;
 
 import com.harderdiesel.ModBlockEntityTypes;
-import com.harderdiesel.ModBlocks;
 import com.harderdiesel.ModItems;
-import com.harderdiesel.content.galvanized.GalvanizedTankBlockEntity;
-import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.tank.FluidTankBlock;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +20,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,76 +28,33 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.harderdiesel.ModItems.CRACKING_CONTROLLER;
-
-public class CrackingReactorBlock extends Block implements IBE<CrackingReactorBlockEntity>, IWrenchable, SpecialBlockItemRequirement {
+public class GalvanizedTankBlock extends Block implements IBE<GalvanizedTankBlockEntity>, IWrenchable, SpecialBlockItemRequirement {
     public static final BooleanProperty TOP = BooleanProperty.create("top");
     public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
     public static final EnumProperty<FluidTankBlock.Shape> SHAPE = EnumProperty.create("shape", FluidTankBlock.Shape.class);
 
-    public CrackingReactorBlock(Properties properties) {
+    public GalvanizedTankBlock(Properties properties) {
         super(properties);
+        registerDefaultState(defaultBlockState().setValue(TOP, true).setValue(BOTTOM, true).setValue(SHAPE, FluidTankBlock.Shape.PLAIN));
     }
 
-    public static boolean isReactor(BlockState state) {
-        return state.getBlock() instanceof CrackingReactorBlock;
-    }
-
-    @Override
-    public InteractionResult onSneakWrenched(BlockState state, UseOnContext context) {
-
-        if (context.getLevel().getBlockEntity(context.getClickedPos()) instanceof CrackingReactorBlockEntity dtbe) {
-            int width = dtbe.getControllerBE().getWidth();
-            BlockPos pos = dtbe.getController();
-            IFluidHandler tank = context.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, dtbe.getBlockPos(), null);
-            FluidStack stackInTank = tank == null ? FluidStack.EMPTY : tank.getFluidInTank(0);
-
-            for (int x = 0; x < width; x++) {
-                for (int z = 0; z < width; z++) {
-                    context.getLevel().setBlockAndUpdate(pos.offset(x, 0, z), ModBlocks.GALVANIZED_TANK.get().defaultBlockState());
-                    context.getLevel().updateNeighborsAt(pos.offset(x, 0, z), ModBlocks.GALVANIZED_TANK.get());
-                    if (context.getLevel().isClientSide) {
-                        for (int i = 0; i < 30; i++) {
-                            Vec3 offset = VecHelper.offsetRandomly(VecHelper.getCenterOf(pos.offset(x, 0, z)), context.getLevel().getRandom(), .3f);
-                            Vec3 motion = VecHelper.offsetRandomly(Vec3.ZERO, context.getLevel().getRandom(), .1f);
-                            context.getLevel().addParticle(new ItemParticleOption(ParticleTypes.ITEM, CRACKING_CONTROLLER.get().getDefaultInstance()), offset.x(), offset.y(),
-                                    offset.z(), motion.x(), motion.y(), motion.z());
-                        }
-                    }
-                }
-            }
-            AllSoundEvents.WRENCH_REMOVE.playAt(context.getLevel(), pos.getX() + (double) width / 2, pos.getY() + 0.5, pos.getZ() + (double) width / 2, 2f, 1f, false);
-            if (!stackInTank.isEmpty() && context.getLevel().getBlockEntity(pos) instanceof GalvanizedTankBlockEntity be) {
-                IFluidHandler fTank = context.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
-                if (fTank != null)
-                    fTank.fill(stackInTank, IFluidHandler.FluidAction.EXECUTE);
-            }
-            if (!context.getPlayer().isCreative())
-                context.getPlayer().getInventory().placeItemBackInInventory(CRACKING_CONTROLLER.get().getDefaultInstance().copyWithCount(width * width));
-        }
-
-        return InteractionResult.SUCCESS;
+    public static boolean isTank(BlockState state) {
+        return state.getBlock() instanceof GalvanizedTankBlock;
     }
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighbourState, LevelAccessor level, BlockPos pos, BlockPos neighbourPos) {
-        if (direction == Direction.DOWN && neighbourState.getBlock() != this)
-            withBlockEntityDo(level, pos, CrackingReactorBlockEntity::updateTemperature);
         return super.updateShape(state, direction, neighbourState, level, pos, neighbourPos);
     }
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos otherPos, boolean p_60514_) {
         super.neighborChanged(state, level, pos, block, otherPos, p_60514_);
-        withBlockEntityDo(level, pos, CrackingReactorBlockEntity::updateVerticalMulti);
+        withBlockEntityDo(level, pos, GalvanizedTankBlockEntity::updateVerticalMulti);
     }
 
     @Override
@@ -111,18 +63,18 @@ public class CrackingReactorBlock extends Block implements IBE<CrackingReactorBl
     }
 
     @Override
-    public Class<CrackingReactorBlockEntity> getBlockEntityClass() {
-        return CrackingReactorBlockEntity.class;
+    public Class<GalvanizedTankBlockEntity> getBlockEntityClass() {
+        return GalvanizedTankBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends CrackingReactorBlockEntity> getBlockEntityType() {
-        return ModBlockEntityTypes.CRACKING_REACTOR.get();
+    public BlockEntityType<? extends GalvanizedTankBlockEntity> getBlockEntityType() {
+        return ModBlockEntityTypes.GALVANIZED_TANK.get();
     }
 
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
-        withBlockEntityDo(context.getLevel(), context.getClickedPos(), CrackingReactorBlockEntity::toggleWindows);
+        withBlockEntityDo(context.getLevel(), context.getClickedPos(), GalvanizedTankBlockEntity::toggleWindows);
         return InteractionResult.SUCCESS;
     }
 
@@ -130,9 +82,9 @@ public class CrackingReactorBlock extends Block implements IBE<CrackingReactorBl
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
             BlockEntity be = world.getBlockEntity(pos);
-            if (!(be instanceof CrackingReactorBlockEntity))
+            if (!(be instanceof GalvanizedTankBlockEntity))
                 return;
-            CrackingReactorBlockEntity tankBE = (CrackingReactorBlockEntity) be;
+            GalvanizedTankBlockEntity tankBE = (GalvanizedTankBlockEntity) be;
             world.removeBlockEntity(pos);
             ConnectivityHandler.splitMulti(tankBE);
         }
@@ -149,8 +101,8 @@ public class CrackingReactorBlock extends Block implements IBE<CrackingReactorBl
             return;
         if (moved)
             return;
-        withBlockEntityDo(level, pos, CrackingReactorBlockEntity::updateConnectivity);
-        withBlockEntityDo(level, pos, CrackingReactorBlockEntity::updateVerticalMulti);
+        withBlockEntityDo(level, pos, GalvanizedTankBlockEntity::updateConnectivity);
+        withBlockEntityDo(level, pos, GalvanizedTankBlockEntity::updateVerticalMulti);
     }
 
     @Override
@@ -188,7 +140,11 @@ public class CrackingReactorBlock extends Block implements IBE<CrackingReactorBl
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity blockEntity) {
         List<ItemStack> list = new ArrayList<>();
         list.add(new ItemStack(ModItems.GALVANIZED_TANK.get()));
-        list.add(CRACKING_CONTROLLER.get().getDefaultInstance());
         return new ItemRequirement(ItemRequirement.ItemUseType.CONSUME, list);
+    }
+
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader world, BlockPos pos, net.minecraft.world.entity.Entity entity) {
+        return SoundType.METAL;
     }
 }

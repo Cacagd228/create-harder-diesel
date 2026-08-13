@@ -42,7 +42,7 @@ public class CrackingReactorScene {
 
         scene.overlay().showText(70)
                 .attachKeyFrame()
-                .text("Apply a Cracking Controller to a at least 3 block tall Oil Barrel structure to create a Cracking Reactor.")
+                .text("Apply a Cracking Controller to a at least 3 block tall Galvanized Reactor Tank structure to create a Cracking Reactor.")
                 .colored(PonderPalette.BLUE)
                 .pointAt(util.vector().topOf(2, 2, 2))
                 .placeNearTarget();

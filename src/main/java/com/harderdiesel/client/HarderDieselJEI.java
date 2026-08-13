@@ -1,6 +1,7 @@
 package com.harderdiesel.client;
 
 import com.harderdiesel.HarderDiesel;
+import com.harderdiesel.ModBlocks;
 import com.harderdiesel.ModItems;
 import com.harderdiesel.ModRecipeTypes;
 import com.harderdiesel.content.cracking.CrackingRecipe;
@@ -34,7 +35,7 @@ public class HarderDieselJEI implements IModPlugin {
         CreateRecipeCategory<CrackingRecipe> cracking = new CreateRecipeCategory.Builder<>(CrackingRecipe.class)
                 .addTypedRecipes(ModRecipeTypes.CRACKING)
                 .catalyst(ModItems.CRACKING_CONTROLLER::get)
-                .doubleItemIcon(com.jesz.createdieselgenerators.CDGBlocks.OIL_BARREL.get(), ModItems.CRACKING_CONTROLLER.get())
+                .doubleItemIcon(ModBlocks.GALVANIZED_TANK.get(), ModItems.CRACKING_CONTROLLER.get())
                 .emptyBackground(177, 200)
                 .build("cracking", CrackingCategory::new);
 

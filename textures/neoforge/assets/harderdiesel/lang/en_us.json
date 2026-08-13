@@ -71,6 +71,7 @@
   "itemGroup.harderdiesel": "Create: Harder Diesel",
   "item.harderdiesel.cracking_controller": "Cracking Controller",
   "block.harderdiesel.cracking_reactor": "Cracking Reactor",
+  "block.harderdiesel.galvanized_reactor_tank": "Galvanized Reactor Tank",
   "harderdiesel.recipe.cracking": "Cracking",
   "harderdiesel.ponder.cracking_reactor.header": "Setting up a Cracking Reactor",
   "harderdiesel.ponder.cracking_reactor.text_1": "Feed two ingredients into the bottom levels",

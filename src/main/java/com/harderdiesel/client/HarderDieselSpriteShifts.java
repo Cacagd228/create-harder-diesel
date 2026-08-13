@@ -15,6 +15,9 @@ public class HarderDieselSpriteShifts {
             SEPARATOR_TOP = rectangle("separator/separator_top"),
             SEPARATOR_NORTH = rectangle("separator/separator", "separator/separator_pipes_connected");
 
+    public static final CTSpriteShiftEntry GALVANIZED_TANK = rectangle("galvanized_reactor_tank/fluid_tank"),
+            GALVANIZED_TANK_TOP = rectangle("galvanized_reactor_tank/fluid_tank_top");
+
     public static void init() {
     }
 
