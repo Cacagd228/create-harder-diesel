@@ -68,5 +68,15 @@
   "item.harderdiesel.benzene_bucket": "Ведро бензола",
   "item.harderdiesel.toluene_bucket": "Ведро толуола",
   "item.harderdiesel.xylene_bucket": "Ведро ксилола",
-  "itemGroup.harderdiesel": "Create: Harder Diesel"
+  "itemGroup.harderdiesel": "Create: Harder Diesel",
+  "item.harderdiesel.cracking_controller": "Контроллер крекинга",
+  "block.harderdiesel.cracking_reactor": "Крекинг-реактор",
+  "harderdiesel.recipe.cracking": "Крекинг",
+  "harderdiesel.ponder.cracking_reactor.header": "Настройка крекинг-реактора",
+  "harderdiesel.ponder.cracking_reactor.text_1": "Подача двух исходных жидкостей на нижние уровни",
+  "harderdiesel.actionbar.cracking_controller.too_short": "Реактор слишком низкий — нужно минимум %s блоков",
+  "harderdiesel.actionbar.cracking_controller.not_enough": "Недостаточно контроллеров",
+  "harderdiesel.hint.reactor_full.title": "Реактор заполнен",
+  "harderdiesel.hint.reactor_full": "Освободите выходные баки, чтобы реактор продолжил работу",
+  "harderdiesel.hint.reactor_empty": "Пусто"
 }

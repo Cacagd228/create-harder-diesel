@@ -1,12 +1,16 @@
 package com.harderdiesel.client;
 
 import com.harderdiesel.HarderDiesel;
+import com.harderdiesel.ModBlockEntityTypes;
 import com.harderdiesel.ModFluidTypes;
 import com.harderdiesel.ModItems;
+import com.simibubi.create.CreateClient;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -102,5 +106,20 @@ public class ModClientEvents {
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.BENZENE_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.TOLUENE_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.XYLENE_BUCKET.get());
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(HarderDieselSpriteShifts::init);
+        HarderDieselPartialModels.init();
+        net.createmod.ponder.foundation.PonderIndex.addPlugin(new HarderDieselPonderPlugin());
+        CreateClient.MODEL_SWAPPER.getCustomBlockModels()
+                .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "cracking_reactor"),
+                        model -> new CrackingReactorModel(model));
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.CRACKING_REACTOR.get(), CrackingReactorRenderer::new);
     }
 }

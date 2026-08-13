@@ -1,5 +1,6 @@
 package com.harderdiesel;
 
+import com.harderdiesel.content.cracking.CrackingReactorBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -385,6 +386,13 @@ public class ModBlocks {
                     .liquid()
                     .sound(SoundType.EMPTY)
                     .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<CrackingReactorBlock> CRACKING_REACTOR = BLOCKS.register("cracking_reactor",
+            () -> new CrackingReactorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .strength(3.0F)
+                    .noOcclusion()
+                    .isRedstoneConductor((p1, p2, p3) -> true)));
 
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);

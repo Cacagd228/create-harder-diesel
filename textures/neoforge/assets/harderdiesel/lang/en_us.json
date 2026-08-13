@@ -68,5 +68,15 @@
   "item.harderdiesel.benzene_bucket": "Benzene Bucket",
   "item.harderdiesel.toluene_bucket": "Toluene Bucket",
   "item.harderdiesel.xylene_bucket": "Xylene Bucket",
-  "itemGroup.harderdiesel": "Create: Harder Diesel"
+  "itemGroup.harderdiesel": "Create: Harder Diesel",
+  "item.harderdiesel.cracking_controller": "Cracking Controller",
+  "block.harderdiesel.cracking_reactor": "Cracking Reactor",
+  "harderdiesel.recipe.cracking": "Cracking",
+  "harderdiesel.ponder.cracking_reactor.header": "Setting up a Cracking Reactor",
+  "harderdiesel.ponder.cracking_reactor.text_1": "Feed two ingredients into the bottom levels",
+  "harderdiesel.actionbar.cracking_controller.too_short": "Reactor too short - at least %s blocks required",
+  "harderdiesel.actionbar.cracking_controller.not_enough": "Not enough controllers",
+  "harderdiesel.hint.reactor_full.title": "Reactor is full",
+  "harderdiesel.hint.reactor_full": "Clear the output tanks to continue processing",
+  "harderdiesel.hint.reactor_empty": "Empty"
 }

@@ -18,6 +18,7 @@ public class ModCreativeTabs {
                     .icon(() -> new ItemStack(ModItems.NAPHTHA_BUCKET.get()))
                     .displayItems((params, output) -> {
                         output.accept(ModItems.COKE_COAL);
+                        output.accept(ModItems.CRACKING_CONTROLLER);
                         output.accept(ModItems.NAPHTHA_BUCKET);
                         output.accept(ModItems.KEROSENE_BUCKET);
                         output.accept(ModItems.HEAVY_OIL_BUCKET);

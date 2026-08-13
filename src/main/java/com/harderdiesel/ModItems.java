@@ -1,5 +1,6 @@
 package com.harderdiesel;
 
+import com.harderdiesel.content.cracking.CrackingControllerItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -148,6 +149,9 @@ public class ModItems {
     public static final DeferredItem<BucketItem> XYLENE_BUCKET = ITEMS.register("xylene_bucket",
             () -> new BucketItem(ModFluids.XYLENE.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<CrackingControllerItem> CRACKING_CONTROLLER = ITEMS.register("cracking_controller",
+            () -> new CrackingControllerItem(new Item.Properties().stacksTo(64)));
 
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);
