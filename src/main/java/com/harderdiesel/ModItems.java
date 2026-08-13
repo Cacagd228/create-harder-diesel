@@ -161,6 +161,9 @@ public class ModItems {
     public static final DeferredItem<BlockItem> GALVANIZED_TANK = ITEMS.register("galvanized_reactor_tank",
             () -> new BlockItem(ModBlocks.GALVANIZED_TANK.get(), new Item.Properties()));
 
+    public static final DeferredItem<BlockItem> WEAR_RESISTANT_TANK = ITEMS.register("wear_resistant_tank",
+            () -> new BlockItem(ModBlocks.WEAR_RESISTANT_TANK.get(), new Item.Properties()));
+
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);
     }

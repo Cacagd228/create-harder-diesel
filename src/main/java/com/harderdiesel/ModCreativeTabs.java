@@ -19,6 +19,7 @@ public class ModCreativeTabs {
                     .displayItems((params, output) -> {
                         output.accept(ModItems.COKE_COAL);
                         output.accept(ModItems.GALVANIZED_TANK);
+                        output.accept(ModItems.WEAR_RESISTANT_TANK);
                         output.accept(ModItems.CRACKING_CONTROLLER);
                         output.accept(ModItems.SEPARATOR_CONTROLLER);
                         output.accept(ModItems.NAPHTHA_BUCKET);

@@ -44,7 +44,7 @@ public class HarderDieselJEI implements IModPlugin {
         CreateRecipeCategory<SeparatorRecipe> separating = new CreateRecipeCategory.Builder<>(SeparatorRecipe.class)
                 .addTypedRecipes(ModRecipeTypes.SEPARATING)
                 .catalyst(ModItems.SEPARATOR_CONTROLLER::get)
-                .doubleItemIcon(com.jesz.createdieselgenerators.CDGBlocks.OIL_BARREL.get(), ModItems.SEPARATOR_CONTROLLER.get())
+                .doubleItemIcon(ModBlocks.WEAR_RESISTANT_TANK.get(), ModItems.SEPARATOR_CONTROLLER.get())
                 .emptyBackground(177, 220)
                 .build("separating", SeparatorCategory::new);
 

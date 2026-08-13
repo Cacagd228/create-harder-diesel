@@ -39,7 +39,7 @@ public class SeparatorScene {
 
         scene.overlay().showText(70)
                 .attachKeyFrame()
-                .text("Apply a Separator Controller to an Oil Barrel structure to create a Separator.")
+                .text("Apply a Separator Controller to a Wear-Resistant Tank structure to create a Separator.")
                 .colored(PonderPalette.BLUE)
                 .pointAt(util.vector().topOf(2, 2, 2))
                 .placeNearTarget();

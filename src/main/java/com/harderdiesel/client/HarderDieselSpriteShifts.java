@@ -18,6 +18,9 @@ public class HarderDieselSpriteShifts {
     public static final CTSpriteShiftEntry GALVANIZED_TANK = rectangle("galvanized_reactor_tank/fluid_tank"),
             GALVANIZED_TANK_TOP = rectangle("galvanized_reactor_tank/fluid_tank_top");
 
+    public static final CTSpriteShiftEntry WEAR_RESISTANT_TANK = rectangle("wear_resistant_tank/fluid_tank"),
+            WEAR_RESISTANT_TANK_TOP = rectangle("wear_resistant_tank/fluid_tank_top");
+
     public static void init() {
     }
 

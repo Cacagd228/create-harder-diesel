@@ -3,6 +3,7 @@ package com.harderdiesel;
 import com.harderdiesel.content.cracking.CrackingReactorBlock;
 import com.harderdiesel.content.galvanized.GalvanizedTankBlock;
 import com.harderdiesel.content.separator.SeparatorBlock;
+import com.harderdiesel.content.wear_resistant.WearResistantTankBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -406,6 +407,14 @@ public class ModBlocks {
     public static final DeferredBlock<GalvanizedTankBlock> GALVANIZED_TANK = BLOCKS.register("galvanized_reactor_tank",
             () -> new GalvanizedTankBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                    .strength(3.0F)
+                    .noOcclusion()
+                    .sound(SoundType.METAL)
+                    .isRedstoneConductor((p1, p2, p3) -> true)));
+
+    public static final DeferredBlock<WearResistantTankBlock> WEAR_RESISTANT_TANK = BLOCKS.register("wear_resistant_tank",
+            () -> new WearResistantTankBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE)
                     .strength(3.0F)
                     .noOcclusion()
                     .sound(SoundType.METAL)

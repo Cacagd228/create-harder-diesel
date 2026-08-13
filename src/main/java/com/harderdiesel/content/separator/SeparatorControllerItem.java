@@ -2,8 +2,7 @@ package com.harderdiesel.content.separator;
 
 import com.harderdiesel.ModBlocks;
 import com.harderdiesel.ModConfig;
-import com.jesz.createdieselgenerators.CDGBlocks;
-import com.jesz.createdieselgenerators.content.oil_barrel.OilBarrelBlockEntity;
+import com.harderdiesel.content.wear_resistant.WearResistantTankBlockEntity;
 import com.simibubi.create.AllSoundEvents;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
@@ -33,8 +32,8 @@ public class SeparatorControllerItem extends Item {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        if (!(context.getLevel().getBlockEntity(context.getClickedPos()) instanceof OilBarrelBlockEntity obbe
-                && CDGBlocks.OIL_BARREL.has(obbe.getBlockState())))
+        if (!(context.getLevel().getBlockEntity(context.getClickedPos()) instanceof WearResistantTankBlockEntity obbe
+                && context.getLevel().getBlockState(context.getClickedPos()).is(ModBlocks.WEAR_RESISTANT_TANK.get())))
             return super.useOn(context);
         ItemStack itemInHand = context.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
         BlockPos controllerPos = obbe.getController();

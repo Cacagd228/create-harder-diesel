@@ -72,6 +72,7 @@
   "item.harderdiesel.cracking_controller": "Контроллер крекинга",
   "block.harderdiesel.cracking_reactor": "Крекинг-реактор",
   "block.harderdiesel.galvanized_reactor_tank": "Оцинкованный бак реактора",
+  "block.harderdiesel.wear_resistant_tank": "Износостойкий бак",
   "harderdiesel.recipe.cracking": "Крекинг",
   "harderdiesel.ponder.cracking_reactor.header": "Настройка крекинг-реактора",
   "harderdiesel.ponder.cracking_reactor.text_1": "Подача двух исходных жидкостей на нижние уровни",

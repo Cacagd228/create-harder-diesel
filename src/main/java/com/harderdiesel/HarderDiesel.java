@@ -3,6 +3,7 @@ package com.harderdiesel;
 import com.harderdiesel.content.cracking.CrackingReactorBlockEntity;
 import com.harderdiesel.content.galvanized.GalvanizedTankBlockEntity;
 import com.harderdiesel.content.separator.SeparatorBlockEntity;
+import com.harderdiesel.content.wear_resistant.WearResistantTankBlockEntity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
@@ -28,5 +29,7 @@ public class HarderDiesel {
                 SeparatorBlockEntity.registerCapabilities(event));
         modEventBus.addListener((RegisterCapabilitiesEvent event) ->
                 GalvanizedTankBlockEntity.registerCapabilities(event));
+        modEventBus.addListener((RegisterCapabilitiesEvent event) ->
+                WearResistantTankBlockEntity.registerCapabilities(event));
     }
 }
