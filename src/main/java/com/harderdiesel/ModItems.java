@@ -152,6 +152,34 @@ public class ModItems {
             () -> new BucketItem(ModFluids.XYLENE.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
+    public static final DeferredItem<BucketItem> LIGHT_SWEET_CRUDE_BUCKET = ITEMS.register("light_sweet_crude_bucket",
+            () -> new BucketItem(ModFluids.LIGHT_SWEET_CRUDE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> LIGHT_SOUR_CRUDE_BUCKET = ITEMS.register("light_sour_crude_bucket",
+            () -> new BucketItem(ModFluids.LIGHT_SOUR_CRUDE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> MEDIUM_SWEET_CRUDE_BUCKET = ITEMS.register("medium_sweet_crude_bucket",
+            () -> new BucketItem(ModFluids.MEDIUM_SWEET_CRUDE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> MEDIUM_SOUR_CRUDE_BUCKET = ITEMS.register("medium_sour_crude_bucket",
+            () -> new BucketItem(ModFluids.MEDIUM_SOUR_CRUDE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> HEAVY_SWEET_CRUDE_BUCKET = ITEMS.register("heavy_sweet_crude_bucket",
+            () -> new BucketItem(ModFluids.HEAVY_SWEET_CRUDE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> HEAVY_SOUR_CRUDE_BUCKET = ITEMS.register("heavy_sour_crude_bucket",
+            () -> new BucketItem(ModFluids.HEAVY_SOUR_CRUDE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> MOLTEN_SULFUR_BUCKET = ITEMS.register("molten_sulfur_bucket",
+            () -> new BucketItem(ModFluids.MOLTEN_SULFUR.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
     public static final DeferredItem<CrackingControllerItem> CRACKING_CONTROLLER = ITEMS.register("cracking_controller",
             () -> new CrackingControllerItem(new Item.Properties().stacksTo(64)));
 

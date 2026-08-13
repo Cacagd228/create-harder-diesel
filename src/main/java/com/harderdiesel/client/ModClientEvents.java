@@ -54,6 +54,13 @@ public class ModClientEvents {
         event.registerFluidType(fluidTextures("benzene"), ModFluidTypes.BENZENE.get());
         event.registerFluidType(fluidTextures("toluene"), ModFluidTypes.TOLUENE.get());
         event.registerFluidType(fluidTextures("xylene"), ModFluidTypes.XYLENE.get());
+        event.registerFluidType(fluidTextures("light_sweet_crude"), ModFluidTypes.LIGHT_SWEET_CRUDE.get());
+        event.registerFluidType(fluidTextures("light_sour_crude"), ModFluidTypes.LIGHT_SOUR_CRUDE.get());
+        event.registerFluidType(fluidTextures("medium_sweet_crude"), ModFluidTypes.MEDIUM_SWEET_CRUDE.get());
+        event.registerFluidType(fluidTextures("medium_sour_crude"), ModFluidTypes.MEDIUM_SOUR_CRUDE.get());
+        event.registerFluidType(fluidTextures("heavy_sweet_crude"), ModFluidTypes.HEAVY_SWEET_CRUDE.get());
+        event.registerFluidType(fluidTextures("heavy_sour_crude"), ModFluidTypes.HEAVY_SOUR_CRUDE.get());
+        event.registerFluidType(fluidTextures("molten_sulfur"), ModFluidTypes.MOLTEN_SULFUR.get());
     }
 
     private static IClientFluidTypeExtensions fluidTextures(String name) {
@@ -106,6 +113,13 @@ public class ModClientEvents {
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.BENZENE_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.TOLUENE_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.XYLENE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.LIGHT_SWEET_CRUDE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.LIGHT_SOUR_CRUDE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.MEDIUM_SWEET_CRUDE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.MEDIUM_SOUR_CRUDE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.HEAVY_SWEET_CRUDE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.HEAVY_SOUR_CRUDE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.MOLTEN_SULFUR_BUCKET.get());
     }
 
     @SubscribeEvent

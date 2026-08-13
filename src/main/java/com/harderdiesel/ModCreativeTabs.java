@@ -61,6 +61,13 @@ public class ModCreativeTabs {
                         output.accept(ModItems.BENZENE_BUCKET);
                         output.accept(ModItems.TOLUENE_BUCKET);
                         output.accept(ModItems.XYLENE_BUCKET);
+                        output.accept(ModItems.LIGHT_SWEET_CRUDE_BUCKET);
+                        output.accept(ModItems.LIGHT_SOUR_CRUDE_BUCKET);
+                        output.accept(ModItems.MEDIUM_SWEET_CRUDE_BUCKET);
+                        output.accept(ModItems.MEDIUM_SOUR_CRUDE_BUCKET);
+                        output.accept(ModItems.HEAVY_SWEET_CRUDE_BUCKET);
+                        output.accept(ModItems.HEAVY_SOUR_CRUDE_BUCKET);
+                        output.accept(ModItems.MOLTEN_SULFUR_BUCKET);
                     })
                     .build());
 

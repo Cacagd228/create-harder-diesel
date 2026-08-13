@@ -385,6 +385,83 @@ public class ModFluids {
                     .block(ModBlocks.XYLENE)
                     .bucket(ModItems.XYLENE_BUCKET);
 
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> LIGHT_SWEET_CRUDE =
+            FLUIDS.register("light_sweet_crude", () -> new BaseFlowingFluid.Source(ModFluids.LIGHT_SWEET_CRUDE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_LIGHT_SWEET_CRUDE =
+            FLUIDS.register("flowing_light_sweet_crude", () -> new BaseFlowingFluid.Flowing(ModFluids.LIGHT_SWEET_CRUDE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties LIGHT_SWEET_CRUDE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.LIGHT_SWEET_CRUDE, LIGHT_SWEET_CRUDE, FLOWING_LIGHT_SWEET_CRUDE)
+                    .block(ModBlocks.LIGHT_SWEET_CRUDE)
+                    .bucket(ModItems.LIGHT_SWEET_CRUDE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> LIGHT_SOUR_CRUDE =
+            FLUIDS.register("light_sour_crude", () -> new BaseFlowingFluid.Source(ModFluids.LIGHT_SOUR_CRUDE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_LIGHT_SOUR_CRUDE =
+            FLUIDS.register("flowing_light_sour_crude", () -> new BaseFlowingFluid.Flowing(ModFluids.LIGHT_SOUR_CRUDE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties LIGHT_SOUR_CRUDE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.LIGHT_SOUR_CRUDE, LIGHT_SOUR_CRUDE, FLOWING_LIGHT_SOUR_CRUDE)
+                    .block(ModBlocks.LIGHT_SOUR_CRUDE)
+                    .bucket(ModItems.LIGHT_SOUR_CRUDE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> MEDIUM_SWEET_CRUDE =
+            FLUIDS.register("medium_sweet_crude", () -> new BaseFlowingFluid.Source(ModFluids.MEDIUM_SWEET_CRUDE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_MEDIUM_SWEET_CRUDE =
+            FLUIDS.register("flowing_medium_sweet_crude", () -> new BaseFlowingFluid.Flowing(ModFluids.MEDIUM_SWEET_CRUDE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties MEDIUM_SWEET_CRUDE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.MEDIUM_SWEET_CRUDE, MEDIUM_SWEET_CRUDE, FLOWING_MEDIUM_SWEET_CRUDE)
+                    .block(ModBlocks.MEDIUM_SWEET_CRUDE)
+                    .bucket(ModItems.MEDIUM_SWEET_CRUDE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> MEDIUM_SOUR_CRUDE =
+            FLUIDS.register("medium_sour_crude", () -> new BaseFlowingFluid.Source(ModFluids.MEDIUM_SOUR_CRUDE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_MEDIUM_SOUR_CRUDE =
+            FLUIDS.register("flowing_medium_sour_crude", () -> new BaseFlowingFluid.Flowing(ModFluids.MEDIUM_SOUR_CRUDE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties MEDIUM_SOUR_CRUDE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.MEDIUM_SOUR_CRUDE, MEDIUM_SOUR_CRUDE, FLOWING_MEDIUM_SOUR_CRUDE)
+                    .block(ModBlocks.MEDIUM_SOUR_CRUDE)
+                    .bucket(ModItems.MEDIUM_SOUR_CRUDE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> HEAVY_SWEET_CRUDE =
+            FLUIDS.register("heavy_sweet_crude", () -> new BaseFlowingFluid.Source(ModFluids.HEAVY_SWEET_CRUDE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_HEAVY_SWEET_CRUDE =
+            FLUIDS.register("flowing_heavy_sweet_crude", () -> new BaseFlowingFluid.Flowing(ModFluids.HEAVY_SWEET_CRUDE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties HEAVY_SWEET_CRUDE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.HEAVY_SWEET_CRUDE, HEAVY_SWEET_CRUDE, FLOWING_HEAVY_SWEET_CRUDE)
+                    .block(ModBlocks.HEAVY_SWEET_CRUDE)
+                    .bucket(ModItems.HEAVY_SWEET_CRUDE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> HEAVY_SOUR_CRUDE =
+            FLUIDS.register("heavy_sour_crude", () -> new BaseFlowingFluid.Source(ModFluids.HEAVY_SOUR_CRUDE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_HEAVY_SOUR_CRUDE =
+            FLUIDS.register("flowing_heavy_sour_crude", () -> new BaseFlowingFluid.Flowing(ModFluids.HEAVY_SOUR_CRUDE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties HEAVY_SOUR_CRUDE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.HEAVY_SOUR_CRUDE, HEAVY_SOUR_CRUDE, FLOWING_HEAVY_SOUR_CRUDE)
+                    .block(ModBlocks.HEAVY_SOUR_CRUDE)
+                    .bucket(ModItems.HEAVY_SOUR_CRUDE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> MOLTEN_SULFUR =
+            FLUIDS.register("molten_sulfur", () -> new BaseFlowingFluid.Source(ModFluids.MOLTEN_SULFUR_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_MOLTEN_SULFUR =
+            FLUIDS.register("flowing_molten_sulfur", () -> new BaseFlowingFluid.Flowing(ModFluids.MOLTEN_SULFUR_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties MOLTEN_SULFUR_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.MOLTEN_SULFUR, MOLTEN_SULFUR, FLOWING_MOLTEN_SULFUR)
+                    .block(ModBlocks.MOLTEN_SULFUR)
+                    .bucket(ModItems.MOLTEN_SULFUR_BUCKET);
+
     public static void register(IEventBus modEventBus) {
         FLUIDS.register(modEventBus);
     }
