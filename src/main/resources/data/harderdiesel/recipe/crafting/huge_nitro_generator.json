@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BEB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "harderdiesel:nitromethane_bucket"
+    },
+    "E": {
+      "item": "createdieselgenerators:huge_diesel_engine"
+    }
+  },
+  "result": {
+    "id": "harderdiesel:huge_nitro_generator"
+  }
+}

@@ -78,5 +78,17 @@
   "harderdiesel.actionbar.cracking_controller.not_enough": "Недостаточно контроллеров",
   "harderdiesel.hint.reactor_full.title": "Реактор заполнен",
   "harderdiesel.hint.reactor_full": "Освободите выходные баки, чтобы реактор продолжил работу",
-  "harderdiesel.hint.reactor_empty": "Пусто"
+  "harderdiesel.hint.reactor_empty": "Пусто",
+  "block.harderdiesel.gasoline_generator": "Бензиновый генератор",
+  "block.harderdiesel.diesel_generator": "Дизельный генератор",
+  "block.harderdiesel.gas_generator": "Газовый генератор",
+  "block.harderdiesel.nitro_generator": "Нитро-генератор",
+  "block.harderdiesel.large_gasoline_generator": "Модульный бензиновый генератор",
+  "block.harderdiesel.large_diesel_generator": "Модульный дизельный генератор",
+  "block.harderdiesel.large_gas_generator": "Модульный газовый генератор",
+  "block.harderdiesel.large_nitro_generator": "Модульный нитро-генератор",
+  "block.harderdiesel.huge_gasoline_generator": "Большой бензиновый генератор",
+  "block.harderdiesel.huge_diesel_generator": "Большой дизельный генератор",
+  "block.harderdiesel.huge_gas_generator": "Большой газовый генератор",
+  "block.harderdiesel.huge_nitro_generator": "Большой нитро-генератор"
 }

@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "harderdiesel:gasoline_generator",
+    "harderdiesel:large_gasoline_generator",
+    "harderdiesel:huge_gasoline_generator",
+    "harderdiesel:diesel_generator",
+    "harderdiesel:large_diesel_generator",
+    "harderdiesel:huge_diesel_generator",
+    "harderdiesel:gas_generator",
+    "harderdiesel:large_gas_generator",
+    "harderdiesel:huge_gas_generator",
+    "harderdiesel:nitro_generator",
+    "harderdiesel:large_nitro_generator",
+    "harderdiesel:huge_nitro_generator"
+  ]
+}

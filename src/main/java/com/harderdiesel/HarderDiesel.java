@@ -18,9 +18,12 @@ public class HarderDiesel {
         ModCreativeTabs.register(modEventBus);
         ModRecipeTypes.register(modEventBus);
         ModBlockEntityTypes.register(modEventBus);
+        ModGenerators.register(modEventBus);
         ModConfig.register(container);
 
-        modEventBus.addListener((RegisterCapabilitiesEvent event) ->
-                CrackingReactorBlockEntity.registerCapabilities(event));
+        modEventBus.addListener((RegisterCapabilitiesEvent event) -> {
+            CrackingReactorBlockEntity.registerCapabilities(event);
+            ModGenerators.registerCapabilities(event);
+        });
     }
 }

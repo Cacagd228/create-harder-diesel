@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#c:low_cetane_diesel",
+    "#c:medium_cetane_diesel",
+    "#c:high_cetane_diesel"
+  ]
+}

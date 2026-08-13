@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "harderdiesel:lpg_liquid",
+    "harderdiesel:flowing_lpg_liquid"
+  ]
+}
