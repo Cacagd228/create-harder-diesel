@@ -116,10 +116,14 @@ public class ModClientEvents {
         CreateClient.MODEL_SWAPPER.getCustomBlockModels()
                 .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "cracking_reactor"),
                         model -> new CrackingReactorModel(model));
+        CreateClient.MODEL_SWAPPER.getCustomBlockModels()
+                .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "separator"),
+                        model -> new SeparatorModel(model));
     }
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntityTypes.CRACKING_REACTOR.get(), CrackingReactorRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.SEPARATOR.get(), SeparatorRenderer::new);
     }
 }

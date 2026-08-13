@@ -4,6 +4,7 @@ import com.harderdiesel.HarderDiesel;
 import com.harderdiesel.ModItems;
 import com.harderdiesel.ModRecipeTypes;
 import com.harderdiesel.content.cracking.CrackingRecipe;
+import com.harderdiesel.content.separator.SeparatorRecipe;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -38,6 +39,15 @@ public class HarderDieselJEI implements IModPlugin {
                 .build("cracking", CrackingCategory::new);
 
         allCategories.add(cracking);
+
+        CreateRecipeCategory<SeparatorRecipe> separating = new CreateRecipeCategory.Builder<>(SeparatorRecipe.class)
+                .addTypedRecipes(ModRecipeTypes.SEPARATING)
+                .catalyst(ModItems.SEPARATOR_CONTROLLER::get)
+                .doubleItemIcon(com.jesz.createdieselgenerators.CDGBlocks.OIL_BARREL.get(), ModItems.SEPARATOR_CONTROLLER.get())
+                .emptyBackground(177, 220)
+                .build("separating", SeparatorCategory::new);
+
+        allCategories.add(separating);
     }
 
     @Override

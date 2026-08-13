@@ -78,5 +78,15 @@
   "harderdiesel.actionbar.cracking_controller.not_enough": "Недостаточно контроллеров",
   "harderdiesel.hint.reactor_full.title": "Реактор заполнен",
   "harderdiesel.hint.reactor_full": "Освободите выходные баки, чтобы реактор продолжил работу",
-  "harderdiesel.hint.reactor_empty": "Пусто"
+  "harderdiesel.hint.reactor_empty": "Пусто",
+  "item.harderdiesel.separator_controller": "Контроллер сепаратора",
+  "block.harderdiesel.separator": "Сепаратор",
+  "harderdiesel.recipe.separating": "Сепарация",
+  "harderdiesel.ponder.separator.header": "Настройка сепаратора",
+  "harderdiesel.ponder.separator.text_1": "Подача одной исходной жидкости в нижний уровень",
+  "harderdiesel.actionbar.separator_controller.too_short": "Сепаратор слишком низкий — нужно минимум %s блоков",
+  "harderdiesel.actionbar.separator_controller.not_enough": "Недостаточно контроллеров",
+  "harderdiesel.hint.separator_full.title": "Сепаратор заполнен",
+  "harderdiesel.hint.separator_full": "Освободите выходные баки, чтобы сепаратор продолжил работу",
+  "harderdiesel.hint.separator_empty": "Пусто"
 }

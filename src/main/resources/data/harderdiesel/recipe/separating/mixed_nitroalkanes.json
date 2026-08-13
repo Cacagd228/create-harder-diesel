@@ -1,0 +1,25 @@
+{
+  "type": "harderdiesel:separating",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:mixed_nitroalkanes",
+      "amount": 100
+    }
+  ],
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "harderdiesel:nitromethane",
+      "amount": 30
+    },
+    {
+      "id": "harderdiesel:nitroethane",
+      "amount": 40
+    },
+    {
+      "id": "harderdiesel:nitropropane",
+      "amount": 30
+    }
+  ]
+}

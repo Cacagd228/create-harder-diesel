@@ -1,6 +1,7 @@
 package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingRecipe;
+import com.harderdiesel.content.separator.SeparatorRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,7 +19,8 @@ import java.util.function.Supplier;
 
 public enum ModRecipeTypes implements IRecipeTypeInfo {
 
-    CRACKING(CrackingRecipe::new);
+    CRACKING(CrackingRecipe::new),
+    SEPARATING(SeparatorRecipe::new);
 
     private final ResourceLocation id;
     private final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> serializerObject;

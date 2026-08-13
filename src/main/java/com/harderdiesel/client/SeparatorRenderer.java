@@ -1,6 +1,6 @@
 package com.harderdiesel.client;
 
-import com.harderdiesel.content.cracking.CrackingReactorBlockEntity;
+import com.harderdiesel.content.separator.SeparatorBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllPartialModels;
@@ -20,12 +20,12 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
-public class CrackingReactorRenderer extends SafeBlockEntityRenderer<CrackingReactorBlockEntity> {
-    public CrackingReactorRenderer(BlockEntityRendererProvider.Context context) {
+public class SeparatorRenderer extends SafeBlockEntityRenderer<SeparatorBlockEntity> {
+    public SeparatorRenderer(BlockEntityRendererProvider.Context context) {
     }
 
     @Override
-    protected void renderSafe(CrackingReactorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+    protected void renderSafe(SeparatorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
         if (be.isController() && be.isBottom()) {
             renderAsBoiler(be, partialTicks, ms, buffer, light, overlay);
@@ -45,7 +45,7 @@ public class CrackingReactorRenderer extends SafeBlockEntityRenderer<CrackingRea
             return;
 
         IFluidHandler fluids = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
-        if (!(fluids instanceof CrackingReactorBlockEntity.CrackingReactorFluidHandler handler))
+        if (!(fluids instanceof SeparatorBlockEntity.SeparatorFluidHandler handler))
             return;
 
         FluidStack fluidStack = firstNonEmpty(handler);
@@ -57,7 +57,7 @@ public class CrackingReactorRenderer extends SafeBlockEntityRenderer<CrackingRea
         level = Mth.clamp(level, 0, 1);
 
         // Hollow block interior: x 1-15, z 1-15, y 4-12, scaled to the layer width
-        CrackingReactorBlockEntity controllerBE = be.getControllerBE();
+        SeparatorBlockEntity controllerBE = be.getControllerBE();
         int width = controllerBE != null ? controllerBE.getWidth() : 1;
         float xMin = 1 / 16f;
         float zMin = 1 / 16f;
@@ -75,7 +75,7 @@ public class CrackingReactorRenderer extends SafeBlockEntityRenderer<CrackingRea
         ms.popPose();
     }
 
-    private FluidStack firstNonEmpty(CrackingReactorBlockEntity.CrackingReactorFluidHandler handler) {
+    private FluidStack firstNonEmpty(SeparatorBlockEntity.SeparatorFluidHandler handler) {
         for (int i = 0; i < handler.getTanks(); i++) {
             FluidStack stack = handler.getFluidInTank(i);
             if (!stack.isEmpty())
@@ -84,7 +84,7 @@ public class CrackingReactorRenderer extends SafeBlockEntityRenderer<CrackingRea
         return FluidStack.EMPTY;
     }
 
-    protected void renderAsBoiler(CrackingReactorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+    protected void renderAsBoiler(SeparatorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                                   int light, int overlay) {
         BlockState blockState = be.getBlockState();
         VertexConsumer vb = buffer.getBuffer(RenderType.cutout());
@@ -98,7 +98,7 @@ public class CrackingReactorRenderer extends SafeBlockEntityRenderer<CrackingRea
 
         for (Direction d : Iterate.horizontalDirections) {
             ms.pushPose();
-            CachedBuffers.partial(HarderDieselPartialModels.CRACKING_REACTOR_GAUGE, blockState)
+            CachedBuffers.partial(HarderDieselPartialModels.SEPARATOR_GAUGE, blockState)
                     .rotateYDegrees(d.toYRot())
                     .uncenter()
                     .translate(be.getWidth() / 2f - 6 / 16f, 0, 0)
@@ -120,7 +120,7 @@ public class CrackingReactorRenderer extends SafeBlockEntityRenderer<CrackingRea
     }
 
     @Override
-    public boolean shouldRenderOffScreen(CrackingReactorBlockEntity be) {
+    public boolean shouldRenderOffScreen(SeparatorBlockEntity be) {
         return be.isController() || be.isOutputLayerRepresentative();
     }
 }

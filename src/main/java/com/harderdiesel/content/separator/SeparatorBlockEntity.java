@@ -1,4 +1,4 @@
-package com.harderdiesel.content.cracking;
+package com.harderdiesel.content.separator;
 
 import com.harderdiesel.HarderDiesel;
 import com.harderdiesel.ModBlockEntityTypes;
@@ -56,13 +56,14 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation, IHaveHoveringInformation {
+public class SeparatorBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation, IHaveHoveringInformation {
     private static final int MAX_SIZE = 3;
+    private static final int TANK_COUNT = 7;
 
     public float progress;
     protected IFluidHandler fluidCapability;
     protected boolean forceFluidLevelUpdate;
-    public CrackingReactorFluidHandler tankInventory;
+    public SeparatorFluidHandler tankInventory;
     protected BlockPos controller;
     protected BlockPos lastKnownPos;
     protected boolean updateConnectivity;
@@ -82,7 +83,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     BlazeBurnerBlock.HeatLevel highestHeatLevel = BlazeBurnerBlock.HeatLevel.NONE;
     int numberOfHighestHeat = 0;
 
-    public CrackingReactorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public SeparatorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         tankInventory = createInventory();
         forceFluidLevelUpdate = true;
@@ -94,8 +95,8 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
         refreshCapability();
     }
 
-    protected CrackingReactorFluidHandler createInventory() {
-        return new CrackingReactorFluidHandler(6, getCapacityMultiplier(), this::onFluidStackChanged);
+    protected SeparatorFluidHandler createInventory() {
+        return new SeparatorFluidHandler(TANK_COUNT, getCapacityMultiplier(), this::onFluidStackChanged);
     }
 
     public BlazeBurnerBlock.HeatLevel getHeat() {
@@ -141,7 +142,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     }
 
     public int processingTime = -1;
-    public CrackingRecipe currentRecipe;
+    public SeparatorRecipe currentRecipe;
 
     private void startProcessing() {
         if (currentRecipe == null)
@@ -159,7 +160,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
             if (processingTime >= 0 && currentRecipe == null) {
                 List<Recipe<?>> r = getMatchingRecipes();
                 if (!r.isEmpty())
-                    currentRecipe = (CrackingRecipe) r.get(0);
+                    currentRecipe = (SeparatorRecipe) r.get(0);
             }
 
             if (processingTime > -1 && currentRecipe != null) {
@@ -240,7 +241,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
 
     protected void tickClient() {
         IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, worldPosition, null);
-        if (cap instanceof CrackingReactorFluidHandler handler) {
+        if (cap instanceof SeparatorFluidHandler handler) {
             float fill = fillStateOf(handler);
             if (fluidLevel == null)
                 fluidLevel = LerpedFloat.linear()
@@ -249,7 +250,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
         }
     }
 
-    protected float fillStateOf(CrackingReactorFluidHandler handler) {
+    protected float fillStateOf(SeparatorFluidHandler handler) {
         for (int i = 0; i < handler.getTanks(); i++) {
             FluidStack stack = handler.getFluidInTank(i);
             if (stack.isEmpty())
@@ -260,8 +261,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
         return 0;
     }
 
-    // The reactor's multi-tank accepts both ingredients. Both fluids are stored
-    // in the controller's tankInventory.
+    // The separator's multi-tank stores the single input fluid.
     protected boolean hasIngredients() {
         if (currentRecipe == null)
             return false;
@@ -303,16 +303,16 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
 
     protected List<Recipe<?>> getMatchingRecipes() {
         List<RecipeHolder<? extends Recipe<?>>> list = RecipeFinder.get(getRecipeCacheKey(), level,
-                recipe -> recipe.value().getType() == ModRecipeTypes.CRACKING.getType());
+                recipe -> recipe.value().getType() == ModRecipeTypes.SEPARATING.getType());
         return list.stream()
                 .map(RecipeHolder::value)
                 .sorted((r1, r2) -> {
-                    if (r1 instanceof CrackingRecipe recipe1 && r2 instanceof CrackingRecipe recipe2)
+                    if (r1 instanceof SeparatorRecipe recipe1 && r2 instanceof SeparatorRecipe recipe2)
                         return recipe2.getRequiredHeat().ordinal() - recipe1.getRequiredHeat().ordinal();
                     return 0;
                 })
                 .filter(r -> {
-                    if (r instanceof CrackingRecipe recipe) {
+                    if (r instanceof SeparatorRecipe recipe) {
                         if (!recipe.getRequiredHeat().testBlazeBurner(highestHeatLevel))
                             return false;
                         return recipe.apply(this, true);
@@ -331,7 +331,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     public void onFluidStackChanged() {
         if (!hasLevel())
             return;
-        CrackingReactorBlockEntity controllerBE = getControllerBE();
+        SeparatorBlockEntity controllerBE = getControllerBE();
         if (controllerBE != null)
             controllerBE.checkForRecipes();
         if (!level.isClientSide) {
@@ -343,7 +343,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         if (!hasLevel())
             return;
-        CrackingReactorBlockEntity controllerBE = getControllerBE();
+        SeparatorBlockEntity controllerBE = getControllerBE();
         if (controllerBE != null)
             controllerBE.checkForRecipes();
         FluidType attributes = newFluidStack.getFluid()
@@ -359,7 +359,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
             for (int xOffset = 0; xOffset < width; xOffset++) {
                 for (int zOffset = 0; zOffset < width; zOffset++) {
                     BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
-                    CrackingReactorBlockEntity tankAt = ConnectivityHandler.partAt(getType(), level, pos);
+                    SeparatorBlockEntity tankAt = ConnectivityHandler.partAt(getType(), level, pos);
                     if (tankAt == null)
                         continue;
                     level.updateNeighbourForOutputSignal(pos, tankAt.getBlockState()
@@ -395,17 +395,17 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
 
     @SuppressWarnings("unchecked")
     @Override
-    public CrackingReactorBlockEntity getControllerBE() {
+    public SeparatorBlockEntity getControllerBE() {
         if (isController())
             return this;
         BlockEntity blockEntity = level.getBlockEntity(controller);
-        if (blockEntity instanceof CrackingReactorBlockEntity)
-            return (CrackingReactorBlockEntity) blockEntity;
+        if (blockEntity instanceof SeparatorBlockEntity)
+            return (SeparatorBlockEntity) blockEntity;
         return null;
     }
 
     public void applyFluidTankSize(int blocks) {
-        // Capacity scales with the reactor footprint (width x width), not its height.
+        // Capacity scales with the separator footprint (width x width), not its height.
         tankInventory.setCapacity(getTotalTankSize() * getCapacityMultiplier());
         forceFluidLevelUpdate = true;
     }
@@ -423,10 +423,10 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
         onFluidStackChanged(tankInventory.getFluid());
 
         BlockState state = getBlockState();
-        if (CrackingReactorBlock.isReactor(state)) {
-            state = state.setValue(CrackingReactorBlock.BOTTOM, true);
-            state = state.setValue(CrackingReactorBlock.TOP, true);
-            state = state.setValue(CrackingReactorBlock.SHAPE, window ? FluidTankBlock.Shape.WINDOW : FluidTankBlock.Shape.PLAIN);
+        if (SeparatorBlock.isSeparator(state)) {
+            state = state.setValue(SeparatorBlock.BOTTOM, true);
+            state = state.setValue(SeparatorBlock.TOP, true);
+            state = state.setValue(SeparatorBlock.SHAPE, window ? FluidTankBlock.Shape.WINDOW : FluidTankBlock.Shape.PLAIN);
             level.setBlock(worldPosition, state, 6);
         }
 
@@ -436,7 +436,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     }
 
     public void toggleWindows() {
-        CrackingReactorBlockEntity be = getControllerBE();
+        SeparatorBlockEntity be = getControllerBE();
         if (be == null)
             return;
         be.setWindows(!be.window);
@@ -461,7 +461,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
 
                     BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
                     BlockState blockState = level.getBlockState(pos);
-                    if (!CrackingReactorBlock.isReactor(blockState))
+                    if (!SeparatorBlock.isSeparator(blockState))
                         continue;
 
                     FluidTankBlock.Shape shape = FluidTankBlock.Shape.PLAIN;
@@ -477,7 +477,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
                         if (width == 3 && Math.abs(xOffset - zOffset) == 1)
                             shape = FluidTankBlock.Shape.WINDOW;
                     }
-                    level.setBlock(pos, blockState.setValue(CrackingReactorBlock.SHAPE, shape), 22);
+                    level.setBlock(pos, blockState.setValue(SeparatorBlock.SHAPE, shape), 22);
                     level.getChunkSource()
                             .getLightEngine()
                             .checkBlock(pos);
@@ -506,7 +506,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     private IFluidHandler handlerForCapability() {
         if (level == null)
             return tankInventory;
-        CrackingReactorBlockEntity controllerBE = getControllerBE();
+        SeparatorBlockEntity controllerBE = getControllerBE();
         if (isBottom())
             return controllerBE != null ? controllerBE.tankInventory : tankInventory;
         if (controllerBE == null)
@@ -515,7 +515,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
         int layer = worldPosition.getY() - controllerBE.getBlockPos().getY();
         BlockPos repPos = controllerBE.getBlockPos().offset(0, layer, 0);
         BlockEntity rep = level.getBlockEntity(repPos);
-        return rep instanceof CrackingReactorBlockEntity repBE ? repBE.tankInventory : tankInventory;
+        return rep instanceof SeparatorBlockEntity repBE ? repBE.tankInventory : tankInventory;
     }
 
     @Override
@@ -524,7 +524,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     }
 
     public boolean isOutputLayerRepresentative() {
-        CrackingReactorBlockEntity controllerBE = getControllerBE();
+        SeparatorBlockEntity controllerBE = getControllerBE();
         if (controllerBE == null)
             return false;
         int layer = worldPosition.getY() - controllerBE.getBlockPos().getY();
@@ -536,7 +536,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
         if (isController())
             return super.createRenderBoundingBox().expandTowards(width - 1, 0, width - 1);
         if (isOutputLayerRepresentative()) {
-            CrackingReactorBlockEntity controllerBE = getControllerBE();
+            SeparatorBlockEntity controllerBE = getControllerBE();
             if (controllerBE != null)
                 return super.createRenderBoundingBox().expandTowards(controllerBE.getWidth() - 1, 0, controllerBE.getWidth() - 1);
         }
@@ -571,7 +571,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
 
         if (isEmpty)
             CreateLang.text(" ")
-                    .add(Component.translatable("harderdiesel.hint.reactor_empty"))
+                    .add(Component.translatable("harderdiesel.hint.separator_empty"))
                     .style(ChatFormatting.GRAY)
                     .forGoggles(tooltip, 1);
 
@@ -641,7 +641,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
         updateTemperature();
         List<Recipe<?>> r = getMatchingRecipes();
         if (!r.isEmpty()) {
-            currentRecipe = (CrackingRecipe) r.get(0);
+            currentRecipe = (SeparatorRecipe) r.get(0);
             if (processingTime <= 0)
                 startProcessing();
         }
@@ -691,7 +691,7 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
-                ModBlockEntityTypes.CRACKING_REACTOR.get(),
+                ModBlockEntityTypes.SEPARATOR.get(),
                 (be, context) -> {
                     if (be.fluidCapability == null)
                         be.refreshCapability();
@@ -730,9 +730,9 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     @Override
     public void notifyMultiUpdated() {
         BlockState state = this.getBlockState();
-        if (CrackingReactorBlock.isReactor(state)) { // safety
-            state = state.setValue(CrackingReactorBlock.BOTTOM, getBottomConnectivity());
-            state = state.setValue(CrackingReactorBlock.TOP, getTopConnectivity());
+        if (SeparatorBlock.isSeparator(state)) { // safety
+            state = state.setValue(SeparatorBlock.BOTTOM, getBottomConnectivity());
+            state = state.setValue(SeparatorBlock.TOP, getTopConnectivity());
             level.setBlock(getBlockPos(), state, 6);
         }
         if (isController()) {
@@ -744,13 +744,13 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     }
 
     private boolean getBottomConnectivity() {
-        if (level.getBlockEntity(getBlockPos().below()) instanceof CrackingReactorBlockEntity be)
+        if (level.getBlockEntity(getBlockPos().below()) instanceof SeparatorBlockEntity be)
             return !isSameMultiBlock(be);
         return true;
     }
 
     private boolean getTopConnectivity() {
-        if (level.getBlockEntity(getBlockPos().above()) instanceof CrackingReactorBlockEntity be)
+        if (level.getBlockEntity(getBlockPos().above()) instanceof SeparatorBlockEntity be)
             return !isSameMultiBlock(be);
         return true;
     }
@@ -843,25 +843,25 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
 
     public void updateVerticalMulti() {
         BlockState state = this.getBlockState();
-        if (CrackingReactorBlock.isReactor(state)) { // safety
-            state = state.setValue(CrackingReactorBlock.BOTTOM, getBottomConnectivity());
-            state = state.setValue(CrackingReactorBlock.TOP, getTopConnectivity());
+        if (SeparatorBlock.isSeparator(state)) { // safety
+            state = state.setValue(SeparatorBlock.BOTTOM, getBottomConnectivity());
+            state = state.setValue(SeparatorBlock.TOP, getTopConnectivity());
             if (state != this.getBlockState())
                 level.setBlock(getBlockPos(), state, 3);
         }
-        if (level.getBlockEntity(getBlockPos().below()) instanceof CrackingReactorBlockEntity be)
+        if (level.getBlockEntity(getBlockPos().below()) instanceof SeparatorBlockEntity be)
             be.updateVerticalMulti();
     }
 
     public boolean isBottom() {
-        return !(level.getBlockEntity(getBlockPos().below()) instanceof CrackingReactorBlockEntity be && isSameMultiBlock(be));
+        return !(level.getBlockEntity(getBlockPos().below()) instanceof SeparatorBlockEntity be && isSameMultiBlock(be));
     }
 
     void checkForRecipes() {
         if (processingTime <= -1) {
             List<Recipe<?>> r = getMatchingRecipes();
             if (!r.isEmpty()) {
-                currentRecipe = (CrackingRecipe) r.get(0);
+                currentRecipe = (SeparatorRecipe) r.get(0);
                 startProcessing();
             } else {
                 currentRecipe = null;
@@ -869,9 +869,9 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
         }
     }
 
-    boolean isSameMultiBlock(CrackingReactorBlockEntity be) {
-        CrackingReactorBlockEntity otherControllerBE = be.getControllerBE();
-        CrackingReactorBlockEntity controllerBE = getControllerBE();
+    boolean isSameMultiBlock(SeparatorBlockEntity be) {
+        SeparatorBlockEntity otherControllerBE = be.getControllerBE();
+        SeparatorBlockEntity controllerBE = getControllerBE();
         if (otherControllerBE == null || controllerBE == null)
             return false;
         if (otherControllerBE == controllerBE)
@@ -885,13 +885,13 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
     @Override
     public boolean addToTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         if (!isController()) {
-            CrackingReactorBlockEntity controller = getControllerBE();
+            SeparatorBlockEntity controller = getControllerBE();
             if (controller == null)
                 return false;
             return controller.addToTooltip(tooltip, isPlayerSneaking);
         }
 
-        CrackingReactorBlockEntity bottomBe = level.getBlockEntity(getBlockPos().below(), ModBlockEntityTypes.CRACKING_REACTOR.get()).orElse(null);
+        SeparatorBlockEntity bottomBe = level.getBlockEntity(getBlockPos().below(), ModBlockEntityTypes.SEPARATOR.get()).orElse(null);
 
         if (bottomBe != null && bottomBe.width == width && bottomBe.getController().equals(getController().below())) {
             return bottomBe.addToTooltip(tooltip, isPlayerSneaking);
@@ -901,12 +901,12 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
             return false;
 
         Lang.builder(HarderDiesel.MODID)
-                .translate("hint.reactor_full.title")
+                .translate("hint.separator_full.title")
                 .style(ChatFormatting.GOLD)
                 .forGoggles(tooltip);
         Component hint =
                 Lang.builder(HarderDiesel.MODID)
-                        .translate("hint.reactor_full")
+                        .translate("hint.separator_full")
                         .component();
         List<Component> cutComponent = TooltipHelper.cutTextComponent(hint, FontHelper.Palette.GRAY_AND_WHITE);
         for (Component component : cutComponent)
@@ -924,17 +924,17 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
             onFluidStackChanged(tankInventory.getFluid());
             return;
         }
-        CrackingReactorBlockEntity be = getControllerBE();
+        SeparatorBlockEntity be = getControllerBE();
         if (be == null)
             return;
         be.updateTemperature();
     }
 
-    public static class CrackingReactorFluidHandler extends SmartFluidTank {
+    public static class SeparatorFluidHandler extends SmartFluidTank {
         int tankCount;
         NonNullList<FluidTank> tanks = NonNullList.create();
 
-        public CrackingReactorFluidHandler(int tankCount, int capacity, Consumer<FluidStack> updateCallback) {
+        public SeparatorFluidHandler(int tankCount, int capacity, Consumer<FluidStack> updateCallback) {
             super(capacity, updateCallback);
             for (int i = 0; i < tankCount; i++)
                 tanks.add(new FluidTank(capacity));

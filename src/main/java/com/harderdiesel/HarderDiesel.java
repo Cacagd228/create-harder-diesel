@@ -1,6 +1,7 @@
 package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingReactorBlockEntity;
+import com.harderdiesel.content.separator.SeparatorBlockEntity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
@@ -22,5 +23,7 @@ public class HarderDiesel {
 
         modEventBus.addListener((RegisterCapabilitiesEvent event) ->
                 CrackingReactorBlockEntity.registerCapabilities(event));
+        modEventBus.addListener((RegisterCapabilitiesEvent event) ->
+                SeparatorBlockEntity.registerCapabilities(event));
     }
 }

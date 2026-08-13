@@ -1,0 +1,21 @@
+{
+  "type": "harderdiesel:separating",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:wet_gas",
+      "amount": 100
+    }
+  ],
+  "processing_time": 60,
+  "results": [
+    {
+      "id": "harderdiesel:propane",
+      "amount": 50
+    },
+    {
+      "id": "harderdiesel:butane_gas",
+      "amount": 50
+    }
+  ]
+}

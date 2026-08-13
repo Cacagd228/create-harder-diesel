@@ -11,6 +11,10 @@ public class HarderDieselSpriteShifts {
             CRACKING_REACTOR_TOP = rectangle("cracking_reactor/cracking_reactor_top"),
             CRACKING_REACTOR_NORTH = rectangle("cracking_reactor/cracking_reactor", "cracking_reactor/cracking_reactor_pipes_connected");
 
+    public static final CTSpriteShiftEntry SEPARATOR = rectangle("separator/separator"),
+            SEPARATOR_TOP = rectangle("separator/separator_top"),
+            SEPARATOR_NORTH = rectangle("separator/separator", "separator/separator_pipes_connected");
+
     public static void init() {
     }
 

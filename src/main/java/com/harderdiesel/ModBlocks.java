@@ -1,6 +1,7 @@
 package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingReactorBlock;
+import com.harderdiesel.content.separator.SeparatorBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -390,6 +391,13 @@ public class ModBlocks {
     public static final DeferredBlock<CrackingReactorBlock> CRACKING_REACTOR = BLOCKS.register("cracking_reactor",
             () -> new CrackingReactorBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_ORANGE)
+                    .strength(3.0F)
+                    .noOcclusion()
+                    .isRedstoneConductor((p1, p2, p3) -> true)));
+
+    public static final DeferredBlock<SeparatorBlock> SEPARATOR = BLOCKS.register("separator",
+            () -> new SeparatorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE)
                     .strength(3.0F)
                     .noOcclusion()
                     .isRedstoneConductor((p1, p2, p3) -> true)));

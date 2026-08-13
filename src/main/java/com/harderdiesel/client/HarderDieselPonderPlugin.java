@@ -19,6 +19,9 @@ public class HarderDieselPonderPlugin implements PonderPlugin {
 
         helper.forComponents(ModItems.CRACKING_CONTROLLER.getId())
                 .addStoryBoard("cracking_reactor", CrackingReactorScene::scene);
+
+        helper.forComponents(ModItems.SEPARATOR_CONTROLLER.getId())
+                .addStoryBoard("separator", SeparatorScene::scene);
     }
 
     @Override

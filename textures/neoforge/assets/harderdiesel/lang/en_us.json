@@ -78,5 +78,15 @@
   "harderdiesel.actionbar.cracking_controller.not_enough": "Not enough controllers",
   "harderdiesel.hint.reactor_full.title": "Reactor is full",
   "harderdiesel.hint.reactor_full": "Clear the output tanks to continue processing",
-  "harderdiesel.hint.reactor_empty": "Empty"
+  "harderdiesel.hint.reactor_empty": "Empty",
+  "item.harderdiesel.separator_controller": "Separator Controller",
+  "block.harderdiesel.separator": "Separator",
+  "harderdiesel.recipe.separating": "Separating",
+  "harderdiesel.ponder.separator.header": "Setting up a Separator",
+  "harderdiesel.ponder.separator.text_1": "Feed a single input fluid into the bottom level",
+  "harderdiesel.actionbar.separator_controller.too_short": "Separator too short - at least %s blocks required",
+  "harderdiesel.actionbar.separator_controller.not_enough": "Not enough controllers",
+  "harderdiesel.hint.separator_full.title": "Separator is full",
+  "harderdiesel.hint.separator_full": "Clear the output tanks to continue processing",
+  "harderdiesel.hint.separator_empty": "Empty"
 }
