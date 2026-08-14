@@ -28,9 +28,9 @@ public class ModFluidTypes {
                     .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                     .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
 
-    public static final DeferredHolder<FluidType, FluidType> HEAVY_OIL =
-            FLUID_TYPES.register("heavy_oil", () -> new FluidType(FluidType.Properties.create()
-                    .descriptionId("block.harderdiesel.heavy_oil")
+    public static final DeferredHolder<FluidType, FluidType> HEAVY_GAS_OIL =
+            FLUID_TYPES.register("heavy_gas_oil", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.heavy_gas_oil")
                     .density(1400)
                     .viscosity(4000)
                     .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
@@ -337,6 +337,22 @@ public class ModFluidTypes {
                     .descriptionId("block.harderdiesel.molten_sulfur")
                     .density(1800)
                     .viscosity(6000)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> SOUR_NAPHTHA =
+            FLUID_TYPES.register("sour_naphtha", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.sour_naphtha")
+                    .density(665)
+                    .viscosity(650)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
+
+    public static final DeferredHolder<FluidType, FluidType> SOUR_KEROSENE =
+            FLUID_TYPES.register("sour_kerosene", () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("block.harderdiesel.sour_kerosene")
+                    .density(820)
+                    .viscosity(1300)
                     .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                     .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)));
 

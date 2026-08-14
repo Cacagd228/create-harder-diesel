@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createbb"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "createbb:hydrogen",
+      "amount": 10
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:sour_naphtha",
+      "amount": 100
+    }
+  ],
+  "heatRequirement": "heated",
+  "results": [
+    {
+      "id": "harderdiesel:naphtha",
+      "amount": 95
+    },
+    {
+      "id": "harderdiesel:molten_sulfur",
+      "amount": 5
+    }
+  ]
+}

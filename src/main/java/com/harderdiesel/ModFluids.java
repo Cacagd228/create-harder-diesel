@@ -33,16 +33,16 @@ public class ModFluids {
                     .block(ModBlocks.KEROSENE)
                     .bucket(ModItems.KEROSENE_BUCKET);
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> HEAVY_OIL =
-            FLUIDS.register("heavy_oil", () -> new BaseFlowingFluid.Source(ModFluids.HEAVY_OIL_PROPERTIES));
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> HEAVY_GAS_OIL =
+            FLUIDS.register("heavy_gas_oil", () -> new BaseFlowingFluid.Source(ModFluids.HEAVY_GAS_OIL_PROPERTIES));
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_HEAVY_OIL =
-            FLUIDS.register("flowing_heavy_oil", () -> new BaseFlowingFluid.Flowing(ModFluids.HEAVY_OIL_PROPERTIES));
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_HEAVY_GAS_OIL =
+            FLUIDS.register("flowing_heavy_gas_oil", () -> new BaseFlowingFluid.Flowing(ModFluids.HEAVY_GAS_OIL_PROPERTIES));
 
-    public static final BaseFlowingFluid.Properties HEAVY_OIL_PROPERTIES =
-            new BaseFlowingFluid.Properties(ModFluidTypes.HEAVY_OIL, HEAVY_OIL, FLOWING_HEAVY_OIL)
-                    .block(ModBlocks.HEAVY_OIL)
-                    .bucket(ModItems.HEAVY_OIL_BUCKET);
+    public static final BaseFlowingFluid.Properties HEAVY_GAS_OIL_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.HEAVY_GAS_OIL, HEAVY_GAS_OIL, FLOWING_HEAVY_GAS_OIL)
+                    .block(ModBlocks.HEAVY_GAS_OIL)
+                    .bucket(ModItems.HEAVY_GAS_OIL_BUCKET);
 
     public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> TAR =
             FLUIDS.register("tar", () -> new TarSourceFluid(ModFluids.TAR_PROPERTIES));
@@ -461,6 +461,28 @@ public class ModFluids {
             new BaseFlowingFluid.Properties(ModFluidTypes.MOLTEN_SULFUR, MOLTEN_SULFUR, FLOWING_MOLTEN_SULFUR)
                     .block(ModBlocks.MOLTEN_SULFUR)
                     .bucket(ModItems.MOLTEN_SULFUR_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> SOUR_NAPHTHA =
+            FLUIDS.register("sour_naphtha", () -> new BaseFlowingFluid.Source(ModFluids.SOUR_NAPHTHA_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_SOUR_NAPHTHA =
+            FLUIDS.register("flowing_sour_naphtha", () -> new BaseFlowingFluid.Flowing(ModFluids.SOUR_NAPHTHA_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties SOUR_NAPHTHA_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.SOUR_NAPHTHA, SOUR_NAPHTHA, FLOWING_SOUR_NAPHTHA)
+                    .block(ModBlocks.SOUR_NAPHTHA)
+                    .bucket(ModItems.SOUR_NAPHTHA_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> SOUR_KEROSENE =
+            FLUIDS.register("sour_kerosene", () -> new BaseFlowingFluid.Source(ModFluids.SOUR_KEROSENE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_SOUR_KEROSENE =
+            FLUIDS.register("flowing_sour_kerosene", () -> new BaseFlowingFluid.Flowing(ModFluids.SOUR_KEROSENE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties SOUR_KEROSENE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.SOUR_KEROSENE, SOUR_KEROSENE, FLOWING_SOUR_KEROSENE)
+                    .block(ModBlocks.SOUR_KEROSENE)
+                    .bucket(ModItems.SOUR_KEROSENE_BUCKET);
 
     public static void register(IEventBus modEventBus) {
         FLUIDS.register(modEventBus);

@@ -24,8 +24,8 @@ public class ModItems {
             () -> new BucketItem(ModFluids.KEROSENE.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
-    public static final DeferredItem<BucketItem> HEAVY_OIL_BUCKET = ITEMS.register("heavy_oil_bucket",
-            () -> new BucketItem(ModFluids.HEAVY_OIL.get(),
+    public static final DeferredItem<BucketItem> HEAVY_GAS_OIL_BUCKET = ITEMS.register("heavy_gas_oil_bucket",
+            () -> new BucketItem(ModFluids.HEAVY_GAS_OIL.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
     public static final DeferredItem<BucketItem> TAR_BUCKET = ITEMS.register("tar_bucket",
@@ -178,6 +178,14 @@ public class ModItems {
 
     public static final DeferredItem<BucketItem> MOLTEN_SULFUR_BUCKET = ITEMS.register("molten_sulfur_bucket",
             () -> new BucketItem(ModFluids.MOLTEN_SULFUR.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> SOUR_NAPHTHA_BUCKET = ITEMS.register("sour_naphtha_bucket",
+            () -> new BucketItem(ModFluids.SOUR_NAPHTHA.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> SOUR_KEROSENE_BUCKET = ITEMS.register("sour_kerosene_bucket",
+            () -> new BucketItem(ModFluids.SOUR_KEROSENE.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
     public static final DeferredItem<CrackingControllerItem> CRACKING_CONTROLLER = ITEMS.register("cracking_controller",

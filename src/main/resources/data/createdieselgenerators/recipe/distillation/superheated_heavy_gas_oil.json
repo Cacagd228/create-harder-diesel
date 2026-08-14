@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "type": "neoforge:single",
-      "fluid": "harderdiesel:heavy_oil",
+      "fluid": "harderdiesel:heavy_gas_oil",
       "amount": 100
     }
   ],

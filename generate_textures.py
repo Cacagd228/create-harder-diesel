@@ -36,6 +36,8 @@ FLUIDS = {
     "heavy_sweet_crude": dict(base=(46, 39, 31), alpha=255, ripple=30, freq=1.0, modifiers=["blotches"]),
     "heavy_sour_crude": dict(base=(41, 43, 30), alpha=255, ripple=30, freq=1.0, modifiers=["blotches"]),
     "molten_sulfur": dict(base=(255, 214, 40), alpha=255, ripple=24, freq=1.4, modifiers=["sparkle"]),
+    "sour_naphtha": dict(base=(205, 205, 105), alpha=170, ripple=20, freq=1.6, modifiers=["blotches"]),
+    "sour_kerosene": dict(base=(224, 196, 96), alpha=185, ripple=22, freq=1.4, modifiers=["blotches"]),
 }
 
 

@@ -1,0 +1,30 @@
+{
+  "type": "createdieselgenerators:distillation",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:heavy_sour_crude",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "heated",
+  "processing_time": 60,
+  "results": [
+    {
+      "id": "harderdiesel:sour_naphtha",
+      "amount": 5
+    },
+    {
+      "id": "harderdiesel:sour_kerosene",
+      "amount": 5
+    },
+    {
+      "id": "harderdiesel:heavy_gas_oil",
+      "amount": 55
+    },
+    {
+      "id": "harderdiesel:vacuum_residue",
+      "amount": 5
+    }
+  ]
+}

@@ -2,29 +2,25 @@
   "type": "createdieselgenerators:distillation",
   "ingredients": [
     {
-      "type": "fluid_tag",
-      "fluid_tag": "c:crude_oil",
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:medium_sweet_crude",
       "amount": 100
     }
   ],
-  "heat_requirement": "superheated",
-  "processing_time": 40,
+  "heat_requirement": "heated",
+  "processing_time": 60,
   "results": [
     {
       "id": "harderdiesel:naphtha",
-      "amount": 60
+      "amount": 32
     },
     {
       "id": "harderdiesel:kerosene",
-      "amount": 40
+      "amount": 20
     },
     {
       "id": "harderdiesel:heavy_gas_oil",
-      "amount": 40
-    },
-    {
-      "id": "harderdiesel:propane",
-      "amount": 15
+      "amount": 32
     }
   ]
 }

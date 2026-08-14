@@ -22,7 +22,7 @@ public class ModClientEvents {
     public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(fluidTextures("naphtha"), ModFluidTypes.NAPHTHA.get());
         event.registerFluidType(fluidTextures("kerosene"), ModFluidTypes.KEROSENE.get());
-        event.registerFluidType(fluidTextures("heavy_oil"), ModFluidTypes.HEAVY_OIL.get());
+        event.registerFluidType(fluidTextures("heavy_gas_oil"), ModFluidTypes.HEAVY_GAS_OIL.get());
         event.registerFluidType(fluidTextures("tar"), ModFluidTypes.TAR.get());
         event.registerFluidType(fluidTextures("low_octane_gasoline"), ModFluidTypes.LOW_OCTANE_GASOLINE.get());
         event.registerFluidType(fluidTextures("high_octane_gasoline"), ModFluidTypes.HIGH_OCTANE_GASOLINE.get());
@@ -61,6 +61,8 @@ public class ModClientEvents {
         event.registerFluidType(fluidTextures("heavy_sweet_crude"), ModFluidTypes.HEAVY_SWEET_CRUDE.get());
         event.registerFluidType(fluidTextures("heavy_sour_crude"), ModFluidTypes.HEAVY_SOUR_CRUDE.get());
         event.registerFluidType(fluidTextures("molten_sulfur"), ModFluidTypes.MOLTEN_SULFUR.get());
+        event.registerFluidType(fluidTextures("sour_naphtha"), ModFluidTypes.SOUR_NAPHTHA.get());
+        event.registerFluidType(fluidTextures("sour_kerosene"), ModFluidTypes.SOUR_KEROSENE.get());
     }
 
     private static IClientFluidTypeExtensions fluidTextures(String name) {
@@ -81,7 +83,7 @@ public class ModClientEvents {
     public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.NAPHTHA_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.KEROSENE_BUCKET.get());
-        event.register(new DynamicFluidContainerModel.Colors(), ModItems.HEAVY_OIL_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.HEAVY_GAS_OIL_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.TAR_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.LOW_OCTANE_GASOLINE_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.HIGH_OCTANE_GASOLINE_BUCKET.get());
@@ -120,6 +122,8 @@ public class ModClientEvents {
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.HEAVY_SWEET_CRUDE_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.HEAVY_SOUR_CRUDE_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.MOLTEN_SULFUR_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.SOUR_NAPHTHA_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.SOUR_KEROSENE_BUCKET.get());
     }
 
     @SubscribeEvent

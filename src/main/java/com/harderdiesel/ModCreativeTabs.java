@@ -29,7 +29,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.SEPARATOR_CONTROLLER);
                         output.accept(ModItems.NAPHTHA_BUCKET);
                         output.accept(ModItems.KEROSENE_BUCKET);
-                        output.accept(ModItems.HEAVY_OIL_BUCKET);
+                        output.accept(ModItems.HEAVY_GAS_OIL_BUCKET);
                         output.accept(ModItems.TAR_BUCKET);
                         output.accept(ModItems.LOW_OCTANE_GASOLINE_BUCKET);
                         output.accept(ModItems.HIGH_OCTANE_GASOLINE_BUCKET);
@@ -68,6 +68,8 @@ public class ModCreativeTabs {
                         output.accept(ModItems.HEAVY_SWEET_CRUDE_BUCKET);
                         output.accept(ModItems.HEAVY_SOUR_CRUDE_BUCKET);
                         output.accept(ModItems.MOLTEN_SULFUR_BUCKET);
+                        output.accept(ModItems.SOUR_NAPHTHA_BUCKET);
+                        output.accept(ModItems.SOUR_KEROSENE_BUCKET);
                     })
                     .build());
 

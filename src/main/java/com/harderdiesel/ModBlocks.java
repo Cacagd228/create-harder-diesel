@@ -38,8 +38,8 @@ public class ModBlocks {
                     .sound(SoundType.EMPTY)
                     .pushReaction(PushReaction.DESTROY)));
 
-    public static final DeferredBlock<LiquidBlock> HEAVY_OIL = BLOCKS.register("heavy_oil",
-            () -> new LiquidBlock(ModFluids.HEAVY_OIL.get(), BlockBehaviour.Properties.of()
+    public static final DeferredBlock<LiquidBlock> HEAVY_GAS_OIL = BLOCKS.register("heavy_gas_oil",
+            () -> new LiquidBlock(ModFluids.HEAVY_GAS_OIL.get(), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BLACK)
                     .replaceable()
                     .noCollission()
@@ -459,6 +459,28 @@ public class ModBlocks {
     public static final DeferredBlock<LiquidBlock> MOLTEN_SULFUR = BLOCKS.register("molten_sulfur",
             () -> new LiquidBlock(ModFluids.MOLTEN_SULFUR.get(), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_YELLOW)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> SOUR_NAPHTHA = BLOCKS.register("sour_naphtha",
+            () -> new LiquidBlock(ModFluids.SOUR_NAPHTHA.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_YELLOW)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> SOUR_KEROSENE = BLOCKS.register("sour_kerosene",
+            () -> new LiquidBlock(ModFluids.SOUR_KEROSENE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_ORANGE)
                     .replaceable()
                     .noCollission()
                     .strength(100.0F)
