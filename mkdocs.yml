@@ -1,0 +1,67 @@
+site_name: "Create: Harder Diesel"
+site_description: "Документация мода Create: Harder Diesel — реалистичная нефтепереработка для Create."
+site_author: Harder Diesel
+repo_url: https://github.com/anomalyco/opencode
+edit_uri: ""
+
+theme:
+  name: material
+  language: ru
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: amber
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Тёмная тема
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: amber
+      accent: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Светлая тема
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    logo: material/engine
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.highlight
+  - pymdownx.snippets
+  - tables
+  - toc:
+      permalink: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+plugins:
+  - search
+
+nav:
+  - Главная: index.md
+  - Установка: getting-started.md
+  - Сырая нефть и биомы: crude-oil.md
+  - Машины: machines.md
+  - Обработка:
+      - Перегонка: processing/distillation.md
+      - Крекинг: processing/cracking.md
+      - Сепарация: processing/separating.md
+      - Смешивание: processing/mixing.md
+  - Жидкости: fluids.md
+  - Топлива и генераторы: fuels.md
+  - Интеграция Propulsion: propulsion.md
+  - Таблицы крафтов: recipes.md
+  - Разработчикам:
+      - Пособие по мультиблокам: dev/multiblock-guide.md
