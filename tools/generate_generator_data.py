@@ -25,11 +25,11 @@ CATEGORIES = {
     ],
     "gas": [
         "#c:propane",
-        "#c:butane_gas",
+        "#c:propane_liquid",
+        "#c:butane",
         "#c:butane_liquid",
-        "#c:lpg_gas",
         "#c:lpg_liquid",
-        "#c:wet_gas",
+        "#c:petroleum_gas",
         "#c:fcc_gas",
     ],
     "nitro": [
@@ -43,11 +43,11 @@ CATEGORIES = {
 # Жидкости, которым нужен тег c:<name> (источник + flowing)
 C_TAGS = [
     "propane",
-    "butane_gas",
+    "propane_liquid",
+    "butane",
     "butane_liquid",
-    "lpg_gas",
     "lpg_liquid",
-    "wet_gas",
+    "petroleum_gas",
     "fcc_gas",
     "nitroethane",
     "nitropropane",
@@ -57,11 +57,11 @@ C_TAGS = [
 # (жидкость, pitch, strength нормал/модуль/хьюдж, burn)
 FUEL_TYPES = [
     ("propane", 1.05, (6144, 9216, 18432), 0.05),
-    ("butane_gas", 1.05, (6144, 9216, 18432), 0.05),
+    ("propane_liquid", 1.05, (6144, 9216, 18432), 0.05),
+    ("butane", 1.05, (6144, 9216, 18432), 0.05),
     ("butane_liquid", 1.05, (6144, 9216, 18432), 0.05),
-    ("lpg_gas", 1.05, (7168, 10240, 20480), 0.05),
     ("lpg_liquid", 1.05, (7168, 10240, 20480), 0.05),
-    ("wet_gas", 1.1, (4096, 6144, 12288), 0.05),
+    ("petroleum_gas", 1.1, (4096, 6144, 12288), 0.05),
     ("fcc_gas", 1.05, (5120, 7680, 15360), 0.05),
     ("nitroethane", 1.2, (11264, 16896, 33792), 0.05),
     ("nitropropane", 1.15, (10240, 15360, 30720), 0.05),

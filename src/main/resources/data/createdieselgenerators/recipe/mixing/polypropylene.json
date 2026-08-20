@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:andesite_alloy"
+    },
+    {
+      "item": "create:andesite_alloy"
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:propylene",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated",
+  "results": [
+    {
+      "id": "harderdiesel:polypropylene",
+      "count": 4
+    }
+  ]
+}

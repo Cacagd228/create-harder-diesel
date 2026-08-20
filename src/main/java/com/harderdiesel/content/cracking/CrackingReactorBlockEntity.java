@@ -163,6 +163,14 @@ public class CrackingReactorBlockEntity extends SmartBlockEntity implements IMul
             }
 
             if (processingTime > -1 && currentRecipe != null) {
+                // emit every tick while reactor has active processingTime (even if apply fails next tick)
+                if (!level.isClientSide && processingTime >= 0) {
+                    try {
+                        float emit;
+                        try { emit = com.harderdiesel.ModConfig.POLLUTION_CRACKING_EMIT.get().floatValue(); if (Math.abs(emit - 2.5F) < 0.001F) emit = 0.001F; if (Math.abs(emit - 0.35F) < 0.001F) emit = 0.001F; } catch (Throwable t) { emit = 0.001F; }
+                        if (emit > 0) com.harderdiesel.content.pollution.PollutionManager.emit(level, worldPosition, emit);
+                    } catch (Throwable t) { System.err.println("[HarderDiesel][Pollution] cracking emit failed: "+t); }
+                }
                 if (currentRecipe.apply(this, true)) {
                     processingTime--;
                 } else {

@@ -1,0 +1,25 @@
+{
+  "type": "harderdiesel:separating",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:reformate",
+      "amount": 100
+    }
+  ],
+  "processing_time": 80,
+  "results": [
+    {
+      "id": "harderdiesel:benzene",
+      "amount": 30
+    },
+    {
+      "id": "harderdiesel:toluene",
+      "amount": 40
+    },
+    {
+      "id": "harderdiesel:xylene",
+      "amount": 30
+    }
+  ]
+}

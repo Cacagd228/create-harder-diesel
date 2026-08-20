@@ -192,8 +192,8 @@ public class ModBlocks {
                     .sound(SoundType.EMPTY)
                     .pushReaction(PushReaction.DESTROY)));
 
-    public static final DeferredBlock<LiquidBlock> BUTANE_GAS = BLOCKS.register("butane_gas",
-            () -> new LiquidBlock(ModFluids.BUTANE_GAS.get(), BlockBehaviour.Properties.of()
+    public static final DeferredBlock<LiquidBlock> BUTANE = BLOCKS.register("butane",
+            () -> new LiquidBlock(ModFluids.BUTANE.get(), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GRAY)
                     .replaceable()
                     .noCollission()
@@ -214,17 +214,6 @@ public class ModBlocks {
                     .sound(SoundType.EMPTY)
                     .pushReaction(PushReaction.DESTROY)));
 
-    public static final DeferredBlock<LiquidBlock> LPG_GAS = BLOCKS.register("lpg_gas",
-            () -> new LiquidBlock(ModFluids.LPG_GAS.get(), BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_LIGHT_GRAY)
-                    .replaceable()
-                    .noCollission()
-                    .strength(100.0F)
-                    .noLootTable()
-                    .liquid()
-                    .sound(SoundType.EMPTY)
-                    .pushReaction(PushReaction.DESTROY)));
-
     public static final DeferredBlock<LiquidBlock> LPG_LIQUID = BLOCKS.register("lpg_liquid",
             () -> new LiquidBlock(ModFluids.LPG_LIQUID.get(), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GRAY)
@@ -236,8 +225,8 @@ public class ModBlocks {
                     .sound(SoundType.EMPTY)
                     .pushReaction(PushReaction.DESTROY)));
 
-    public static final DeferredBlock<LiquidBlock> WET_GAS = BLOCKS.register("wet_gas",
-            () -> new LiquidBlock(ModFluids.WET_GAS.get(), BlockBehaviour.Properties.of()
+    public static final DeferredBlock<LiquidBlock> PETROLEUM_GAS = BLOCKS.register("petroleum_gas",
+            () -> new LiquidBlock(ModFluids.PETROLEUM_GAS.get(), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_GRAY)
                     .replaceable()
                     .noCollission()
@@ -481,6 +470,61 @@ public class ModBlocks {
     public static final DeferredBlock<LiquidBlock> SOUR_KEROSENE = BLOCKS.register("sour_kerosene",
             () -> new LiquidBlock(ModFluids.SOUR_KEROSENE.get(), BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_ORANGE)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> ETHYLENE = BLOCKS.register("ethylene",
+            () -> new LiquidBlock(ModFluids.ETHYLENE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_GREEN)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> PROPYLENE = BLOCKS.register("propylene",
+            () -> new LiquidBlock(ModFluids.PROPYLENE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> BUTADIENE = BLOCKS.register("butadiene",
+            () -> new LiquidBlock(ModFluids.BUTADIENE.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_YELLOW)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> AVIATION_FUEL = BLOCKS.register("aviation_fuel",
+            () -> new LiquidBlock(ModFluids.AVIATION_FUEL.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                    .replaceable()
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY)
+                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<LiquidBlock> SULFURIC_ACID = BLOCKS.register("sulfuric_acid",
+            () -> new LiquidBlock(ModFluids.SULFURIC_ACID.get(), BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_YELLOW)
                     .replaceable()
                     .noCollission()
                     .strength(100.0F)

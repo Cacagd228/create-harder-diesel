@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:propylene",
+      "amount": 100
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "minecraft:water",
+      "amount": 50
+    }
+  ],
+  "heat_requirement": "heated",
+  "results": [
+    {
+      "id": "harderdiesel:glycerol",
+      "amount": 60
+    }
+  ]
+}

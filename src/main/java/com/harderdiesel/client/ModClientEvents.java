@@ -36,11 +36,10 @@ public class ModClientEvents {
         event.registerFluidType(fluidTextures("medium_cetane_diesel"), ModFluidTypes.MEDIUM_CETANE_DIESEL.get());
         event.registerFluidType(fluidTextures("high_cetane_diesel"), ModFluidTypes.HIGH_CETANE_DIESEL.get());
         event.registerFluidType(fluidTextures("mazut"), ModFluidTypes.MAZUT.get());
-        event.registerFluidType(fluidTextures("butane_gas"), ModFluidTypes.BUTANE_GAS.get());
+        event.registerFluidType(fluidTextures("butane"), ModFluidTypes.BUTANE.get());
         event.registerFluidType(fluidTextures("butane_liquid"), ModFluidTypes.BUTANE_LIQUID.get());
-        event.registerFluidType(fluidTextures("lpg_gas"), ModFluidTypes.LPG_GAS.get());
         event.registerFluidType(fluidTextures("lpg_liquid"), ModFluidTypes.LPG_LIQUID.get());
-        event.registerFluidType(fluidTextures("wet_gas"), ModFluidTypes.WET_GAS.get());
+        event.registerFluidType(fluidTextures("petroleum_gas"), ModFluidTypes.PETROLEUM_GAS.get());
         event.registerFluidType(fluidTextures("propane_liquid"), ModFluidTypes.PROPANE_LIQUID.get());
         event.registerFluidType(fluidTextures("vacuum_gas_oil"), ModFluidTypes.VACUUM_GAS_OIL.get());
         event.registerFluidType(fluidTextures("vacuum_residue"), ModFluidTypes.VACUUM_RESIDUE.get());
@@ -63,6 +62,11 @@ public class ModClientEvents {
         event.registerFluidType(fluidTextures("molten_sulfur"), ModFluidTypes.MOLTEN_SULFUR.get());
         event.registerFluidType(fluidTextures("sour_naphtha"), ModFluidTypes.SOUR_NAPHTHA.get());
         event.registerFluidType(fluidTextures("sour_kerosene"), ModFluidTypes.SOUR_KEROSENE.get());
+        event.registerFluidType(fluidTextures("ethylene"), ModFluidTypes.ETHYLENE.get());
+        event.registerFluidType(fluidTextures("propylene"), ModFluidTypes.PROPYLENE.get());
+        event.registerFluidType(fluidTextures("butadiene"), ModFluidTypes.BUTADIENE.get());
+        event.registerFluidType(fluidTextures("aviation_fuel"), ModFluidTypes.AVIATION_FUEL.get());
+        event.registerFluidType(fluidTextures("sulfuric_acid"), ModFluidTypes.SULFURIC_ACID.get());
     }
 
     private static IClientFluidTypeExtensions fluidTextures(String name) {
@@ -97,11 +101,10 @@ public class ModClientEvents {
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.MEDIUM_CETANE_DIESEL_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.HIGH_CETANE_DIESEL_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.MAZUT_BUCKET.get());
-        event.register(new DynamicFluidContainerModel.Colors(), ModItems.BUTANE_GAS_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.BUTANE_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.BUTANE_LIQUID_BUCKET.get());
-        event.register(new DynamicFluidContainerModel.Colors(), ModItems.LPG_GAS_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.LPG_LIQUID_BUCKET.get());
-        event.register(new DynamicFluidContainerModel.Colors(), ModItems.WET_GAS_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.PETROLEUM_GAS_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.PROPANE_LIQUID_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.VACUUM_GAS_OIL_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.VACUUM_RESIDUE_BUCKET.get());
@@ -124,6 +127,11 @@ public class ModClientEvents {
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.MOLTEN_SULFUR_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.SOUR_NAPHTHA_BUCKET.get());
         event.register(new DynamicFluidContainerModel.Colors(), ModItems.SOUR_KEROSENE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.ETHYLENE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.PROPYLENE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.BUTADIENE_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.AVIATION_FUEL_BUCKET.get());
+        event.register(new DynamicFluidContainerModel.Colors(), ModItems.SULFURIC_ACID_BUCKET.get());
     }
 
     @SubscribeEvent
@@ -143,6 +151,35 @@ public class ModClientEvents {
         CreateClient.MODEL_SWAPPER.getCustomBlockModels()
                 .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "wear_resistant_tank"),
                         model -> new WearResistantTankModel(model));
+
+        // XaerosZones Pollution provider — через рефлексию чтобы не крашить без xaerolib/xaeroszones
+        event.enqueueWork(() -> {
+            try {
+                Class.forName("com.slavav.xaeroszones.api.pollution.PollutionRegistry");
+                Class<?> providerCls = Class.forName("com.harderdiesel.content.pollution.HarderDieselPollutionProvider");
+                Object provider = providerCls.getDeclaredConstructor().newInstance();
+                Class<?> registryCls = Class.forName("com.slavav.xaeroszones.api.pollution.PollutionRegistry");
+                java.lang.reflect.Method reg = registryCls.getMethod("registerProvider", ResourceLocation.class, Class.forName("com.slavav.xaeroszones.api.pollution.IPollutionProvider"));
+                reg.invoke(null, ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "pollution"), provider);
+                try {
+                    java.lang.reflect.Method setActive = registryCls.getMethod("setActiveProvider", ResourceLocation.class);
+                    setActive.invoke(null, ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "pollution"));
+                } catch (Throwable ignored) {}
+                try {
+                    Class<?> cpd = Class.forName("com.slavav.xaeroszones.client.pollution.ClientPollutionData");
+                    cpd.getField("showPollution").setBoolean(null, true);
+                    cpd.getField("showPollutionWorldMap").setBoolean(null, true);
+                    cpd.getField("showPollutionMinimap").setBoolean(null, true);
+                    cpd.getField("pollutionOpacity").setFloat(null, 0.9F);
+                } catch (Throwable ignored) {}
+                System.out.println("[HarderDiesel] Pollution provider registered and enabled");
+            } catch (ClassNotFoundException cnf) {
+                System.out.println("[HarderDiesel] XaerosZones not present, pollution map overlay disabled");
+            } catch (Throwable t) {
+                System.err.println("[HarderDiesel] Failed to register pollution provider: " + t);
+                t.printStackTrace();
+            }
+        });
     }
 
     @SubscribeEvent

@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:butadiene",
+      "amount": 250
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:molten_sulfur",
+      "amount": 50
+    }
+  ],
+  "heat_requirement": "heated",
+  "results": [
+    {
+      "id": "harderdiesel:synthetic_rubber",
+      "count": 4
+    }
+  ]
+}

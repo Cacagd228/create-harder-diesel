@@ -1,0 +1,26 @@
+{
+  "type": "harderdiesel:cracking",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:vacuum_gas_oil",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "superheated",
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "harderdiesel:cracked_naphtha",
+      "amount": 40
+    },
+    {
+      "id": "harderdiesel:light_cycle_oil",
+      "amount": 30
+    },
+    {
+      "id": "harderdiesel:fcc_gas",
+      "amount": 20
+    }
+  ]
+}

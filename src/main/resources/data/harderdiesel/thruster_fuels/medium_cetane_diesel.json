@@ -1,0 +1,5 @@
+{
+    "fluid": "harderdiesel:medium_cetane_diesel",
+    "thrust_multiplier": 0.95,
+    "consumption_multiplier": 0.9
+}

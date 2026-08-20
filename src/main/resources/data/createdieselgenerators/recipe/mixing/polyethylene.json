@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:andesite_alloy"
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:ethylene",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated",
+  "results": [
+    {
+      "id": "harderdiesel:polyethylene",
+      "count": 4
+    }
+  ]
+}

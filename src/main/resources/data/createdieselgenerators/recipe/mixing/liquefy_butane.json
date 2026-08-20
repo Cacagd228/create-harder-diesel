@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:butane",
+      "amount": 100
+    }
+  ],
+  "results": [
+    {
+      "id": "harderdiesel:butane_liquid",
+      "amount": 10
+    }
+  ]
+}

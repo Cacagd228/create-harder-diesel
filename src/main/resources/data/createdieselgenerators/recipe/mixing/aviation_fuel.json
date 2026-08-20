@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:kerosene",
+      "amount": 100
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:nitroethane",
+      "amount": 25
+    }
+  ],
+  "results": [
+    {
+      "id": "harderdiesel:aviation_fuel",
+      "amount": 100
+    }
+  ]
+}

@@ -164,6 +164,13 @@ public class SeparatorBlockEntity extends SmartBlockEntity implements IMultiBloc
             }
 
             if (processingTime > -1 && currentRecipe != null) {
+                if (!level.isClientSide && processingTime >= 0) {
+                    try {
+                        float emit;
+                        try { emit = com.harderdiesel.ModConfig.POLLUTION_SEPARATOR_EMIT.get().floatValue(); if (Math.abs(emit - 2.0F) < 0.001F) emit = 0.0008F; if (Math.abs(emit - 0.25F) < 0.001F) emit = 0.0008F; } catch (Throwable t) { emit = 0.0008F; }
+                        if (emit > 0) com.harderdiesel.content.pollution.PollutionManager.emit(level, worldPosition, emit);
+                    } catch (Throwable t) { System.err.println("[HarderDiesel][Pollution] separator emit failed: "+t); }
+                }
                 if (currentRecipe.apply(this, true)) {
                     processingTime--;
                 } else {

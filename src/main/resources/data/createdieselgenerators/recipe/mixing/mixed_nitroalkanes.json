@@ -9,7 +9,7 @@
   "ingredients": [
     {
       "type": "neoforge:single",
-      "fluid": "powergrid:acid",
+      "fluid": "harderdiesel:sulfuric_acid",
       "amount": 25
     },
     {
@@ -18,7 +18,7 @@
       "amount": 25
     }
   ],
-  "heatRequirement": "heated",
+  "heat_requirement": "heated",
   "results": [
     {
       "id": "harderdiesel:mixed_nitroalkanes",

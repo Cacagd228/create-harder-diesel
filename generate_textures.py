@@ -38,6 +38,11 @@ FLUIDS = {
     "molten_sulfur": dict(base=(255, 214, 40), alpha=255, ripple=24, freq=1.4, modifiers=["sparkle"]),
     "sour_naphtha": dict(base=(205, 205, 105), alpha=170, ripple=20, freq=1.6, modifiers=["blotches"]),
     "sour_kerosene": dict(base=(224, 196, 96), alpha=185, ripple=22, freq=1.4, modifiers=["blotches"]),
+    "ethylene": dict(base=(170, 220, 170), alpha=90, ripple=16, freq=1.8, modifiers=["bubbles"]),
+    "propylene": dict(base=(160, 200, 230), alpha=95, ripple=16, freq=1.8, modifiers=["bubbles"]),
+    "butadiene": dict(base=(235, 210, 130), alpha=100, ripple=17, freq=1.7, modifiers=["bubbles"]),
+    "aviation_fuel": dict(base=(150, 190, 210), alpha=180, ripple=20, freq=1.5, modifiers=[]),
+    "sulfuric_acid": dict(base=(205, 220, 120), alpha=200, ripple=18, freq=1.5, modifiers=[]),
 }
 
 

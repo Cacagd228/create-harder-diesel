@@ -1,0 +1,5 @@
+{
+    "fluid": "harderdiesel:aviation_fuel",
+    "thrust_multiplier": 1.2,
+    "consumption_multiplier": 0.88
+}

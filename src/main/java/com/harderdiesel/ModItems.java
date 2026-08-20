@@ -1,6 +1,7 @@
 package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingControllerItem;
+import com.harderdiesel.content.pollution.AirAnalyzerItem;
 import com.harderdiesel.content.separator.SeparatorControllerItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
@@ -80,24 +81,20 @@ public class ModItems {
             () -> new BucketItem(ModFluids.MAZUT.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
-    public static final DeferredItem<BucketItem> BUTANE_GAS_BUCKET = ITEMS.register("butane_gas_bucket",
-            () -> new BucketItem(ModFluids.BUTANE_GAS.get(),
+    public static final DeferredItem<BucketItem> BUTANE_BUCKET = ITEMS.register("butane_bucket",
+            () -> new BucketItem(ModFluids.BUTANE.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
     public static final DeferredItem<BucketItem> BUTANE_LIQUID_BUCKET = ITEMS.register("butane_liquid_bucket",
             () -> new BucketItem(ModFluids.BUTANE_LIQUID.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
-    public static final DeferredItem<BucketItem> LPG_GAS_BUCKET = ITEMS.register("lpg_gas_bucket",
-            () -> new BucketItem(ModFluids.LPG_GAS.get(),
-                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
-
     public static final DeferredItem<BucketItem> LPG_LIQUID_BUCKET = ITEMS.register("lpg_liquid_bucket",
             () -> new BucketItem(ModFluids.LPG_LIQUID.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
-    public static final DeferredItem<BucketItem> WET_GAS_BUCKET = ITEMS.register("wet_gas_bucket",
-            () -> new BucketItem(ModFluids.WET_GAS.get(),
+    public static final DeferredItem<BucketItem> PETROLEUM_GAS_BUCKET = ITEMS.register("petroleum_gas_bucket",
+            () -> new BucketItem(ModFluids.PETROLEUM_GAS.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
     public static final DeferredItem<BucketItem> PROPANE_LIQUID_BUCKET = ITEMS.register("propane_liquid_bucket",
@@ -188,6 +185,35 @@ public class ModItems {
             () -> new BucketItem(ModFluids.SOUR_KEROSENE.get(),
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
+    public static final DeferredItem<BucketItem> ETHYLENE_BUCKET = ITEMS.register("ethylene_bucket",
+            () -> new BucketItem(ModFluids.ETHYLENE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> PROPYLENE_BUCKET = ITEMS.register("propylene_bucket",
+            () -> new BucketItem(ModFluids.PROPYLENE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> BUTADIENE_BUCKET = ITEMS.register("butadiene_bucket",
+            () -> new BucketItem(ModFluids.BUTADIENE.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> AVIATION_FUEL_BUCKET = ITEMS.register("aviation_fuel_bucket",
+            () -> new BucketItem(ModFluids.AVIATION_FUEL.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<BucketItem> SULFURIC_ACID_BUCKET = ITEMS.register("sulfuric_acid_bucket",
+            () -> new BucketItem(ModFluids.SULFURIC_ACID.get(),
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+
+    public static final DeferredItem<Item> POLYETHYLENE = ITEMS.register("polyethylene",
+            () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> POLYPROPYLENE = ITEMS.register("polypropylene",
+            () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> SYNTHETIC_RUBBER = ITEMS.register("synthetic_rubber",
+            () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<CrackingControllerItem> CRACKING_CONTROLLER = ITEMS.register("cracking_controller",
             () -> new CrackingControllerItem(new Item.Properties().stacksTo(64)));
 
@@ -199,6 +225,9 @@ public class ModItems {
 
     public static final DeferredItem<BlockItem> WEAR_RESISTANT_TANK = ITEMS.register("wear_resistant_tank",
             () -> new BlockItem(ModBlocks.WEAR_RESISTANT_TANK.get(), new Item.Properties()));
+
+    public static final DeferredItem<AirAnalyzerItem> AIR_ANALYZER = ITEMS.register("air_analyzer",
+            () -> new AirAnalyzerItem(new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);

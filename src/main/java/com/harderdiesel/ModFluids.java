@@ -187,16 +187,16 @@ public class ModFluids {
                     .block(ModBlocks.MAZUT)
                     .bucket(ModItems.MAZUT_BUCKET);
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> BUTANE_GAS =
-            FLUIDS.register("butane_gas", () -> new BaseFlowingFluid.Source(ModFluids.BUTANE_GAS_PROPERTIES));
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> BUTANE =
+            FLUIDS.register("butane", () -> new BaseFlowingFluid.Source(ModFluids.BUTANE_PROPERTIES));
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_BUTANE_GAS =
-            FLUIDS.register("flowing_butane_gas", () -> new BaseFlowingFluid.Flowing(ModFluids.BUTANE_GAS_PROPERTIES));
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_BUTANE =
+            FLUIDS.register("flowing_butane", () -> new BaseFlowingFluid.Flowing(ModFluids.BUTANE_PROPERTIES));
 
-    public static final BaseFlowingFluid.Properties BUTANE_GAS_PROPERTIES =
-            new BaseFlowingFluid.Properties(ModFluidTypes.BUTANE_GAS, BUTANE_GAS, FLOWING_BUTANE_GAS)
-                    .block(ModBlocks.BUTANE_GAS)
-                    .bucket(ModItems.BUTANE_GAS_BUCKET);
+    public static final BaseFlowingFluid.Properties BUTANE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.BUTANE, BUTANE, FLOWING_BUTANE)
+                    .block(ModBlocks.BUTANE)
+                    .bucket(ModItems.BUTANE_BUCKET);
 
     public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> BUTANE_LIQUID =
             FLUIDS.register("butane_liquid", () -> new BaseFlowingFluid.Source(ModFluids.BUTANE_LIQUID_PROPERTIES));
@@ -209,17 +209,6 @@ public class ModFluids {
                     .block(ModBlocks.BUTANE_LIQUID)
                     .bucket(ModItems.BUTANE_LIQUID_BUCKET);
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> LPG_GAS =
-            FLUIDS.register("lpg_gas", () -> new BaseFlowingFluid.Source(ModFluids.LPG_GAS_PROPERTIES));
-
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_LPG_GAS =
-            FLUIDS.register("flowing_lpg_gas", () -> new BaseFlowingFluid.Flowing(ModFluids.LPG_GAS_PROPERTIES));
-
-    public static final BaseFlowingFluid.Properties LPG_GAS_PROPERTIES =
-            new BaseFlowingFluid.Properties(ModFluidTypes.LPG_GAS, LPG_GAS, FLOWING_LPG_GAS)
-                    .block(ModBlocks.LPG_GAS)
-                    .bucket(ModItems.LPG_GAS_BUCKET);
-
     public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> LPG_LIQUID =
             FLUIDS.register("lpg_liquid", () -> new BaseFlowingFluid.Source(ModFluids.LPG_LIQUID_PROPERTIES));
 
@@ -231,16 +220,16 @@ public class ModFluids {
                     .block(ModBlocks.LPG_LIQUID)
                     .bucket(ModItems.LPG_LIQUID_BUCKET);
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> WET_GAS =
-            FLUIDS.register("wet_gas", () -> new BaseFlowingFluid.Source(ModFluids.WET_GAS_PROPERTIES));
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> PETROLEUM_GAS =
+            FLUIDS.register("petroleum_gas", () -> new BaseFlowingFluid.Source(ModFluids.PETROLEUM_GAS_PROPERTIES));
 
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_WET_GAS =
-            FLUIDS.register("flowing_wet_gas", () -> new BaseFlowingFluid.Flowing(ModFluids.WET_GAS_PROPERTIES));
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_PETROLEUM_GAS =
+            FLUIDS.register("flowing_petroleum_gas", () -> new BaseFlowingFluid.Flowing(ModFluids.PETROLEUM_GAS_PROPERTIES));
 
-    public static final BaseFlowingFluid.Properties WET_GAS_PROPERTIES =
-            new BaseFlowingFluid.Properties(ModFluidTypes.WET_GAS, WET_GAS, FLOWING_WET_GAS)
-                    .block(ModBlocks.WET_GAS)
-                    .bucket(ModItems.WET_GAS_BUCKET);
+    public static final BaseFlowingFluid.Properties PETROLEUM_GAS_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.PETROLEUM_GAS, PETROLEUM_GAS, FLOWING_PETROLEUM_GAS)
+                    .block(ModBlocks.PETROLEUM_GAS)
+                    .bucket(ModItems.PETROLEUM_GAS_BUCKET);
 
     public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> PROPANE_LIQUID =
             FLUIDS.register("propane_liquid", () -> new BaseFlowingFluid.Source(ModFluids.PROPANE_LIQUID_PROPERTIES));
@@ -483,6 +472,61 @@ public class ModFluids {
             new BaseFlowingFluid.Properties(ModFluidTypes.SOUR_KEROSENE, SOUR_KEROSENE, FLOWING_SOUR_KEROSENE)
                     .block(ModBlocks.SOUR_KEROSENE)
                     .bucket(ModItems.SOUR_KEROSENE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> ETHYLENE =
+            FLUIDS.register("ethylene", () -> new BaseFlowingFluid.Source(ModFluids.ETHYLENE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_ETHYLENE =
+            FLUIDS.register("flowing_ethylene", () -> new BaseFlowingFluid.Flowing(ModFluids.ETHYLENE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties ETHYLENE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.ETHYLENE, ETHYLENE, FLOWING_ETHYLENE)
+                    .block(ModBlocks.ETHYLENE)
+                    .bucket(ModItems.ETHYLENE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> PROPYLENE =
+            FLUIDS.register("propylene", () -> new BaseFlowingFluid.Source(ModFluids.PROPYLENE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_PROPYLENE =
+            FLUIDS.register("flowing_propylene", () -> new BaseFlowingFluid.Flowing(ModFluids.PROPYLENE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties PROPYLENE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.PROPYLENE, PROPYLENE, FLOWING_PROPYLENE)
+                    .block(ModBlocks.PROPYLENE)
+                    .bucket(ModItems.PROPYLENE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> BUTADIENE =
+            FLUIDS.register("butadiene", () -> new BaseFlowingFluid.Source(ModFluids.BUTADIENE_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_BUTADIENE =
+            FLUIDS.register("flowing_butadiene", () -> new BaseFlowingFluid.Flowing(ModFluids.BUTADIENE_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties BUTADIENE_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.BUTADIENE, BUTADIENE, FLOWING_BUTADIENE)
+                    .block(ModBlocks.BUTADIENE)
+                    .bucket(ModItems.BUTADIENE_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> AVIATION_FUEL =
+            FLUIDS.register("aviation_fuel", () -> new BaseFlowingFluid.Source(ModFluids.AVIATION_FUEL_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_AVIATION_FUEL =
+            FLUIDS.register("flowing_aviation_fuel", () -> new BaseFlowingFluid.Flowing(ModFluids.AVIATION_FUEL_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties AVIATION_FUEL_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.AVIATION_FUEL, AVIATION_FUEL, FLOWING_AVIATION_FUEL)
+                    .block(ModBlocks.AVIATION_FUEL)
+                    .bucket(ModItems.AVIATION_FUEL_BUCKET);
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> SULFURIC_ACID =
+            FLUIDS.register("sulfuric_acid", () -> new BaseFlowingFluid.Source(ModFluids.SULFURIC_ACID_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_SULFURIC_ACID =
+            FLUIDS.register("flowing_sulfuric_acid", () -> new BaseFlowingFluid.Flowing(ModFluids.SULFURIC_ACID_PROPERTIES));
+
+    public static final BaseFlowingFluid.Properties SULFURIC_ACID_PROPERTIES =
+            new BaseFlowingFluid.Properties(ModFluidTypes.SULFURIC_ACID, SULFURIC_ACID, FLOWING_SULFURIC_ACID)
+                    .block(ModBlocks.SULFURIC_ACID)
+                    .bucket(ModItems.SULFURIC_ACID_BUCKET);
 
     public static void register(IEventBus modEventBus) {
         FLUIDS.register(modEventBus);

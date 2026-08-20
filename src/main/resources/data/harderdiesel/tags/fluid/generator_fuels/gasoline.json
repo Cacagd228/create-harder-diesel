@@ -4,6 +4,7 @@
     "#c:low_octane_gasoline",
     "#c:high_octane_gasoline",
     "#c:artisan_high_octane_gasoline",
-    "#c:kerosene"
+    "#c:kerosene",
+    "#c:aviation_fuel"
   ]
 }

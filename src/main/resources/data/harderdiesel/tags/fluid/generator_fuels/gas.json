@@ -2,11 +2,11 @@
   "replace": false,
   "values": [
     "#c:propane",
-    "#c:butane_gas",
+    "#c:propane_liquid",
+    "#c:butane",
     "#c:butane_liquid",
-    "#c:lpg_gas",
     "#c:lpg_liquid",
-    "#c:wet_gas",
+    "#c:petroleum_gas",
     "#c:fcc_gas"
   ]
 }

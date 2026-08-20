@@ -1,0 +1,26 @@
+{
+  "type": "harderdiesel:cracking",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:lpg_liquid",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "superheated",
+  "processing_time": 180,
+  "results": [
+    {
+      "id": "harderdiesel:ethylene",
+      "amount": 35
+    },
+    {
+      "id": "harderdiesel:propylene",
+      "amount": 35
+    },
+    {
+      "id": "harderdiesel:butadiene",
+      "amount": 25
+    }
+  ]
+}

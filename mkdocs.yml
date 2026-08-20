@@ -1,5 +1,5 @@
 site_name: "Create: Harder Diesel"
-site_description: "Документация мода Create: Harder Diesel — реалистичная нефтепереработка для Create."
+site_description: "Документация мода Create: Harder Diesel — реалистичная нефтепереработка для Create: Diesel Generators."
 site_author: Harder Diesel
 repo_url: https://github.com/anomalyco/opencode
 edit_uri: ""
@@ -50,18 +50,31 @@ plugins:
   - search
 
 nav:
-  - Главная: index.md
-  - Установка: getting-started.md
-  - Сырая нефть и биомы: crude-oil.md
-  - Машины: machines.md
+  # Всё содержимое — на главной (index.md) во вкладках (pymdownx.tabbed).
+  # Якоря: __tabbed_1_* = верхний уровень, __tabbed_2_* = «Обработка»,
+  # __tabbed_3_* = «Разработчикам».
+  - Обзор: index.md
+  - Установка и зависимости: index.md#__tabbed_1_1
+  - Сырая нефть и биомы: index.md#__tabbed_1_2
   - Обработка:
-      - Перегонка: processing/distillation.md
-      - Крекинг: processing/cracking.md
-      - Сепарация: processing/separating.md
-      - Смешивание: processing/mixing.md
-  - Жидкости: fluids.md
-  - Топлива и генераторы: fuels.md
-  - Интеграция Propulsion: propulsion.md
-  - Таблицы крафтов: recipes.md
+      - Перегонка: index.md#__tabbed_2_1
+      - Крекинг: index.md#__tabbed_2_2
+      - Сепарация: index.md#__tabbed_2_3
+      - Смешивание: index.md#__tabbed_2_4
+  - Жидкости: index.md#__tabbed_1_4
+  - Топлива и генераторы: index.md#__tabbed_1_5
+  - "Интеграция Propulsion": index.md#__tabbed_1_6
+  - Таблицы крафтов: index.md#__tabbed_1_7
   - Разработчикам:
-      - Пособие по мультиблокам: dev/multiblock-guide.md
+      - Введение и архитектура: index.md#__tabbed_3_1
+      - Регистрация: index.md#__tabbed_3_2
+      - Блок и блок-сущность: index.md#__tabbed_3_3
+      - Капабилити жидкости: index.md#__tabbed_3_4
+      - Обработка рецептов: index.md#__tabbed_3_5
+      - Контроллер-предмет: index.md#__tabbed_3_6
+      - Синхронизация и NBT: index.md#__tabbed_3_7
+      - Клиент: модели и рендер: index.md#__tabbed_3_8
+      - JEI + Ponder: index.md#__tabbed_3_9
+      - Ассеты и рецепты: index.md#__tabbed_3_10
+      - Конфиг и ошибки: index.md#__tabbed_3_11
+      - Чек-лист и быстрый старт: index.md#__tabbed_3_12

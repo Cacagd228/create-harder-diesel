@@ -17,6 +17,10 @@
     "harderdiesel:flowing_high_cetane_diesel",
     "harderdiesel:artisan_high_octane_gasoline",
     "harderdiesel:flowing_artisan_high_octane_gasoline",
+    "harderdiesel:kerosene",
+    "harderdiesel:flowing_kerosene",
+    "harderdiesel:aviation_fuel",
+    "harderdiesel:flowing_aviation_fuel",
     "harderdiesel:nitromethane",
     "harderdiesel:flowing_nitromethane"
   ]

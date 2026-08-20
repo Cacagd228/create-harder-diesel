@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "powergrid"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:molten_sulfur",
+      "amount": 25
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "powergrid:acid",
+      "amount": 25
+    }
+  ],
+  "heat_requirement": "heated",
+  "results": [
+    {
+      "id": "harderdiesel:sulfuric_acid",
+      "amount": 35
+    }
+  ]
+}

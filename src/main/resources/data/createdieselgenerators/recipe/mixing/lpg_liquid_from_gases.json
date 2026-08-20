@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:propane",
+      "amount": 60
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:butane",
+      "amount": 40
+    }
+  ],
+  "results": [
+    {
+      "id": "harderdiesel:lpg_liquid",
+      "amount": 10
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+    "fluid": "harderdiesel:low_octane_gasoline",
+    "thrust_multiplier": 1.05,
+    "consumption_multiplier": 0.95
+}

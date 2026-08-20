@@ -1,0 +1,18 @@
+{
+  "type": "harderdiesel:cracking",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:cracked_naphtha",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "superheated",
+  "processing_time": 80,
+  "results": [
+    {
+      "id": "harderdiesel:reformate",
+      "amount": 60
+    }
+  ]
+}

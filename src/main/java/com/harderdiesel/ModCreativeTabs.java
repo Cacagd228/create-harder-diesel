@@ -43,11 +43,10 @@ public class ModCreativeTabs {
                         output.accept(ModItems.MEDIUM_CETANE_DIESEL_BUCKET);
                         output.accept(ModItems.HIGH_CETANE_DIESEL_BUCKET);
                         output.accept(ModItems.MAZUT_BUCKET);
-                        output.accept(ModItems.BUTANE_GAS_BUCKET);
+                        output.accept(ModItems.BUTANE_BUCKET);
                         output.accept(ModItems.BUTANE_LIQUID_BUCKET);
-                        output.accept(ModItems.LPG_GAS_BUCKET);
                         output.accept(ModItems.LPG_LIQUID_BUCKET);
-                        output.accept(ModItems.WET_GAS_BUCKET);
+                        output.accept(ModItems.PETROLEUM_GAS_BUCKET);
                         output.accept(ModItems.PROPANE_LIQUID_BUCKET);
                         output.accept(ModItems.VACUUM_GAS_OIL_BUCKET);
                         output.accept(ModItems.VACUUM_RESIDUE_BUCKET);
@@ -70,6 +69,15 @@ public class ModCreativeTabs {
                         output.accept(ModItems.MOLTEN_SULFUR_BUCKET);
                         output.accept(ModItems.SOUR_NAPHTHA_BUCKET);
                         output.accept(ModItems.SOUR_KEROSENE_BUCKET);
+                        output.accept(ModItems.ETHYLENE_BUCKET);
+                        output.accept(ModItems.PROPYLENE_BUCKET);
+                        output.accept(ModItems.BUTADIENE_BUCKET);
+                        output.accept(ModItems.AVIATION_FUEL_BUCKET);
+                        output.accept(ModItems.SULFURIC_ACID_BUCKET);
+                        output.accept(ModItems.AIR_ANALYZER);
+                        output.accept(ModItems.POLYETHYLENE);
+                        output.accept(ModItems.POLYPROPYLENE);
+                        output.accept(ModItems.SYNTHETIC_RUBBER);
                     })
                     .build());
 
