@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class PollutionManager {
     public static final int POLLUTION_TICK_INTERVAL = 20; // раз в секунду
-    public static float DIFFUSION_RATE = 0.25F; // консервативный flux = diffusion*(val-neighbor)/4, caps diff*0.45 val*0.24 → 0.08/0.081 плавно (читается из конфига)
+    public static float DIFFUSION_RATE = 0.0018F; // консервативный flux = diffusion*(val-neighbor)/4, caps diff*0.45 val*0.24; B: 0.0018 → завод 1.08/с выходит на ~500 (T2-T3) за ~9-10 мин (читается из конфига)
     public static float DECAY_RATE = 0.0004F; // B: 0.0004 нелинейный 1000→0 ~80мин, 2× медленнее набора (читается из конфига)
     public static final float SYNC_THRESHOLD = 0.1F; // план: 0.1 для видимости при 0.02/с (синк ~5с)
     public static double globalMultiplier = 1.0; // множитель из команды / конфига
@@ -125,17 +125,11 @@ public class PollutionManager {
     }
 
     private static void tickLevel(ServerLevel level) {
-        // читаем конфиг каждый тик, мигрируем старые значения к B
-        try {
-            float cfgDecay = com.harderdiesel.ModConfig.POLLUTION_DECAY_RATE.get().floatValue();
-            float cfgDiff = com.harderdiesel.ModConfig.POLLUTION_DIFFUSION_RATE.get().floatValue();
-            // старые: 0.015/0.08, 0.005/0.03 → 0.0002/0.008 → 0.00002/0.008 → B 0.0004/0.004 → cons 0.0004/0.25
-            if (Math.abs(cfgDecay - 0.015F) < 0.0001F || Math.abs(cfgDecay - 0.005F) < 0.0001F || Math.abs(cfgDecay - 0.0002F) < 0.000005F || Math.abs(cfgDecay - 0.00002F) < 0.0000005F) cfgDecay = 0.0004F;
-            if (Math.abs(cfgDiff - 0.08F) < 0.005F || Math.abs(cfgDiff - 0.03F) < 0.0001F || Math.abs(cfgDiff - 0.008F) < 0.00005F || Math.abs(cfgDiff - 0.004F) < 0.00005F || Math.abs(cfgDiff - 0.04F) < 0.0005F) cfgDiff = 0.25F;
-            DECAY_RATE = cfgDecay;
-            DIFFUSION_RATE = Math.max(0F, Math.min(1F, cfgDiff));
-            try { globalMultiplier = com.harderdiesel.ModConfig.POLLUTION_GLOBAL_MULTIPLIER.get(); } catch (Throwable ignored2) {}
-        } catch (Throwable ignored) {}
+        float cfgDecay = com.harderdiesel.ModConfig.POLLUTION_DECAY_RATE.get().floatValue();
+        float cfgDiff = com.harderdiesel.ModConfig.POLLUTION_DIFFUSION_RATE.get().floatValue();
+        DECAY_RATE = cfgDecay;
+        DIFFUSION_RATE = Math.max(0F, Math.min(1F, cfgDiff));
+        try { globalMultiplier = com.harderdiesel.ModConfig.POLLUTION_GLOBAL_MULTIPLIER.get(); } catch (Throwable ignored2) {}
         PollutionSavedData data = PollutionSavedData.get(level);
         Map<Long, Float> snap = data.snapshot();
         if (snap.isEmpty()) return;

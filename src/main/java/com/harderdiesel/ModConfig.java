@@ -42,8 +42,8 @@ public class ModConfig {
                 .defineInRange("DistillationPollutionPerTick", 0.018, 0.0, 10.0);
         POLLUTION_DECAY_RATE = SERVER_BUILDER.comment("Pollution decay per diffusion tick (0..0.2). B: 0.0004 non-linear (0.5+val/1000*0.5) → 1000→0 ~80мин, 2× медленнее набора")
                 .defineInRange("PollutionDecayRate", 0.0004, 0.0, 0.2);
-        POLLUTION_DIFFUSION_RATE = SERVER_BUILDER.comment("Pollution diffusion per gradient (0..1). Conservative flux=diffusion*(val-neighbor)/4, no val scaling → 0.08/0.081 smooth")
-                .defineInRange("PollutionDiffusionRate", 0.25, 0.0, 1.0);
+        POLLUTION_DIFFUSION_RATE = SERVER_BUILDER.comment("Pollution diffusion per gradient (0..1). Conservative flux=diffusion*(val-neighbor)/4. B: 0.0018 → завод 1.08/с выходит на ~500 (T2-T3) за ~9-10 мин")
+                .defineInRange("PollutionDiffusionRate", 0.0018, 0.0, 1.0);
         POLLUTION_GLOBAL_MULTIPLIER = SERVER_BUILDER.comment("Global multiplier for all pollution emissions (0..100). Use command /harderdiesel pollution multiplier")
                 .defineInRange("GlobalPollutionMultiplier", 1.0, 0.0, 100.0);
         SERVER_BUILDER.pop();
