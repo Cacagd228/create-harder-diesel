@@ -23,6 +23,11 @@ public enum CrudeGrade {
         return fluidName;
     }
 
+    /** Ключ локализации короткого имени сорта (уже есть в lang: block.harderdiesel.<grade>_crude) */
+    public String displayNameKey() {
+        return "block.harderdiesel." + fluidName;
+    }
+
     public Fluid fluid() {
         try {
             return fluidSupplier.get();

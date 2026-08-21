@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "com.harderdiesel.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"PumpjackHoleBlockEntityMixin",
+		"OilScannerItemMixin",
+		"PumpjackOilAmountDisplaySourceMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
