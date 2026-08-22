@@ -17,6 +17,7 @@ import net.neoforged.neoforge.common.NeoForge;
 @Mod(HarderDiesel.MODID)
 public class HarderDiesel {
     public static final String MODID = "harderdiesel";
+    public static final org.slf4j.Logger LOGGER = com.mojang.logging.LogUtils.getLogger();
 
     public HarderDiesel(IEventBus modEventBus, ModContainer container) {
         ModItems.register(modEventBus);

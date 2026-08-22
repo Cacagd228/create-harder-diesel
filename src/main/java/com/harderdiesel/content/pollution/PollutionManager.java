@@ -20,11 +20,17 @@ public class PollutionManager {
     public static float DIFFUSION_RATE = 0.0018F; // консервативный flux = diffusion*(val-neighbor)/4, caps diff*0.45 val*0.24; B: 0.0018 → завод 1.08/с выходит на ~500 (T2-T3) за ~9-10 мин (читается из конфига)
     public static float DECAY_RATE = 0.0004F; // B: 0.0004 нелинейный 1000→0 ~80мин, 2× медленнее набора (читается из конфига)
     public static final float SYNC_THRESHOLD = 0.1F; // план: 0.1 для видимости при 0.02/с (синк ~5с)
-    public static double globalMultiplier = 1.0; // множитель из команды / конфига
+    public static volatile double globalMultiplier = 1.0; // множитель из команды / конфига (volatile: читается из разных потоков)
 
     private static int tickCounter = 0;
     // кэш последних синкнутых значений для throttling
     private static final Map<String, Map<Long, Float>> lastSynced = new HashMap<>();
+
+    /** Очистка серверных кэшей при остановке сервера (иначе утечка между мирами). */
+    public static void clearCaches() {
+        lastSynced.clear();
+        loggedFirst.clear();
+    }
 
     public static String dimId(ServerLevel level) {
         return level.dimension().location().toString();
@@ -202,7 +208,7 @@ public class PollutionManager {
 
     public static void setGlobalMultiplier(double mult) {
         globalMultiplier = Math.max(0, Math.min(100, mult));
-        System.out.println("[HarderDiesel][Pollution] global multiplier set to " + globalMultiplier);
+        com.harderdiesel.HarderDiesel.LOGGER.info("[Pollution] global multiplier set to {}", globalMultiplier);
     }
 
     public static double getGlobalMultiplier() { return globalMultiplier; }
@@ -210,8 +216,7 @@ public class PollutionManager {
     /** Эмиссия helper: добавить delta*globalMultiplier к чанку блока */
     public static void emit(Level level, net.minecraft.core.BlockPos pos, float amount) {
         if (!(level instanceof ServerLevel sl)) return;
-        // читаем множитель также из конфига если команда не использовалась
-        try { globalMultiplier = com.harderdiesel.ModConfig.POLLUTION_GLOBAL_MULTIPLIER.get(); } catch (Throwable ignored) {}
+        // globalMultiplier синхронизируется с конфигом в tickLevel каждый diffusion-тик
         float effective = (float)(amount * globalMultiplier);
         if (effective <= 0) return;
         ChunkPos cp = new ChunkPos(pos);
@@ -219,7 +224,8 @@ public class PollutionManager {
         addPollution(sl, cp, effective);
         long key = cp.toLong();
         if (before < 0.01F && effective > 0 && loggedFirst.add(key)) {
-            System.out.println("[HarderDiesel][Pollution] first emit at " + pos + " chunk=" + cp + " base=" + amount + " mult=" + globalMultiplier + " effective=" + effective + " dim=" + dimId(sl) + " now=" + getPollution(sl, cp));
+            com.harderdiesel.HarderDiesel.LOGGER.debug("[Pollution] first emit at {} chunk={} base={} mult={} effective={} dim={} now={}",
+                    pos, cp, amount, globalMultiplier, effective, dimId(sl), getPollution(sl, cp));
         }
     }
 }

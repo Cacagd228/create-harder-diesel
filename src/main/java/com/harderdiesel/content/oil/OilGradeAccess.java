@@ -9,9 +9,10 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.server.level.ServerLevel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Сорт нефти в чанке. Детерминирован от seed+chunkPos+биомы — как количество нефти в CDG,
@@ -21,9 +22,20 @@ import java.util.Map;
 public final class OilGradeAccess {
     private OilGradeAccess() {}
 
-    // кэш: dimension -> chunkPos -> grade (расчёт дорогой: ~12k сэмплов биомов на чанк)
-    private static final Map<String, Map<Long, CrudeGrade>> CACHE = new HashMap<>();
+    // кэш: dimension -> chunkPos -> grade (расчёт дорогой: ~12k сэмплов биомов на чанк).
+    // ConcurrentHashMap: пишется серверным потоком, читается клиентским (гогглы/туман).
+    private static final Map<String, Map<Long, CrudeGrade>> CACHE = new ConcurrentHashMap<>();
     private static final int CACHE_CAP = 65536;
+
+    /** LRU-мапа: вытесняет самый старый элемент вместо полной очистки всего кэша. */
+    private static Map<Long, CrudeGrade> newLruMap() {
+        return java.util.Collections.synchronizedMap(new LinkedHashMap<>(256, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<Long, CrudeGrade> eldest) {
+                return size() > CACHE_CAP;
+            }
+        });
+    }
 
     /** Любая сторона, с кэшем. Используется миксинами помпы, сканера, гогглов и дисплеев.
      *  Возвращает null если seed мира недоступен (клиент на удалённом сервере). */
@@ -32,16 +44,16 @@ public final class OilGradeAccess {
         long seed = seedOf(level);
         if (seed == SEED_UNKNOWN) return null;
         String dim = level.dimension().location().toString();
-        Map<Long, CrudeGrade> map = CACHE.computeIfAbsent(dim, k -> new HashMap<>());
-        CrudeGrade cached = map.get(pos.toLong());
+        Map<Long, CrudeGrade> map = CACHE.computeIfAbsent(dim, k -> newLruMap());
+        Long key = pos.toLong();
+        CrudeGrade cached = map.get(key);
         if (cached != null) return cached;
         RandomSource random = RandomSource.create(seed
                 ^ (long) pos.x * 341873128712L
                 ^ (long) pos.z * 132897987541L
                 ^ 0x5DEECE66DL);
         CrudeGrade grade = OilBiomeWeights.pickForChunkBiomes(random, sampleBiomes(level, pos));
-        if (map.size() >= CACHE_CAP) map.clear();
-        map.put(pos.toLong(), grade);
+        map.put(key, grade);
         return grade;
     }
 

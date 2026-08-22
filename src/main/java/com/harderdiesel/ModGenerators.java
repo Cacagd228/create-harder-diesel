@@ -145,12 +145,14 @@ public class ModGenerators {
                 });
     }
 
+    private static final IFluidHandler EMPTY_TANK = new FluidTank(0);
+
     private static IFluidHandler handlerFor(FueledModularDieselEngineBlockEntity be) {
         if (be.isController())
             return be.getTank();
         com.jesz.createdieselgenerators.content.diesel_engine.modular.ModularDieselEngineBlockEntity controller =
                 be.getControllerBE();
-        return controller != null ? controller.getTank() : new FluidTank(0);
+        return controller != null ? controller.getTank() : EMPTY_TANK;
     }
 
     private static void registerHugeCapability(RegisterCapabilitiesEvent event,

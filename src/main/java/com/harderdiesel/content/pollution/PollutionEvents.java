@@ -6,6 +6,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 
 import java.util.List;
 
@@ -21,6 +22,12 @@ public class PollutionEvents {
             for (ServerLevel sl : event.getServer().getAllLevels()) list.add(sl);
             PollutionManager.serverTick(list);
         } catch (Throwable ignored) {}
+    }
+
+    @SubscribeEvent
+    public static void onServerStopping(ServerStoppingEvent event) {
+        // Иначе статические кэши протекут в следующий мир/сервер
+        PollutionManager.clearCaches();
     }
 
     @SubscribeEvent

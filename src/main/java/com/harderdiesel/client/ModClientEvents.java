@@ -18,6 +18,8 @@ import net.neoforged.neoforge.client.model.DynamicFluidContainerModel;
 
 @EventBusSubscriber(modid = HarderDiesel.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModClientEvents {
+    private static final org.slf4j.Logger LOGGER = com.mojang.logging.LogUtils.getLogger();
+
     @SubscribeEvent
     public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(fluidTextures("naphtha"), ModFluidTypes.NAPHTHA.get());
@@ -176,12 +178,11 @@ public class ModClientEvents {
                     cpd.getField("showPollutionMinimap").setBoolean(null, true);
                     cpd.getField("pollutionOpacity").setFloat(null, 0.9F);
                 } catch (Throwable ignored) {}
-                System.out.println("[HarderDiesel] Pollution provider registered and enabled");
+                LOGGER.info("Pollution provider registered and enabled");
             } catch (ClassNotFoundException cnf) {
-                System.out.println("[HarderDiesel] XaerosZones not present, pollution map overlay disabled");
+                LOGGER.info("XaerosZones not present, pollution map overlay disabled");
             } catch (Throwable t) {
-                System.err.println("[HarderDiesel] Failed to register pollution provider: " + t);
-                t.printStackTrace();
+                LOGGER.error("Failed to register pollution provider", t);
             }
         });
     }

@@ -58,8 +58,7 @@ public class AirAnalyzerItem extends Item {
                 }
             }
         } catch (Throwable t) {
-            System.err.println("[HarderDiesel][AirAnalyzer] showReading error: " + t);
-            t.printStackTrace();
+            com.harderdiesel.HarderDiesel.LOGGER.error("[AirAnalyzer] showReading error", t);
             pollution = 0F;
         }
         PollutionTier tier = PollutionTier.from(pollution);
@@ -74,7 +73,8 @@ public class AirAnalyzerItem extends Item {
         Component msg = Component.translatable("item.harderdiesel.air_analyzer.reading",
                         String.format("%.0f", pollution), tierName)
                 .withStyle(color);
-        System.out.println("[HarderDiesel][AirAnalyzer] chunk=" + pos + " dim=" + level.dimension().location() + " poll=" + pollution + " tier=" + tierName + " src=" + source + " side=" + (level.isClientSide ? "client" : "server"));
+        com.harderdiesel.HarderDiesel.LOGGER.debug("[AirAnalyzer] chunk={} dim={} poll={} tier={} src={} side={}",
+                pos, level.dimension().location(), pollution, tierName, source, level.isClientSide ? "client" : "server");
         player.displayClientMessage(msg, true);
     }
 

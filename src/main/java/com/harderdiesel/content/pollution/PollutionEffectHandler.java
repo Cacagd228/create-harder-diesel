@@ -6,6 +6,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.ChunkPos;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.HashMap;
@@ -68,5 +69,11 @@ public class PollutionEffectHandler {
         if (tier.hasWither()) {
             player.addEffect(new MobEffectInstance(MobEffects.WITHER, isT5 ? 120 : 80, isT5 ? 1 : 0, false, true, true));
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        // иначе запись про игрока остаётся навсегда
+        cooldown.remove(event.getEntity().getUUID());
     }
 }
