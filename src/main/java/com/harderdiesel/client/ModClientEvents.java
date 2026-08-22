@@ -141,16 +141,20 @@ public class ModClientEvents {
         net.createmod.ponder.foundation.PonderIndex.addPlugin(new HarderDieselPonderPlugin());
         CreateClient.MODEL_SWAPPER.getCustomBlockModels()
                 .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "cracking_reactor"),
-                        model -> new CrackingReactorModel(model));
+                        model -> new MultiblockCTModel(model, new MultiblockCTBehavior(com.harderdiesel.content.cracking.CrackingReactorBlock.class,
+                                HarderDieselSpriteShifts.CRACKING_REACTOR, HarderDieselSpriteShifts.CRACKING_REACTOR_TOP, HarderDieselSpriteShifts.CRACKING_REACTOR_NORTH)));
         CreateClient.MODEL_SWAPPER.getCustomBlockModels()
                 .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "separator"),
-                        model -> new SeparatorModel(model));
+                        model -> new MultiblockCTModel(model, new MultiblockCTBehavior(com.harderdiesel.content.separator.SeparatorBlock.class,
+                                HarderDieselSpriteShifts.SEPARATOR, HarderDieselSpriteShifts.SEPARATOR_TOP, HarderDieselSpriteShifts.SEPARATOR_NORTH)));
         CreateClient.MODEL_SWAPPER.getCustomBlockModels()
                 .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "galvanized_reactor_tank"),
-                        model -> new GalvanizedTankModel(model));
+                        model -> new MultiblockCTModel(model, new MultiblockCTBehavior(com.harderdiesel.content.galvanized.GalvanizedTankBlock.class,
+                                HarderDieselSpriteShifts.GALVANIZED_TANK, HarderDieselSpriteShifts.GALVANIZED_TANK_TOP)));
         CreateClient.MODEL_SWAPPER.getCustomBlockModels()
                 .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "wear_resistant_tank"),
-                        model -> new WearResistantTankModel(model));
+                        model -> new MultiblockCTModel(model, new MultiblockCTBehavior(com.harderdiesel.content.wear_resistant.WearResistantTankBlock.class,
+                                HarderDieselSpriteShifts.WEAR_RESISTANT_TANK, HarderDieselSpriteShifts.WEAR_RESISTANT_TANK_TOP)));
 
         // XaerosZones Pollution provider — через рефлексию чтобы не крашить без xaerolib/xaeroszones
         event.enqueueWork(() -> {

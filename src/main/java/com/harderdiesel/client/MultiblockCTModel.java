@@ -2,6 +2,7 @@ package com.harderdiesel.client;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.foundation.block.connected.CTModel;
+import com.simibubi.create.foundation.block.connected.ConnectedTextureBehaviour;
 import net.createmod.catnip.data.Iterate;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -19,12 +20,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class GalvanizedTankModel extends CTModel {
+/**
+ * CT-модель с горизонтальным куллингом для мультиблочных семейств.
+ * Заменяет четыре одинаковых класса моделей.
+ */
+public class MultiblockCTModel extends CTModel {
 
     protected static final ModelProperty<CullData> CULL_PROPERTY = new ModelProperty<>();
 
-    public GalvanizedTankModel(BakedModel originalModel) {
-        super(originalModel, new GalvanizedTankCTBehavior());
+    public MultiblockCTModel(BakedModel originalModel, ConnectedTextureBehaviour behaviour) {
+        super(originalModel, behaviour);
     }
 
     @Override
