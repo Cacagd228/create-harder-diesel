@@ -24,7 +24,7 @@ import sys
 import numpy as np
 from PIL import Image
 
-OUT_DIR = os.path.join("textures", "neoforge", "assets", "harderdiesel", "textures", "block")
+OUT_DIR = os.path.join("src", "main", "resources", "assets", "harderdiesel", "textures", "block")
 SIZE = 16
 
 # name -> {base: (r,g,b), alpha, ripple, freq, modifiers: [...]}

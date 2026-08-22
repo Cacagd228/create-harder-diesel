@@ -59,7 +59,7 @@ def main() -> int:
         return 1
     src_dir = Path(sys.argv[1])
     out_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(
-        "textures/neoforge/assets/harderdiesel/textures/block")
+        "src/main/resources/assets/harderdiesel/textures/block")
 
     for cat, hue in CATEGORIES.items():
         cat_dir = out_dir / cat

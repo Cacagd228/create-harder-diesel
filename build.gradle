@@ -118,9 +118,6 @@ neoForge {
     }
 }
 
-// Модели, языки и текстуры хранятся отдельно от кода — в textures/neoforge
-sourceSets.main.resources.srcDir 'textures/neoforge'
-
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }

@@ -3,7 +3,7 @@
 
 Копирует модели двигателей из CDG и подставляет перекрашенные текстуры из
 assets/harderdiesel/textures/block/<категория>/. Сгенерированные файлы пишутся
-в textures/neoforge/assets/harderdiesel/.
+в src/main/resources/assets/harderdiesel/.
 
 Исходники моделей CDG: распакованный jar CDG, assets/createdieselgenerators/models/block.
 """
@@ -149,7 +149,7 @@ def main() -> int:
     # createdieselgenerators внутри него.
     if (src / "createdieselgenerators").exists():
         src = src / "createdieselgenerators"
-    out = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("textures/neoforge/assets/harderdiesel")
+    out = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("src/main/resources/assets/harderdiesel")
 
     copy_models(src / "models/block", out / "models/block")
     copy_blockstates(src / "blockstates", out / "blockstates")
