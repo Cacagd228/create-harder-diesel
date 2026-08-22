@@ -57,8 +57,7 @@ public class DistillationPollutionTicker {
                     }
                     if (!active) continue;
 
-                    float emit = 0.0009F;
-                    try { emit = ModConfig.POLLUTION_DISTILLATION_EMIT.get().floatValue(); if (Math.abs(emit - 2.2F) < 0.001F || Math.abs(emit - 0.30F) < 0.001F) emit = 0.0009F; } catch (Throwable ignored2) { emit = 0.0009F; }
+                    float emit = ModConfig.POLLUTION_DISTILLATION_EMIT.get().floatValue();
                     if (emit <= 0) continue;
                     // тикер раз в 20 тиков (1/с), эмиссия в конфиге per-tick — умножаем на 20; множитель учтётся в PollutionManager.emit
                     PollutionManager.emit(sl, dbe.getBlockPos(), emit * 20F);

@@ -1,6 +1,7 @@
 package com.harderdiesel;
 
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ModConfig {
@@ -53,5 +54,33 @@ public class ModConfig {
 
     public static void register(ModContainer container) {
         container.registerConfig(net.neoforged.fml.config.ModConfig.Type.SERVER, SERVER_SPEC, HarderDiesel.MODID + "-server.toml");
+    }
+
+    /**
+     * Одноразовая миграция эмиссий загрязнения. В ранних версиях мода у этих
+     * настроек были другие значения по умолчанию (2.5/2.0/2.2 и промежуточные
+     * правки 0.35/0.25/0.30), которые нельзя оставлять как есть — с ними
+     * загрязнение растёт в тысячи раз быстрее задуманного.
+     * <p>
+     * Раньше подмена выполнялась каждый тик каждой машины (и молча ломала
+     * осознанно выставленное пользователем значение); теперь выполняется один
+     * раз при загрузке и перезагрузке серверного конфига.
+     */
+    public static void migrateLegacyEmissionDefaults(ModConfigEvent event) {
+        if (event.getConfig().getSpec() != SERVER_SPEC)
+            return;
+        migrateLegacy(POLLUTION_CRACKING_EMIT, new double[] {2.5, 0.35}, 0.001);
+        migrateLegacy(POLLUTION_SEPARATOR_EMIT, new double[] {2.0, 0.25}, 0.0008);
+        migrateLegacy(POLLUTION_DISTILLATION_EMIT, new double[] {2.2, 0.30}, 0.0009);
+    }
+
+    private static void migrateLegacy(ModConfigSpec.ConfigValue<Double> value, double[] legacyValues, double replacement) {
+        double current = value.get();
+        for (double legacy : legacyValues) {
+            if (Math.abs(current - legacy) < 1e-3) {
+                value.set(replacement);
+                return;
+            }
+        }
     }
 }

@@ -28,16 +28,7 @@ public class SeparatorBlockEntity extends ReactorBlockEntity {
 
     @Override
     protected float pollutionEmission() {
-        try {
-            float emit = ModConfig.POLLUTION_SEPARATOR_EMIT.get().floatValue();
-            if (Math.abs(emit - 2.0F) < 0.001F)
-                emit = 0.0008F;
-            if (Math.abs(emit - 0.25F) < 0.001F)
-                emit = 0.0008F;
-            return emit;
-        } catch (Throwable t) {
-            return 0.0008F;
-        }
+        return ModConfig.POLLUTION_SEPARATOR_EMIT.get().floatValue();
     }
 
     @Override

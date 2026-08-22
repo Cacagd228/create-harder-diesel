@@ -28,16 +28,7 @@ public class CrackingReactorBlockEntity extends ReactorBlockEntity {
 
     @Override
     protected float pollutionEmission() {
-        try {
-            float emit = ModConfig.POLLUTION_CRACKING_EMIT.get().floatValue();
-            if (Math.abs(emit - 2.5F) < 0.001F)
-                emit = 0.001F;
-            if (Math.abs(emit - 0.35F) < 0.001F)
-                emit = 0.001F;
-            return emit;
-        } catch (Throwable t) {
-            return 0.001F;
-        }
+        return ModConfig.POLLUTION_CRACKING_EMIT.get().floatValue();
     }
 
     @Override

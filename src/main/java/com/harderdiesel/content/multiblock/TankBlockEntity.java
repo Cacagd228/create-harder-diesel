@@ -32,8 +32,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * РћР±С‰Р°СЏ Р»РѕРіРёРєР° РјСѓР»СЊС‚РёР±Р»РѕС‡РЅРѕРіРѕ Р±Р°РєР° (РіР°Р»СЊРІР°РЅРёС‡РµСЃРєРёР№ / РёР·РЅРѕСЃРѕСЃС‚РѕР№РєРёР№),
- * СЃР»СѓР¶Р°С‰РµРіРѕ РѕСЃРЅРѕРІРѕР№ РґР»СЏ СЂРµР°РєС‚РѕСЂРѕРІ.
+ * Общая логика мультиблочного бака (гальванический / износостойкий),
+ * служащего основой для реакторов.
  *
  * @see com.harderdiesel.content.galvanized.GalvanizedTankBlockEntity
  * @see com.harderdiesel.content.wear_resistant.WearResistantTankBlockEntity
@@ -200,7 +200,7 @@ public abstract class TankBlockEntity extends SmartBlockEntity
         sendData();
     }
 
-    /** РџСЂРѕРІРµСЂРєР°, С‡С‚Рѕ СЃРѕСЃС‚РѕСЏРЅРёРµ РїСЂРёРЅР°РґР»РµР¶РёС‚ Р±Р»РѕРєСѓ РёРјРµРЅРЅРѕ СЌС‚РѕРіРѕ СЃРµРјРµР№СЃС‚РІР° Р±Р°РєРѕРІ. */
+    /** Проверка, что состояние принадлежит блоку именно этого семейства баков. */
     private boolean isOwnBlock(BlockState state) {
         return getType().isValid(state);
     }

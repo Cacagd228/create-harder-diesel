@@ -28,6 +28,8 @@ public class HarderDiesel {
         ModBlockEntityTypes.register(modEventBus);
         ModGenerators.register(modEventBus);
         ModConfig.register(container);
+        modEventBus.addListener((net.neoforged.fml.event.config.ModConfigEvent event) ->
+                ModConfig.migrateLegacyEmissionDefaults(event));
 
         modEventBus.addListener((RegisterCapabilitiesEvent event) ->
                 CrackingReactorBlockEntity.registerCapabilities(event));
