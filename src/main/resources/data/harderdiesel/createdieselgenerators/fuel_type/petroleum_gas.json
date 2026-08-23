@@ -3,17 +3,17 @@
   "sound_pitch": 1.1,
   "normal": {
     "speed": 96.0,
-    "strength": 4096.0,
+    "strength": 2560.0,
     "burn_rate": 0.05
   },
   "modular": {
     "speed": 96.0,
-    "strength": 6144.0,
+    "strength": 3840.0,
     "burn_rate": 0.05
   },
   "huge": {
     "speed": 224.0,
-    "strength": 12288.0,
+    "strength": 7680.0,
     "burn_rate": 0.05
   },
   "burner_multiplier": 1.0
