@@ -1,0 +1,22 @@
+{
+  "type": "harderdiesel:cracking",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:mazut",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "superheated",
+  "processing_time": 140,
+  "results": [
+    {
+      "id": "harderdiesel:vacuum_gas_oil",
+      "amount": 50
+    },
+    {
+      "id": "harderdiesel:tar",
+      "amount": 30
+    }
+  ]
+}
