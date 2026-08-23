@@ -20,15 +20,15 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Анализатор воздуха — латунный сканер.
- * ПКМ → сканирование с прогресс-баром в actionbar, затем количество
- * загрязнения 0..1000 и тир над ХП.
+ * РђРЅР°Р»РёР·Р°С‚РѕСЂ РІРѕР·РґСѓС…Р° вЂ” Р»Р°С‚СѓРЅРЅС‹Р№ СЃРєР°РЅРµСЂ.
+ * РџРљРњ в†’ СЃРєР°РЅРёСЂРѕРІР°РЅРёРµ СЃ РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂРѕРј РІ actionbar, Р·Р°С‚РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ
+ * Р·Р°РіСЂСЏР·РЅРµРЅРёСЏ 0..1000 Рё С‚РёСЂ РЅР°Рґ РҐРџ.
  */
 public class AirAnalyzerItem extends Item {
 
-    private static final int SCAN_DURATION = 40; // тиков (2 сек)
-    private static final int BAR_WIDTH = 24;
-    /** Остаток сканирования по игроку. */
+    private static final int SCAN_DURATION = 40; // С‚РёРєРѕРІ (2 СЃРµРє)
+    private static final int BAR_WIDTH = 5;
+    /** РћСЃС‚Р°С‚РѕРє СЃРєР°РЅРёСЂРѕРІР°РЅРёСЏ РїРѕ РёРіСЂРѕРєСѓ. */
     private static final Map<UUID, Integer> SCANNING = new HashMap<>();
 
     public AirAnalyzerItem(Properties properties) {
@@ -37,7 +37,7 @@ public class AirAnalyzerItem extends Item {
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return true; // зачарованный блеск как у Debug Stick
+        return true; // Р·Р°С‡Р°СЂРѕРІР°РЅРЅС‹Р№ Р±Р»РµСЃРє РєР°Рє Сѓ Debug Stick
     }
 
     @Override
@@ -49,7 +49,7 @@ public class AirAnalyzerItem extends Item {
         if (left == null)
             return;
 
-        // сканирование прерывается, если предмет больше не в руках
+        // СЃРєР°РЅРёСЂРѕРІР°РЅРёРµ РїСЂРµСЂС‹РІР°РµС‚СЃСЏ, РµСЃР»Рё РїСЂРµРґРјРµС‚ Р±РѕР»СЊС€Рµ РЅРµ РІ СЂСѓРєР°С…
         if (!player.getMainHandItem().is(this) && !player.getOffhandItem().is(this)) {
             SCANNING.remove(id);
             return;
@@ -64,17 +64,23 @@ public class AirAnalyzerItem extends Item {
             return;
         }
         SCANNING.put(id, left);
+        if (left % 8 == 0)
+            sl.playSound(null, player.blockPosition(),
+                    com.simibubi.create.AllSoundEvents.SCROLL_VALUE.getMainEvent(),
+                    net.minecraft.sounds.SoundSource.PLAYERS, 0.75f, 1f);
         player.displayClientMessage(progressBar(left), true);
     }
 
     private static Component progressBar(int ticksLeft) {
         float frac = 1f - (float) ticksLeft / SCAN_DURATION;
         int filled = Math.round(frac * BAR_WIDTH);
-        return Component.literal("[" + "\u2588".repeat(Math.max(0, filled))
-                + "\u2591".repeat(Math.max(0, BAR_WIDTH - filled)) + "] ")
-                .withStyle(ChatFormatting.DARK_GREEN)
-                .append(Component.literal((int) (frac * 100) + "%")
-                        .withStyle(ChatFormatting.GREEN));
+        // С‚РѕС‚ Р¶Рµ СЃС‚РёР»СЊ Р±Р°СЂР°, С‡С‚Рѕ Сѓ СЃРєР°РЅРµСЂР° РЅРµС„С‚Рё (TooltipHelper.makeProgressBar),
+        // РЅРѕ 5 РєРІР°РґСЂР°С‚РѕРІ Рё СЃРµСЂР°СЏ СЃС‚СЂРѕРєР°
+        return Component.literal(com.simibubi.create.foundation.item.TooltipHelper
+                        .makeProgressBar(BAR_WIDTH, filled))
+                .withStyle(ChatFormatting.GRAY)
+                .append(Component.literal(" " + (int) (frac * 100) + "%")
+                        .withStyle(ChatFormatting.GRAY));
     }
 
     private static void showReading(Player player, Level level, ChunkPos pos) {
@@ -96,7 +102,7 @@ public class AirAnalyzerItem extends Item {
                         pollution = PollutionManager.getPollution(sp.serverLevel(), pos);
                         source = "server-fallback";
                     } else {
-                        // последний fallback — пробуем напрямую из level если это ServerLevel на клиенте инт. сервера
+                        // РїРѕСЃР»РµРґРЅРёР№ fallback вЂ” РїСЂРѕР±СѓРµРј РЅР°РїСЂСЏРјСѓСЋ РёР· level РµСЃР»Рё СЌС‚Рѕ ServerLevel РЅР° РєР»РёРµРЅС‚Рµ РёРЅС‚. СЃРµСЂРІРµСЂР°
                         if (level instanceof ServerLevel sl2) {
                             pollution = PollutionManager.getPollution(sl2, pos);
                             source = "server-level-direct";
@@ -141,7 +147,7 @@ public class AirAnalyzerItem extends Item {
     }
 
     private static void startScan(Player player) {
-        // повторное использование во время скана не сбрасывает его
+        // РїРѕРІС‚РѕСЂРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РІРѕ РІСЂРµРјСЏ СЃРєР°РЅР° РЅРµ СЃР±СЂР°СЃС‹РІР°РµС‚ РµРіРѕ
         SCANNING.putIfAbsent(player.getUUID(), SCAN_DURATION);
     }
 }
