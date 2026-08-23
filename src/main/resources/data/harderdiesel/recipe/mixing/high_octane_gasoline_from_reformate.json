@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:low_octane_gasoline",
+      "amount": 100
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "harderdiesel:reformate",
+      "amount": 40
+    }
+  ],
+  "heatRequirement": "heated",
+  "results": [
+    {
+      "id": "harderdiesel:high_octane_gasoline",
+      "amount": 100
+    }
+  ]
+}
