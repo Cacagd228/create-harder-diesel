@@ -2,6 +2,7 @@ package com.harderdiesel.mixin;
 
 import com.harderdiesel.content.oil.CrudeGrade;
 import com.harderdiesel.content.oil.OilGradeAccess;
+import com.harderdiesel.content.oil.OilToggle;
 import com.jesz.createdieselgenerators.content.pumpjack.PumpjackHoleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -11,7 +12,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
@@ -28,6 +31,13 @@ public abstract class PumpjackHoleBlockEntityMixin {
 
     private BlockPos hd_pos() {
         return ((BlockEntity) (Object) this).getBlockPos();
+    }
+
+    /** Нефть выключена: помпа не качает и не перезаписывает месторождение нулём. */
+    @Inject(method = "pumpjackRotation", at = @At("HEAD"), cancellable = true, remap = false)
+    private void hd_blockPumpingWhenDisabled(boolean rotation, CallbackInfo ci) {
+        if (!OilToggle.enabled())
+            ci.cancel();
     }
 
     /** Подмена stackList.get(0): и при закачке в танк (сервер), и в партиклах (клиент). */
@@ -51,7 +61,7 @@ public abstract class PumpjackHoleBlockEntityMixin {
             remap = false)
     private String hd_gogglesAddGrade(String format, Object[] args) {
         String s = String.format(format, args);
-        if (hd_level() != null) {
+        if (hd_level() != null && OilToggle.enabled()) {
             CrudeGrade grade = OilGradeAccess.getForChunk(hd_level(), new ChunkPos(hd_pos()));
             if (grade != null)
                 return s + " \u00B7 " + Component.translatable(grade.displayNameKey()).getString();

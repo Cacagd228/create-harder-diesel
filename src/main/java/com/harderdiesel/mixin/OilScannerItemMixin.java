@@ -2,6 +2,7 @@ package com.harderdiesel.mixin;
 
 import com.harderdiesel.content.oil.CrudeGrade;
 import com.harderdiesel.content.oil.OilGradeAccess;
+import com.harderdiesel.content.oil.OilToggle;
 import com.jesz.createdieselgenerators.content.tools.OilScannerItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -14,13 +15,22 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Сканер нефти: дописывает сорт к сообщению о количестве ("Loads of Oil · Средняя сладкая нефть").
+ * Сканер нефти: добавляет название сорта к сообщению ("Loads of Oil" и т.д.).
+ * При выключенной нефти тик сканера отменяется целиком — он молчит.
  */
 @Mixin(value = OilScannerItem.class, remap = false)
 public abstract class OilScannerItemMixin {
+
+    @Inject(method = "inventoryTick", at = @At("HEAD"), cancellable = true, remap = false)
+    private void hd_scannerSilentWhenDisabled(ItemStack stack, Level level, Entity entity, int slot, boolean selected, CallbackInfo ci) {
+        if (!level.isClientSide && !OilToggle.enabled())
+            ci.cancel();
+    }
 
     @Redirect(method = "inventoryTick",
             at = @At(value = "NEW",

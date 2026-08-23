@@ -2,6 +2,7 @@ package com.harderdiesel.mixin;
 
 import com.harderdiesel.content.oil.CrudeGrade;
 import com.harderdiesel.content.oil.OilGradeAccess;
+import com.harderdiesel.content.oil.OilToggle;
 import com.jesz.createdieselgenerators.content.pumpjack.PumpjackHoleBlockEntity;
 import com.jesz.createdieselgenerators.content.pumpjack.PumpjackOilAmountDisplaySource;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
@@ -24,7 +25,8 @@ public abstract class PumpjackOilAmountDisplaySourceMixin {
     private void hd_displayAddGrade(DisplayLinkContext context, DisplayTargetStats stats,
                                     CallbackInfoReturnable<MutableComponent> cir) {
         if (!(context.getSourceBlockEntity() instanceof PumpjackHoleBlockEntity be)) return;
-        CrudeGrade grade = be.getLevel() != null
+        boolean enabled = OilToggle.enabled();
+        CrudeGrade grade = enabled && be.getLevel() != null
                 ? OilGradeAccess.getForChunk(be.getLevel(), new ChunkPos(be.getBlockPos()))
                 : null;
         String prefix = grade != null ? Component.translatable(grade.displayNameKey()).getString() + " \u00B7 " : "";

@@ -123,6 +123,42 @@ public class PollutionCommand {
                                         )
                                 )
                         )
+                        .then(Commands.literal("oil")
+                                .then(Commands.literal("status")
+                                        .executes(ctx -> {
+                                            boolean on = com.harderdiesel.content.oil.OilToggle.enabled();
+                                            double chance;
+                                            try { chance = com.harderdiesel.ModConfig.OIL_CHUNK_CHANCE.get(); } catch (Throwable t) { chance = 1.0; }
+                                            double c = chance;
+                                            ctx.getSource().sendSuccess(() -> Component.literal(
+                                                    "Нефть: " + (on ? "включена" : "выключена (/harderdiesel oil enable)")
+                                                    + " · доля чанков с месторождениями: " + String.format("%.0f%%", c * 100)), false);
+                                            return 1;
+                                        })
+                                )
+                                .then(Commands.literal("enable")
+                                        .requires(src -> src.hasPermission(2))
+                                        .executes(ctx -> {
+                                            try { com.harderdiesel.ModConfig.OIL_ENABLED.set(true); } catch (Throwable t) {
+                                                ctx.getSource().sendFailure(Component.literal("Не удалось изменить конфиг: " + t));
+                                                return 0;
+                                            }
+                                            ctx.getSource().sendSuccess(() -> Component.literal("Нефть включена: месторождения снова видны сканеру и добываются"), true);
+                                            return 1;
+                                        })
+                                )
+                                .then(Commands.literal("disable")
+                                        .requires(src -> src.hasPermission(2))
+                                        .executes(ctx -> {
+                                            try { com.harderdiesel.ModConfig.OIL_ENABLED.set(false); } catch (Throwable t) {
+                                                ctx.getSource().sendFailure(Component.literal("Не удалось изменить конфиг: " + t));
+                                                return 0;
+                                            }
+                                            ctx.getSource().sendSuccess(() -> Component.literal("Нефть выключена: добыча остановлена, сканер молчит. Существующие месторождения сохранены и возобновят работу после включения"), true);
+                                            return 1;
+                                        })
+                                )
+                        )
         );
     }
 }

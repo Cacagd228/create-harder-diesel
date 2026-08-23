@@ -18,6 +18,9 @@ public class ModConfig {
     public static final ModConfigSpec.ConfigValue<Double> POLLUTION_DIFFUSION_RATE;
     public static final ModConfigSpec.ConfigValue<Double> POLLUTION_GLOBAL_MULTIPLIER;
 
+    public static final ModConfigSpec.ConfigValue<Boolean> OIL_ENABLED;
+    public static final ModConfigSpec.ConfigValue<Double> OIL_CHUNK_CHANCE;
+
     static {
         SERVER_BUILDER.push("cracking_reactor");
 
@@ -47,6 +50,17 @@ public class ModConfig {
                 .defineInRange("PollutionDiffusionRate", 0.0018, 0.0, 1.0);
         POLLUTION_GLOBAL_MULTIPLIER = SERVER_BUILDER.comment("Global multiplier for all pollution emissions (0..100). Use command /harderdiesel pollution multiplier")
                 .defineInRange("GlobalPollutionMultiplier", 1.0, 0.0, 100.0);
+        SERVER_BUILDER.pop();
+
+        SERVER_BUILDER.push("oil");
+        // Глобальный тумблер нефти: /harderdiesel oil disable|enable.
+        // При выключении нельзя добывать и не видно сканером; существующие
+        // месторождения остаются в сохранении и работают после включения.
+        OIL_ENABLED = SERVER_BUILDER.comment("Global oil toggle (/harderdiesel oil enable|disable). When off, oil cannot be pumped and scanners show nothing; existing deposits are kept and resume after re-enabling")
+                .define("OilEnabled", true);
+        // Редкость: детерминированная доля подходящих чанков с нефтью.
+        OIL_CHUNK_CHANCE = SERVER_BUILDER.comment("Fraction of eligible chunks that actually contain oil (0..1). Deterministic per world seed. Affects only not-yet-generated deposits")
+                .defineInRange("OilChunkChance", 0.5, 0.0, 1.0);
         SERVER_BUILDER.pop();
 
         SERVER_SPEC = SERVER_BUILDER.build();
