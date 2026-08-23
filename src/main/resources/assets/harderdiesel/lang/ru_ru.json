@@ -119,6 +119,7 @@
   "harderdiesel.actionbar.separator_controller.not_enough": "Недостаточно контроллеров",
   "harderdiesel.hint.separator_full.title": "Сепаратор заполнен",
   "harderdiesel.hint.separator_full": "Освободите выходные баки, чтобы сепаратор продолжил работу",
+  "harderdiesel.scanner.blocked": "Неведомая сила не даёт просканировать нефть",
   "harderdiesel.hint.separator_empty": "Пусто",
   "block.harderdiesel.gasoline_generator": "Бензиновый генератор",
   "block.harderdiesel.diesel_generator": "Дизельный генератор",

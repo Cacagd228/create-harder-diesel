@@ -119,6 +119,7 @@
   "harderdiesel.actionbar.separator_controller.not_enough": "Not enough controllers",
   "harderdiesel.hint.separator_full.title": "Separator is full",
   "harderdiesel.hint.separator_full": "Clear the output tanks to continue processing",
+  "harderdiesel.scanner.blocked": "An unknown force prevents you from scanning for oil",
   "harderdiesel.hint.separator_empty": "Empty",
   "block.harderdiesel.gasoline_generator": "Gasoline Generator",
   "block.harderdiesel.diesel_generator": "Diesel Generator",

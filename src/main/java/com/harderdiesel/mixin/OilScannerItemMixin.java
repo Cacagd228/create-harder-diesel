@@ -15,22 +15,15 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Сканер нефти: добавляет название сорта к сообщению ("Loads of Oil" и т.д.).
- * При выключенной нефти тик сканера отменяется целиком — он молчит.
+ * Сканер нефти: добавляет название сорта к сообщению ("Loads of Oil" и прочее).
+ * При выключенной нефти сканер работает как обычно (звук, цикл),
+ * но вместо результата сообщает о неведомой силе.
  */
 @Mixin(value = OilScannerItem.class, remap = false)
 public abstract class OilScannerItemMixin {
-
-    @Inject(method = "inventoryTick", at = @At("HEAD"), cancellable = true, remap = false)
-    private void hd_scannerSilentWhenDisabled(ItemStack stack, Level level, Entity entity, int slot, boolean selected, CallbackInfo ci) {
-        if (!level.isClientSide && !OilToggle.enabled())
-            ci.cancel();
-    }
 
     @Redirect(method = "inventoryTick",
             at = @At(value = "NEW",
@@ -42,6 +35,11 @@ public abstract class OilScannerItemMixin {
         try {
             if (entity instanceof ServerPlayer sp && sp.level() instanceof ServerLevel sl
                     && message.getContents() instanceof TranslatableContents tc) {
+                if (!OilToggle.enabled()) {
+                    // Нефть выключена: обычный звук и тайминги, но результат подменён
+                    return new ClientboundSetActionBarTextPacket(
+                            Component.translatable("harderdiesel.scanner.blocked"));
+                }
                 String key = tc.getKey();
                 boolean hasOil = key.endsWith("oil_low") || key.endsWith("oil_high") || key.endsWith("oil_bottomless");
                 if (hasOil) {
