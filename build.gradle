@@ -10,11 +10,6 @@ base {
     archivesName = 'harderdiesel'
 }
 
-// В имени папки проекта есть двоеточие («create: harder disel»), а для Java оно
-// является разделителем записей classpath. Из-за этого gradlew и javac не находят
-// свои jar-файлы. Переносим каталог сборки в соседнюю папку без двоеточия.
-buildDir = file('../harderdiesel-build')
-
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 repositories {
@@ -68,13 +63,13 @@ dependencies {
     implementation "maven.modrinth:create-diesel-generators:1.21.1-1.3.12"
     // Create's transitive client/runtime libs that moddev doesn't put on the compile classpath.
     // They ARE present at runtime (Create pulls them in), so compileOnly avoids duplicate JPMS modules.
-    // catnip/ponder качаются с maven.createmod.net, flywheel/Registrate — из flatDir ../harderdiesel-build/libs.
+    // catnip/ponder качаются с maven.createmod.net, flywheel/Registrate — из libs/.
     compileOnly "net.createmod.catnip:Catnip-NeoForge-1.21.1:0.8.54"
     compileOnly "net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1"
     compileOnly name: 'flywheel-neoforge-1.21.1-1.0.6', ext: 'jar'
     compileOnly name: 'Registrate-MC1.21-1.3.0+67', ext: 'jar'
     // Для веток нитро-топлива и гидрообработки дизеля (рецепты условны, завязаны на эти моды).
-    // power-grid грузим локальным jar'ом через flatDir (../harderdiesel-build/libs):
+    // power-grid грузим локальным jar'ом через flatDir (libs/):
     // на Modrinth Maven у версии 0.5.5.1 одна координата на все загрузчики,
     // и maven отдаёт forge-1.20.1 вместо neoforge-1.21.1.
     implementation name: 'powergrid-mc1.21.1-0.5.5.1', ext: 'jar'
