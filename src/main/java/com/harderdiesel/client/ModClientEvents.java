@@ -157,6 +157,10 @@ public class ModClientEvents {
                 .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "wear_resistant_tank"),
                         model -> new MultiblockCTModel(model, new MultiblockCTBehavior(com.harderdiesel.content.wear_resistant.WearResistantTankBlock.class,
                                 HarderDieselSpriteShifts.WEAR_RESISTANT_TANK, HarderDieselSpriteShifts.WEAR_RESISTANT_TANK_TOP)));
+        CreateClient.MODEL_SWAPPER.getCustomBlockModels()
+                .register(ResourceLocation.fromNamespaceAndPath(HarderDiesel.MODID, "platinum_tank"),
+                        model -> new MultiblockCTModel(model, new MultiblockCTBehavior(com.harderdiesel.content.platinum.PlatinumTankBlock.class,
+                                HarderDieselSpriteShifts.PLATINUM_TANK, HarderDieselSpriteShifts.PLATINUM_TANK_TOP)));
 
         // XaerosZones Pollution provider — через рефлексию чтобы не крашить без xaerolib/xaeroszones
         event.enqueueWork(() -> {

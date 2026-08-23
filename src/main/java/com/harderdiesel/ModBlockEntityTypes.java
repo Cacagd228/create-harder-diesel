@@ -2,6 +2,7 @@ package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingReactorBlockEntity;
 import com.harderdiesel.content.galvanized.GalvanizedTankBlockEntity;
+import com.harderdiesel.content.platinum.PlatinumTankBlockEntity;
 import com.harderdiesel.content.separator.SeparatorBlockEntity;
 import com.harderdiesel.content.wear_resistant.WearResistantTankBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -27,6 +28,9 @@ public class ModBlockEntityTypes {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WearResistantTankBlockEntity>> WEAR_RESISTANT_TANK =
             BLOCK_ENTITY_TYPES.register("wear_resistant_tank", () -> createWearResistantTankType());
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PlatinumTankBlockEntity>> PLATINUM_TANK =
+            BLOCK_ENTITY_TYPES.register("platinum_tank", () -> createPlatinumTankType());
 
     private static BlockEntityType<CrackingReactorBlockEntity> createReactorType() {
         BlockEntityType<CrackingReactorBlockEntity> type =
@@ -70,6 +74,17 @@ public class ModBlockEntityTypes {
 
     private static WearResistantTankBlockEntity createWearResistantTank(BlockPos pos, BlockState state) {
         return new WearResistantTankBlockEntity(WEAR_RESISTANT_TANK.get(), pos, state);
+    }
+
+    private static BlockEntityType<PlatinumTankBlockEntity> createPlatinumTankType() {
+        BlockEntityType<PlatinumTankBlockEntity> type =
+                BlockEntityType.Builder.of(ModBlockEntityTypes::createPlatinumTank, ModBlocks.PLATINUM_TANK.get())
+                        .build(null);
+        return type;
+    }
+
+    private static PlatinumTankBlockEntity createPlatinumTank(BlockPos pos, BlockState state) {
+        return new PlatinumTankBlockEntity(PLATINUM_TANK.get(), pos, state);
     }
 
     public static void register(IEventBus modEventBus) {

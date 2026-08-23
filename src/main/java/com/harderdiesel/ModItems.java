@@ -226,6 +226,9 @@ public class ModItems {
     public static final DeferredItem<BlockItem> WEAR_RESISTANT_TANK = ITEMS.register("wear_resistant_tank",
             () -> new BlockItem(ModBlocks.WEAR_RESISTANT_TANK.get(), new Item.Properties()));
 
+    public static final DeferredItem<BlockItem> PLATINUM_TANK = ITEMS.register("platinum_tank",
+            () -> new BlockItem(ModBlocks.PLATINUM_TANK.get(), new Item.Properties()));
+
     public static final DeferredItem<AirAnalyzerItem> AIR_ANALYZER = ITEMS.register("air_analyzer",
             () -> new AirAnalyzerItem(new Item.Properties().stacksTo(1)));
 

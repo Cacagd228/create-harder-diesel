@@ -101,6 +101,7 @@
   "item.harderdiesel.cracking_controller": "Контроллер крекинга",
   "block.harderdiesel.cracking_reactor": "Крекинг-реактор",
   "block.harderdiesel.galvanized_reactor_tank": "Оцинкованный бак реактора",
+  "block.harderdiesel.platinum_tank": "Сверхстойкий платиновый бак",
   "block.harderdiesel.wear_resistant_tank": "Износостойкий бак",
   "harderdiesel.recipe.cracking": "Крекинг",
   "harderdiesel.ponder.cracking_reactor.header": "Настройка крекинг-реактора",

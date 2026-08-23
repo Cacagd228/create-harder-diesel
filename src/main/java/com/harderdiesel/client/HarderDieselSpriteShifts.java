@@ -22,6 +22,9 @@ public class HarderDieselSpriteShifts {
     public static final CTSpriteShiftEntry WEAR_RESISTANT_TANK = rectangle("wear_resistant_tank/fluid_tank"),
             WEAR_RESISTANT_TANK_TOP = rectangle("wear_resistant_tank/fluid_tank_top");
 
+    public static final CTSpriteShiftEntry PLATINUM_TANK = rectangle("platinum_tank/fluid_tank"),
+            PLATINUM_TANK_TOP = rectangle("platinum_tank/fluid_tank_top");
+
     public static void init() {
     }
 

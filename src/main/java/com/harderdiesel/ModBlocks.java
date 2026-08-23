@@ -2,6 +2,7 @@ package com.harderdiesel;
 
 import com.harderdiesel.content.cracking.CrackingReactorBlock;
 import com.harderdiesel.content.galvanized.GalvanizedTankBlock;
+import com.harderdiesel.content.platinum.PlatinumTankBlock;
 import com.harderdiesel.content.separator.SeparatorBlock;
 import com.harderdiesel.content.wear_resistant.WearResistantTankBlock;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -559,6 +560,14 @@ public class ModBlocks {
             () -> new WearResistantTankBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_BLUE)
                     .strength(3.0F)
+                    .noOcclusion()
+                    .sound(SoundType.METAL)
+                    .isRedstoneConductor((p1, p2, p3) -> true)));
+
+    public static final DeferredBlock<PlatinumTankBlock> PLATINUM_TANK = BLOCKS.register("platinum_tank",
+            () -> new PlatinumTankBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_GRAY)
+                    .strength(4.0F)
                     .noOcclusion()
                     .sound(SoundType.METAL)
                     .isRedstoneConductor((p1, p2, p3) -> true)));

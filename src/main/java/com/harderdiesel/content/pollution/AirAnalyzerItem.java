@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,12 +15,21 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- * Анализатор воздуха — зачарованная палка.
- * ПКМ → над ХП (actionbar) количество загрязнения 0..1000 и тир.
- * Работает в креативе без кулдауна.
+ * Анализатор воздуха — латунный сканер.
+ * ПКМ → сканирование с прогресс-баром в actionbar, затем количество
+ * загрязнения 0..1000 и тир над ХП.
  */
 public class AirAnalyzerItem extends Item {
+
+    private static final int SCAN_DURATION = 40; // тиков (2 сек)
+    private static final int BAR_WIDTH = 24;
+    /** Остаток сканирования по игроку. */
+    private static final Map<UUID, Integer> SCANNING = new HashMap<>();
 
     public AirAnalyzerItem(Properties properties) {
         super(properties);
@@ -28,6 +38,43 @@ public class AirAnalyzerItem extends Item {
     @Override
     public boolean isFoil(ItemStack stack) {
         return true; // зачарованный блеск как у Debug Stick
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+        if (!(level instanceof ServerLevel sl) || !(entity instanceof ServerPlayer player))
+            return;
+        UUID id = player.getUUID();
+        Integer left = SCANNING.get(id);
+        if (left == null)
+            return;
+
+        // сканирование прерывается, если предмет больше не в руках
+        if (!player.getMainHandItem().is(this) && !player.getOffhandItem().is(this)) {
+            SCANNING.remove(id);
+            return;
+        }
+
+        left--;
+        if (left <= 0) {
+            SCANNING.remove(id);
+            showReading(player, sl, new ChunkPos(player.blockPosition()));
+            if (!player.isCreative())
+                player.getCooldowns().addCooldown(this, 10);
+            return;
+        }
+        SCANNING.put(id, left);
+        player.displayClientMessage(progressBar(left), true);
+    }
+
+    private static Component progressBar(int ticksLeft) {
+        float frac = 1f - (float) ticksLeft / SCAN_DURATION;
+        int filled = Math.round(frac * BAR_WIDTH);
+        return Component.literal("[" + "\u2588".repeat(Math.max(0, filled))
+                + "\u2591".repeat(Math.max(0, BAR_WIDTH - filled)) + "] ")
+                .withStyle(ChatFormatting.DARK_GREEN)
+                .append(Component.literal((int) (frac * 100) + "%")
+                        .withStyle(ChatFormatting.GREEN));
     }
 
     private static void showReading(Player player, Level level, ChunkPos pos) {
@@ -81,24 +128,20 @@ public class AirAnalyzerItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        ChunkPos pos = new ChunkPos(player.blockPosition());
-        showReading(player, level, pos);
-        if (!player.isCreative()) {
-            player.getCooldowns().addCooldown(this, 10);
-        }
+        startScan(player);
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
     }
 
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
-        Level level = ctx.getLevel();
         Player player = ctx.getPlayer();
         if (player == null) return InteractionResult.PASS;
-        ChunkPos pos = new ChunkPos(ctx.getClickedPos());
-        showReading(player, level, pos);
-        if (!player.isCreative()) {
-            player.getCooldowns().addCooldown(this, 10);
-        }
+        startScan(player);
         return InteractionResult.SUCCESS;
+    }
+
+    private static void startScan(Player player) {
+        // повторное использование во время скана не сбрасывает его
+        SCANNING.putIfAbsent(player.getUUID(), SCAN_DURATION);
     }
 }

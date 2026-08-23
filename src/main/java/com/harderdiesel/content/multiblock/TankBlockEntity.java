@@ -364,8 +364,17 @@ public abstract class TankBlockEntity extends SmartBlockEntity
         return width * width * height;
     }
 
-    public static int getCapacityMultiplier() {
+    public static int getBaseCapacityMultiplier() {
         return AllConfigs.server().fluids.fluidTankCapacity.get() * 1000;
+    }
+
+    /** Множитель ёмкости семейства баков (сверхстойкий платиновый — x2). */
+    protected float capacityMultiplier() {
+        return 1.0f;
+    }
+
+    public int getCapacityMultiplier() {
+        return (int) (getBaseCapacityMultiplier() * capacityMultiplier());
     }
 
     @Override

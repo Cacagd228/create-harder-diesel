@@ -41,6 +41,8 @@ public class HarderDiesel {
         modEventBus.addListener((RegisterCapabilitiesEvent event) ->
                 WearResistantTankBlockEntity.registerCapabilities(event));
         modEventBus.addListener((RegisterCapabilitiesEvent event) ->
+                com.harderdiesel.content.platinum.PlatinumTankBlockEntity.registerCapabilities(event));
+        modEventBus.addListener((RegisterCapabilitiesEvent event) ->
                 ModGenerators.registerCapabilities(event));
 
         // Pollution — серверные события (GAME bus)
