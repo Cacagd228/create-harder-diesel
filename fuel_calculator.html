@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Harder Diesel — калькулятор топлива</title>
+<style>
+  :root { color-scheme: dark; }
+  body { font-family: 'Segoe UI', sans-serif; background:#14161a; color:#d8dbe0; margin:24px; }
+  h1 { font-size:20px; margin-top:0; }
+  .panel { background:#1c1f26; border:1px solid #2c313a; border-radius:10px; padding:16px 20px; margin-bottom:18px; max-width:820px; }
+  label { display:inline-block; margin-right:14px; margin-top:8px; }
+  input[type=number] { width:90px; background:#12141a; color:#fff; border:1px solid #343a46; border-radius:6px; padding:4px 8px; }
+  select { background:#12141a; color:#fff; border:1px solid #343a46; border-radius:6px; padding:4px 8px; }
+  input[type=range] { vertical-align:middle; width:220px; }
+  input[type=checkbox] { vertical-align:middle; transform:scale(1.2); }
+  table { border-collapse:collapse; width:100%; max-width:820px; font-size:14px; }
+  th, td { border-bottom:1px solid #2c313a; padding:6px 10px; text-align:right; }
+  th:first-child, td:first-child { text-align:left; }
+  th { color:#9aa3b2; font-weight:600; }
+  tr.total td { border-top:2px solid #4a5568; font-weight:700; color:#fff; }
+  .hint { color:#8892a0; font-size:12px; margin-top:6px; }
+  .big { font-size:17px; color:#7fd487; font-weight:700; }
+</style>
+</head>
+<body>
+
+<h1>Калькулятор переработки нефти</h1>
+
+<div class="panel">
+  <label>Сорт нефти:
+    <select id="grade">
+      <option value="light_sweet" selected>Лёгкая сладкая</option>
+      <option value="light_sour">Лёгкая кислая</option>
+      <option value="medium_sweet">Средняя сладкая</option>
+      <option value="medium_sour">Средняя кислая</option>
+      <option value="heavy_sweet">Тяжёлая сладкая</option>
+      <option value="heavy_sour">Тяжёлая кислая</option>
+    </select>
+  </label>
+  <label>Бакетов: <input type="number" id="buckets" value="100" min="0"></label><br>
+  <label>Перегонка:
+    <select id="heat">
+      <option value="super" selected>Сверхнагрев (superheated)</option>
+      <option value="heated">Нагрев (heated)</option>
+    </select>
+  </label><br>
+  <label><input type="checkbox" id="nmUp" checked> Нитрометан перерабатывать дальше (кустарный бензин)</label><br>
+  <label><input type="checkbox" id="hogUp" checked> Бензин поднимать до высокооктанового (этанол)</label><br>
+  <label>Доля пропана в нитро: <span id="nitroLbl">100%</span><br>
+    <input type="range" id="nitro" min="0" max="100" value="100">
+  </label>
+  <div class="hint">Сернистые фракции гидроочищаются водородом (95%). Вак. остаток → крекинг → VGO → FCC. Апгрейд дизеля: LCO → НПН → НЭ. Водород, этанол и серная кислота бесконечны.</div>
+</div>
+
+<div class="panel">
+  <label>Нагрузка базы, СУ: <input type="number" id="load" value="50000" min="1"></label>
+  <div class="big" id="runtime"></div>
+</div>
+
+<table id="out">
+  <thead><tr><th>Топливо</th><th>Объём, мб</th><th>Бакетов</th><th>SU·ч</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<script>
+const FUELS = {
+  ahog:     {name:'Кустарный высоокт. бензин', str:20400, burn:0.04},
+  hog:      {name:'Высокооктановый бензин',   str:20480, burn:0.045},
+  alkylate: {name:'Алкилат',                  str:24576, burn:0.05},
+  aviation: {name:'Авиатопливо',              str:17700, burn:0.02},
+  kero:     {name:'Керосин',                  str:14336, burn:0.05},
+  hcd:      {name:'Высокоцетановый дизель',   str:24576, burn:0.04},
+  mcd:      {name:'Среднецетановый дизель',   str:18432, burn:0.045},
+  lcd:      {name:'Низкоцетановый дизель',    str:14336, burn:0.05},
+  log:      {name:'Низкооктановый бензин',    str:12288, burn:0.05},
+  propane:  {name:'Пропан',                   str:18432, burn:0.05},
+  butane:   {name:'Бутан',                    str:18432, burn:0.05},
+  nm:       {name:'Нитрометан (топливо)',     str:36864, burn:0.05},
+  ne:       {name:'Нитроэтан (остаток)',      str:26112, burn:0.05},
+  np:       {name:'Нитропропан (остаток)',    str:24576, burn:0.05},
+  fcc:      {name:'FCC-газ',                  str:9216,  burn:0.05},
+  tar:      {name:'Гудрон',                   str:2048,  burn:0.05},
+};
+const suH = (f, mb) => f.str * mb / (f.burn * 72000);
+
+// [нафта, керосин, тяж.газойль, вак.остаток, нефт.газ] на 100 мб
+const GRADES = {
+  light_sweet:  {h:[55,15,10,0,15], s:[80,22,15,0,22],  sour:false},
+  light_sour:   {h:[45,15,10,0,12], s:[65,22,15,0,17],  sour:true},
+  medium_sweet: {h:[32,20,32,0,0],  s:[46,29,46,0,0],   sour:false},
+  medium_sour:  {h:[27,18,30,0,0],  s:[39,26,44,0,0],   sour:true},
+  heavy_sweet:  {h:[17,15,47,10,0], s:[25,22,68,15,0],  sour:false},
+  heavy_sour:   {h:[5,5,55,5,0],    s:[7,7,80,7,0],     sour:true},
+};
+
+function calc() {
+  const tb = document.querySelector('#out tbody');
+  const grade = GRADES[document.getElementById('grade').value];
+  const mb = (+document.getElementById('buckets').value || 0) * 1000;
+  const sup = document.getElementById('heat').value === 'super';
+  const key = sup ? 's' : 'h';
+  const nf  = (+document.getElementById('nitro').value) / 100;
+  const nmUp = document.getElementById('nmUp').checked;
+  const load = +document.getElementById('load').value || 1;
+  document.getElementById('nitroLbl').textContent = Math.round(nf*100)+'%';
+
+  if (!mb || !grade) { tb.innerHTML = ''; document.getElementById('runtime').textContent=''; return; }
+
+  let [n, k, hgo, vr, pg] = grade[key].map(x => mb*x/100);
+  const q = grade.sour ? 0.95 : 1;
+  let nap = n*q, ker = k*q;
+
+  const mazut = hgo*(sup?0.8:0.7);
+  let tar = mazut*(sup?0.8:0.7);
+  nap += hgo*(sup?0.15:0.10) + mazut*(sup?0.08:0.05);
+
+  const vgo = vr*0.70; tar += vr*0.15;
+  let lco = vgo*0.30; const fccGas = vgo*0.20;
+
+  let log, lcd;
+  [log, lcd] = (sup?[0.70,0.40]:[0.60,0.30]).map(x => nap*x);
+
+  const butane = pg/2;
+  const pNitro = pg/2*nf;
+  let nm = pNitro*0.42, ne = pNitro*0.56, np = pNitro*0.42;
+  const propaneFuel = pg/2 - pNitro;
+
+  let mcd = lcd;
+  let ahog = 0;
+  if (nmUp) { ahog = Math.min(log, nm*10); nm -= ahog/10; }
+  log -= ahog;
+  const hogUp = document.getElementById('hogUp').checked;
+  let hog = hogUp ? log : 0;
+  log -= hog;
+  let avi = Math.min(ker, ne*4); ne -= avi/4; ker -= avi;
+  let hcdL = Math.min(mcd, lco*5);  lco -= hcdL/5;  mcd -= hcdL;
+  let hcdN = Math.min(mcd, np*10);  np -= hcdN/10;  mcd -= hcdN;
+  let hcdE = Math.min(mcd, ne*5);   ne -= hcdE/5;   mcd -= hcdE;
+  const hcd = hcdL + hcdN + hcdE;
+
+  const rows = [
+    ['ahog', ahog], ['hog', hog], ['log', log], ['aviation', avi], ['kero', ker],
+    ['hcd', hcd], ['mcd', mcd],
+    ['propane', propaneFuel], ['butane', butane], ['fcc', fccGas],
+    ['nm', nm], ['ne', ne], ['np', np], ['tar', tar],
+  ];
+
+  tb.innerHTML = '';
+  let totV = 0, totE = 0;
+  for (const [k2, vol] of rows) {
+    if (!(vol >= 0.5)) continue;
+    const f = FUELS[k2];
+    const e = suH(f, vol);
+    totV += vol; totE += e;
+    tb.insertAdjacentHTML('beforeend',
+      `<tr><td>${f.name}</td><td>${vol.toFixed(0)}</td>` +
+      `<td>${(vol/1000).toFixed(2)}</td><td>${e.toFixed(0)}</td></tr>`);
+  }
+  const extra = [];
+  if (vr > 0.5) extra.push('крек.нафта/риформат ' + (vgo*0.4).toFixed(0));
+  if (lco > 0.5) extra.push('LCO остаток ' + lco.toFixed(0));
+  tb.insertAdjacentHTML('beforeend',
+    `<tr class="total"><td>Итого (${(totV/mb*100)|0}% объёма)</td>` +
+    `<td>${totV.toFixed(0)}</td><td>${(totV/1000).toFixed(1)}</td>` +
+    `<td class="big">${Math.round(totE).toLocaleString('ru')}</td></tr>` +
+    `<tr><td colspan="3">Время работы базы ${load.toLocaleString('ru')} СУ</td>` +
+    `<td>${(totE/load).toFixed(1)} ч</td></tr>` +
+    (extra.length ? `<tr><td colspan="4" class="hint">Побочные (не топливо): ${extra.join(', ')} мб</td></tr>` : ''));
+}
+
+for (const id of ['grade','buckets','heat','nitro','load','nmUp','hogUp'])
+  document.getElementById(id).addEventListener('input', calc);
+calc();
+</script>
+
+</body>
+</html>
