@@ -45,10 +45,13 @@ public abstract class PumpjackHoleBlockEntityMixin {
             at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", remap = false),
             remap = false)
     private Object hd_pumpGradeFluid(List<Fluid> list, int index) {
-        if (index == 0 && hd_level() != null) {
-            CrudeGrade grade = OilGradeAccess.getForChunk(hd_level(), new ChunkPos(hd_pos()));
-            Fluid f = grade != null ? grade.fluid() : null;
-            if (f != null) return f;
+        // Сужаем перехват: только индекс 0 и только когда сорт известен и нефть включена
+        if (index == 0 && hd_level() != null && OilToggle.enabled() && !list.isEmpty()) {
+            try {
+                CrudeGrade grade = OilGradeAccess.getForChunk(hd_level(), new ChunkPos(hd_pos()));
+                Fluid f = grade != null ? grade.fluid() : null;
+                if (f != null) return f;
+            } catch (Throwable ignored) {}
         }
         return list.get(index);
     }
@@ -62,9 +65,11 @@ public abstract class PumpjackHoleBlockEntityMixin {
     private String hd_gogglesAddGrade(String format, Object[] args) {
         String s = String.format(format, args);
         if (hd_level() != null && OilToggle.enabled()) {
-            CrudeGrade grade = OilGradeAccess.getForChunk(hd_level(), new ChunkPos(hd_pos()));
-            if (grade != null)
-                return s + " \u00B7 " + Component.translatable(grade.displayNameKey()).getString();
+            try {
+                CrudeGrade grade = OilGradeAccess.getForChunk(hd_level(), new ChunkPos(hd_pos()));
+                if (grade != null)
+                    return s + " \u00B7 " + Component.translatable(grade.displayNameKey()).getString();
+            } catch (Throwable ignored) {}
         }
         return s;
     }

@@ -69,8 +69,15 @@ public abstract class ReactorControllerItem extends Item {
             return InteractionResult.FAIL;
         }
 
+        // Сохраняем все слоты исходного бака (multi-tank), не только слот 0
         IFluidHandler tank = context.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, obbe.getBlockPos(), null);
-        FluidStack fluidInTank = tank.getFluidInTank(0);
+        List<FluidStack> fluidsToTransfer = new ArrayList<>();
+        if (tank != null) {
+            for (int i = 0; i < tank.getTanks(); i++) {
+                FluidStack fs = tank.getFluidInTank(i);
+                if (!fs.isEmpty()) fluidsToTransfer.add(fs.copy());
+            }
+        }
         List<BlockPos> positions = new ArrayList<>();
 
         for (int y = 0; y < height; y++) {
@@ -115,8 +122,18 @@ public abstract class ReactorControllerItem extends Item {
             be.updateVerticalMulti();
             be.updateTemperature();
             IFluidHandler reactorTank = context.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, controllerPos, null);
-            if (reactorTank != null)
-                reactorTank.fill(fluidInTank, IFluidHandler.FluidAction.EXECUTE);
+            if (reactorTank != null) {
+                for (FluidStack fs : fluidsToTransfer) {
+                    int filled = reactorTank.fill(fs, IFluidHandler.FluidAction.EXECUTE);
+                    if (filled < fs.getAmount() && !context.getLevel().isClientSide) {
+                        // Не влезло — предупреждаем, не воидим молча
+                        if (context.getPlayer() instanceof ServerPlayer sp)
+                            sp.connection.send(new ClientboundSetActionBarTextPacket(
+                                    Component.translatable(actionbarKey + ".fluid_overflow").withStyle(ChatFormatting.YELLOW)));
+                        break;
+                    }
+                }
+            }
         }
 
         return InteractionResult.SUCCESS;

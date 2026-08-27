@@ -193,6 +193,12 @@ public class PollutionManager {
         for (ChunkPos cp : changedChunks) {
             syncChunk(level, cp, data.get(cp));
         }
+
+        // подчищаем lastSynced от давно удалённых чанков (утечка P1)
+        Map<Long, Float> synced = lastSynced.get(dimId(level));
+        if (synced != null && synced.size() > data.snapshot().size() + 1024) {
+            synced.keySet().retainAll(data.snapshot().keySet());
+        }
     }
 
     /** Получить pollution для игрока (по его чанку) */

@@ -38,9 +38,17 @@ public final class OilGradeAccess {
     }
 
     /** Любая сторона, с кэшем. Используется миксинами помпы, сканера, гогглов и дисплеев.
-     *  Возвращает null если seed мира недоступен (клиент на удалённом сервере). */
+     *  Возвращает null если seed мира недоступен (клиент на удалённом сервере).
+     *  На сервере сначала проверяет OilGradeOverrideSavedData (команда oil add). */
     public static CrudeGrade getForChunk(Level level, ChunkPos pos) {
         if (level == null) return null;
+        // серверный оверрайд от команды
+        if (level instanceof ServerLevel sl) {
+            try {
+                CrudeGrade overridden = OilGradeOverrideSavedData.get(sl).get(pos);
+                if (overridden != null) return overridden;
+            } catch (Throwable ignored) {}
+        }
         long seed = seedOf(level);
         if (seed == SEED_UNKNOWN) return null;
         String dim = level.dimension().location().toString();
@@ -62,13 +70,30 @@ public final class OilGradeAccess {
         return getForChunk((Level) level, pos);
     }
 
-    public static final long SEED_UNKNOWN = 0L;
+    public static final long SEED_UNKNOWN = Long.MIN_VALUE;
 
     /** Seed мира: сервер — напрямую; клиент — только через интегрированный сервер (одиночка/LAN-хост). */
     public static long seedOf(Level level) {
         if (level instanceof ServerLevel sl) return sl.getSeed();
         if (!net.neoforged.fml.loading.FMLLoader.getDist().isClient()) return SEED_UNKNOWN;
-        return ClientSeedHolder.get(level);
+        // Не ссылаемся на ClientSeedHolder напрямую — иначе NoClassDefFoundError на dedicated server
+        try {
+            Class<?> holder = Class.forName("com.harderdiesel.content.oil.ClientSeedHolder");
+            java.lang.reflect.Method m = holder.getMethod("get", Level.class);
+            Object res = m.invoke(null, level);
+            return res instanceof Long l ? l : SEED_UNKNOWN;
+        } catch (Throwable t) {
+            return SEED_UNKNOWN;
+        }
+    }
+
+    public static void clearCache() {
+        CACHE.clear();
+    }
+
+    public static void invalidate(ChunkPos pos, String dim) {
+        Map<Long, CrudeGrade> map = CACHE.get(dim);
+        if (map != null) map.remove(pos.toLong());
     }
 
     public static CrudeGrade getForChunkSeeded(long seed, ChunkPos pos, List<Holder<Biome>> biomes) {
@@ -81,15 +106,16 @@ public final class OilGradeAccess {
 
     /** Сэмплирование биомов чанка — та же схема, что OilChunksSavedData.getBiomesInChunk у CDG (y 60..110). */
     private static List<Holder<Biome>> sampleBiomes(Level level, ChunkPos pos) {
-        List<Holder<Biome>> list = new ArrayList<>();
+        java.util.Set<Holder<Biome>> set = new java.util.HashSet<>();
+        BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
         for (int x = pos.getMinBlockX(); x <= pos.getMaxBlockX(); x++) {
-            for (int y = 60; y < 110; y++) {
-                for (int z = pos.getMinBlockZ(); z <= pos.getMaxBlockZ(); z++) {
-                    Holder<Biome> h = level.getBiome(new BlockPos(x, y, z));
-                    if (!list.contains(h)) list.add(h);
+            for (int z = pos.getMinBlockZ(); z <= pos.getMaxBlockZ(); z++) {
+                for (int y = 60; y < 110; y++) {
+                    mpos.set(x, y, z);
+                    set.add(level.getBiome(mpos));
                 }
             }
         }
-        return list;
+        return new ArrayList<>(set);
     }
 }

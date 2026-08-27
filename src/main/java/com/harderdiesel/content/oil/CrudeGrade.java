@@ -9,7 +9,9 @@ public enum CrudeGrade {
     HEAVY_SOUR("heavy_sour_crude", () -> ModFluids.HEAVY_SOUR_CRUDE.get()),
     HEAVY_SWEET("heavy_sweet_crude", () -> ModFluids.HEAVY_SWEET_CRUDE.get()),
     MEDIUM_SOUR("medium_sour_crude", () -> ModFluids.MEDIUM_SOUR_CRUDE.get()),
-    MEDIUM_SWEET("medium_sweet_crude", () -> ModFluids.MEDIUM_SWEET_CRUDE.get());
+    MEDIUM_SWEET("medium_sweet_crude", () -> ModFluids.MEDIUM_SWEET_CRUDE.get()),
+    LIGHT_SOUR("light_sour_crude", () -> ModFluids.LIGHT_SOUR_CRUDE.get()),
+    LIGHT_SWEET("light_sweet_crude", () -> ModFluids.LIGHT_SWEET_CRUDE.get());
 
     private final String fluidName;
     private final Supplier<Fluid> fluidSupplier;

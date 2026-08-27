@@ -123,12 +123,18 @@ public abstract class ReactorBlockEntity extends SmartBlockEntity implements IMu
     }
 
     public BlazeBurnerBlock.HeatLevel getHeat() {
-        int width = getControllerBE().width;
+        if (level == null) return BlazeBurnerBlock.HeatLevel.NONE;
+        ReactorBlockEntity cbe = getControllerBE();
+        if (cbe == null) return BlazeBurnerBlock.HeatLevel.NONE;
+        int w = cbe.width;
+        if (w <= 0) return BlazeBurnerBlock.HeatLevel.NONE;
         BlazeBurnerBlock.HeatLevel highestHeat = BlazeBurnerBlock.HeatLevel.NONE;
-
-        for (int xOffset = 0; xOffset < width; xOffset++) {
-            for (int zOffset = 0; zOffset < width; zOffset++) {
-                BlockPos pos = getController().offset(xOffset, -1, zOffset);
+        BlockPos ctrl = getController();
+        if (ctrl == null) return BlazeBurnerBlock.HeatLevel.NONE;
+        for (int xOffset = 0; xOffset < w; xOffset++) {
+            for (int zOffset = 0; zOffset < w; zOffset++) {
+                BlockPos pos = ctrl.offset(xOffset, -1, zOffset);
+                if (!level.isLoaded(pos)) continue;
                 BlockState blockState = level.getBlockState(pos);
                 BlazeBurnerBlock.HeatLevel heat = BasinBlockEntity.getHeatLevelOf(blockState);
                 if (!highestHeat.isAtLeast(heat))
@@ -140,12 +146,18 @@ public abstract class ReactorBlockEntity extends SmartBlockEntity implements IMu
 
     // counts the number of burners if an EXACT heat level
     public int getNumberOfHeat(BlazeBurnerBlock.HeatLevel heatTest) {
-        int width = getControllerBE().width;
+        if (level == null) return 0;
+        ReactorBlockEntity cbe = getControllerBE();
+        if (cbe == null) return 0;
+        int w = cbe.width;
+        if (w <= 0) return 0;
+        BlockPos ctrl = getController();
+        if (ctrl == null) return 0;
         int heatCount = 0;
-
-        for (int xOffset = 0; xOffset < width; xOffset++) {
-            for (int zOffset = 0; zOffset < width; zOffset++) {
-                BlockPos pos = getController().offset(xOffset, -1, zOffset);
+        for (int xOffset = 0; xOffset < w; xOffset++) {
+            for (int zOffset = 0; zOffset < w; zOffset++) {
+                BlockPos pos = ctrl.offset(xOffset, -1, zOffset);
+                if (!level.isLoaded(pos)) continue;
                 BlockState blockState = level.getBlockState(pos);
                 BlazeBurnerBlock.HeatLevel heat = BasinBlockEntity.getHeatLevelOf(blockState);
                 if (heatTest == heat)
@@ -177,6 +189,7 @@ public abstract class ReactorBlockEntity extends SmartBlockEntity implements IMu
 
     @Override
     public void tick() {
+        if (level == null) { super.tick(); return; }
         boolean prevTanksFull = tanksFull;
         tanksFull = false;
         if (isController() && isBottom()) {
@@ -187,13 +200,13 @@ public abstract class ReactorBlockEntity extends SmartBlockEntity implements IMu
             }
 
             if (processingTime > -1 && currentRecipe != null) {
-                // emit every tick while reactor has active processingTime (even if apply fails next tick)
-                if (!level.isClientSide && processingTime >= 0) {
-                    float emit = pollutionEmission();
-                    if (emit > 0)
-                        com.harderdiesel.content.pollution.PollutionManager.emit(level, worldPosition, emit);
-                }
                 if (currentRecipe.apply(this, true)) {
+                    // Эмиссия только когда реактор реально обрабатывает (проверка пройдена)
+                    if (!level.isClientSide && processingTime >= 0) {
+                        float emit = pollutionEmission();
+                        if (emit > 0)
+                            com.harderdiesel.content.pollution.PollutionManager.emit(level, worldPosition, emit);
+                    }
                     processingTime--;
                 } else {
                     tanksFull = true;
@@ -425,6 +438,8 @@ public abstract class ReactorBlockEntity extends SmartBlockEntity implements IMu
     public ReactorBlockEntity getControllerBE() {
         if (isController())
             return this;
+        if (level == null || controller == null) return null;
+        if (!level.isLoaded(controller)) return null;
         BlockEntity blockEntity = level.getBlockEntity(controller);
         if (blockEntity instanceof ReactorBlockEntity
                 && blockEntity.getType() == getType())
@@ -885,7 +900,10 @@ public abstract class ReactorBlockEntity extends SmartBlockEntity implements IMu
     }
 
     public boolean isBottom() {
-        return !(level.getBlockEntity(getBlockPos().below()) instanceof ReactorBlockEntity be && isSameMultiBlock(be));
+        if (level == null) return true;
+        BlockPos below = getBlockPos().below();
+        if (!level.isLoaded(below)) return true;
+        return !(level.getBlockEntity(below) instanceof ReactorBlockEntity be && isSameMultiBlock(be));
     }
 
     void checkForRecipes() {

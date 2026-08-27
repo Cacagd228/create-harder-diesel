@@ -1,8 +1,14 @@
 package com.harderdiesel.content.pollution;
 
+import com.harderdiesel.content.oil.CrudeGrade;
+import com.harderdiesel.content.oil.OilGradeAccess;
+import com.harderdiesel.content.oil.OilGradeOverrideSavedData;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
@@ -158,7 +164,101 @@ public class PollutionCommand {
                                             return 1;
                                         })
                                 )
+                                .then(Commands.literal("add")
+                                        .requires(src -> src.hasPermission(2))
+                                        // /harderdiesel oil add — дефолт amount + авто-сорт (чанк игрока)
+                                        .executes(ctx -> executeOilAdd(ctx.getSource(), null, null))
+                                        // совместимость: /harderdiesel oil add <amount> [grade]
+                                        .then(Commands.argument("amountOnly", IntegerArgumentType.integer(0, Integer.MAX_VALUE))
+                                                .executes(ctx -> executeOilAdd(ctx.getSource(),
+                                                        IntegerArgumentType.getInteger(ctx, "amountOnly"), null))
+                                                .then(Commands.argument("grade2", StringArgumentType.word())
+                                                        .suggests((c, b) -> SharedSuggestionProvider.suggest(
+                                                                java.util.Arrays.stream(CrudeGrade.values()).map(g -> g.name().toLowerCase()).toList(), b))
+                                                        .executes(ctx -> executeOilAdd(ctx.getSource(),
+                                                                IntegerArgumentType.getInteger(ctx, "amountOnly"),
+                                                                StringArgumentType.getString(ctx, "grade2")))
+                                                )
+                                        )
+                                        // основной: /harderdiesel oil add <grade> [amount] — сорт первый (с подсказкой)
+                                        .then(Commands.argument("grade", StringArgumentType.word())
+                                                .suggests((c, b) -> SharedSuggestionProvider.suggest(
+                                                        java.util.Arrays.stream(CrudeGrade.values()).map(g -> g.name().toLowerCase()).toList(), b))
+                                                .executes(ctx -> {
+                                                    String raw = StringArgumentType.getString(ctx, "grade");
+                                                    // если ввели число вместо сорта — трактуем как amount (защита от порядка веток)
+                                                    if (raw.matches("\\d+")) {
+                                                        try { return executeOilAdd(ctx.getSource(), Integer.parseInt(raw), null); } catch (Exception ignored) {}
+                                                    }
+                                                    return executeOilAdd(ctx.getSource(), null, raw);
+                                                })
+                                                .then(Commands.argument("amount", IntegerArgumentType.integer(0, Integer.MAX_VALUE))
+                                                        .executes(ctx -> executeOilAdd(ctx.getSource(),
+                                                                IntegerArgumentType.getInteger(ctx, "amount"),
+                                                                StringArgumentType.getString(ctx, "grade")))
+                                                )
+                                        )
+                                )
+                                .then(Commands.literal("remove")
+                                        .requires(src -> src.hasPermission(2))
+                                        .executes(ctx -> executeOilAdd(ctx.getSource(), 0, null))
+                                )
                         )
         );
+    }
+
+    private static final int DEFAULT_OIL_AMOUNT = 3000000;
+
+    private static int executeOilAdd(CommandSourceStack src, Integer amountOrNull, String gradeRaw) {
+        if (!(src.getLevel() instanceof ServerLevel sl)) {
+            src.sendFailure(Component.literal("Команда только на сервере"));
+            return 0;
+        }
+        net.minecraft.world.entity.Entity e = src.getEntity();
+        if (e == null) {
+            src.sendFailure(Component.literal("Команда требует исполнителя в мире (игрока) — чанк берётся из позиции игрока"));
+            return 0;
+        }
+        ChunkPos cp = new ChunkPos(e.blockPosition());
+        int amount = amountOrNull != null ? amountOrNull : DEFAULT_OIL_AMOUNT;
+        CrudeGrade grade = null;
+        if (gradeRaw != null) {
+            try { grade = CrudeGrade.valueOf(gradeRaw.toUpperCase()); }
+            catch (Exception ex) {
+                String avail = String.join(", ", java.util.Arrays.stream(CrudeGrade.values()).map(g -> g.name().toLowerCase()).toList());
+                src.sendFailure(Component.literal("Неизвестный сорт нефти: " + gradeRaw + ". Допустимо: " + avail));
+                return 0;
+            }
+        }
+
+        // Принудительно пишем в CDG SavedData игнорируя OilEnabled/OilChunkChance
+        try {
+            if (amount == 0) {
+                com.jesz.createdieselgenerators.world.OilChunksSavedData.removeChunk(sl, cp);
+                OilGradeOverrideSavedData.get(sl).clear(cp);
+                OilGradeAccess.invalidate(cp, sl.dimension().location().toString());
+                src.sendSuccess(() -> Component.literal("Нефть в чанке [" + cp.x + "," + cp.z + "] удалена"), true);
+            } else {
+                com.jesz.createdieselgenerators.world.OilChunksSavedData.setChunkOilAmount(sl, cp, amount);
+                if (grade != null) {
+                    OilGradeOverrideSavedData.get(sl).set(cp, grade);
+                    OilGradeAccess.invalidate(cp, sl.dimension().location().toString());
+                    // прогреть кэш новым сортом
+                    OilGradeAccess.getForChunk(sl, cp);
+                } else {
+                    // сброс оверрайда если сорт не указан а был — оставляем как есть, но чистим кэш чтобы пересчитался детерминированный
+                    // не трогаем оверрайд
+                }
+                String gradeName = grade != null ? grade.name().toLowerCase() : OilGradeAccess.getForChunk(sl, cp) != null ? OilGradeAccess.getForChunk(sl, cp).name().toLowerCase() : "?";
+                String msg = grade != null
+                        ? "Нефть добавлена в чанк [" + cp.x + "," + cp.z + "]: " + amount + " mB, сорт " + gradeName + " (принудительно, игнорируя тумблер)"
+                        : "Нефть добавлена в чанк [" + cp.x + "," + cp.z + "]: " + amount + " mB, сорт " + gradeName + " (авто)";
+                src.sendSuccess(() -> Component.literal(msg), true);
+            }
+        } catch (Throwable t) {
+            src.sendFailure(Component.literal("Ошибка записи нефти: " + t.getMessage()));
+            return 0;
+        }
+        return 1;
     }
 }

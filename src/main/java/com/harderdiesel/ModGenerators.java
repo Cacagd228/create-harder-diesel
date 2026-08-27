@@ -180,6 +180,8 @@ public class ModGenerators {
                     new FueledDieselEngineMovementBehaviour(() -> family.normalItem.get().getDefaultInstance()));
             MovementBehaviour.REGISTRY.register(family.modular.get(),
                     new FueledDieselEngineMovementBehaviour(() -> family.modularItem.get().getDefaultInstance()));
+            MovementBehaviour.REGISTRY.register(family.huge.get(),
+                    new FueledDieselEngineMovementBehaviour(() -> family.hugeItem.get().getDefaultInstance()));
         }
     }
 }

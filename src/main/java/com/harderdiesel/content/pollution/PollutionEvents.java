@@ -54,6 +54,7 @@ public class PollutionEvents {
     public static void onServerStopping(ServerStoppingEvent event) {
         // Иначе статические кэши протекут в следующий мир/сервер
         PollutionManager.clearCaches();
+        com.harderdiesel.content.oil.OilGradeAccess.clearCache();
         areaSyncCounters.clear();
     }
 

@@ -25,11 +25,18 @@ public abstract class PumpjackOilAmountDisplaySourceMixin {
     private void hd_displayAddGrade(DisplayLinkContext context, DisplayTargetStats stats,
                                     CallbackInfoReturnable<MutableComponent> cir) {
         if (!(context.getSourceBlockEntity() instanceof PumpjackHoleBlockEntity be)) return;
-        boolean enabled = OilToggle.enabled();
-        CrudeGrade grade = enabled && be.getLevel() != null
-                ? OilGradeAccess.getForChunk(be.getLevel(), new ChunkPos(be.getBlockPos()))
-                : null;
-        String prefix = grade != null ? Component.translatable(grade.displayNameKey()).getString() + " \u00B7 " : "";
-        cir.setReturnValue(Component.literal(prefix + be.oilAmount / 1000 + "B"));
+        if (be.getLevel() == null) return;
+        try {
+            CrudeGrade grade = OilToggle.enabled()
+                    ? OilGradeAccess.getForChunk(be.getLevel(), new ChunkPos(be.getBlockPos()))
+                    : null;
+            MutableComponent line = Component.literal(be.oilAmount / 1000 + "B");
+            if (grade != null) {
+                MutableComponent prefix = Component.translatable(grade.displayNameKey())
+                        .append(Component.literal(" \u00B7 "));
+                line = prefix.append(line);
+            }
+            cir.setReturnValue(line);
+        } catch (Throwable ignored) {}
     }
 }

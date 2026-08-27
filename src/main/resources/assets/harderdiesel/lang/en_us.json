@@ -108,6 +108,8 @@
   "harderdiesel.ponder.cracking_reactor.text_1": "Feed two ingredients into the bottom levels",
   "harderdiesel.actionbar.cracking_controller.too_short": "Reactor too short - at least %s blocks required",
   "harderdiesel.actionbar.cracking_controller.not_enough": "Not enough controllers",
+  "harderdiesel.actionbar.cracking_controller.fluid_overflow": "Some fluid was lost - reactor tank overflow",
+  "harderdiesel.actionbar.separator_controller.fluid_overflow": "Some fluid was lost - separator tank overflow",
   "harderdiesel.hint.reactor_full.title": "Reactor is full",
   "harderdiesel.hint.reactor_full": "Clear the output tanks to continue processing",
   "harderdiesel.hint.reactor_empty": "Empty",

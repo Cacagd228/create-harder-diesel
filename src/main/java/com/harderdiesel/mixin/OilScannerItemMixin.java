@@ -45,8 +45,9 @@ public abstract class OilScannerItemMixin {
                 if (hasOil) {
                     CrudeGrade grade = OilGradeAccess.getForChunk(sl, new ChunkPos(sp.blockPosition()));
                     if (grade != null)
-                        wrapped = message.copy().append(" \u00B7 "
-                                + Component.translatable(grade.displayNameKey()).getString());
+                        wrapped = message.copy()
+                                .append(Component.literal(" \u00B7 "))
+                                .append(Component.translatable(grade.displayNameKey()));
                 }
             }
         } catch (Throwable ignored) {}
